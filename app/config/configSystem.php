@@ -9,14 +9,14 @@ define('DB_PASSWORD','');       //contraseña de usuario de base de datos
 define('DB_NAME_BD','Dbmvc');   //nombre de base de datos
 
 //Configuracion CONTROLADOR y METODO [DEFAULT]
-define('CONTROLLER','Productos');   //Controller
-define('METHOD','index');           //Method
+define('CONTROLLER','Ejemplo');   //Controller
+define('METHOD','Index');           //Method
 
 //Ruta App
 define('RUTA_APP', dirname(dirname(__FILE__)));
 
 //URL
-define('RUTA_URL', 'http://'.$_SERVER['HTTP_HOST'].'/frameworkMVC'); //Cambiar a Nombre de Proyecto
+define('RUTA_URL', 'http://'.$_SERVER['HTTP_HOST'].'/Facturatron'); //Cambiar a Nombre de Proyecto
 
 
 ?>
