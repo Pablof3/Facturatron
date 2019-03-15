@@ -1,17 +1,14 @@
 <?php
 namespace Core
 {
-    class Compra  
+    class Venta
     {
-        public $id_compra;
+        public $id_venta;
         public $nro;
         public $fecha;
         public $usuario;
-        public $proveedor;
+        public $factura;
+        public $cliente;
         public $total;
-
-        public $compra_detalles;
     }
-    
 }
-?>
