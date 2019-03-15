@@ -81,10 +81,14 @@ class mCompra
             $this->db->execute();
 
             $id_compra = $this->db->lastInsertId();
-
-            foreach ($compra->compra_detalles as $key => $value) {
-                
-            }
+            
+            $query = "INSERT INTO CompraDetalle(compra, producto, cantidad, subtotal) 
+                      VALUES(:compra, :producto, :cantidad, :subtotal)";
+            $this->db->prepare($query);
+            foreach ($compra->compra_detalles as $key => $compra_detalle) {
+                $this->db->bindParam(":compra");
+                $this->db->execute();
+            }   
 
         }
         catch(Exception $ex)
