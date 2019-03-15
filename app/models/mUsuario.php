@@ -3,7 +3,7 @@ class mUsuario
 {
     private $db=new Database;
     public function __construct() {
-        $this->db=new Database;
+        $this->db=new Database; 
     }
 
     public function Insertar($usuario)
@@ -20,6 +20,7 @@ class mUsuario
         return $this->db->execute();
         
     }
+
     public function Actualizar($usuario)
     {
         $query="UPDATE Usuario 
@@ -34,10 +35,14 @@ class mUsuario
         $this->db->bindParam(':nombre',$usuario->apellido);
         $this->db->bindParam(':id_usuario',$usuario->id_usuario);
         return $this->db->execute();
-    }   
+    }
+
     public function Eliminar($id)
     {
-
+        $query="DELETE FROM Usuario WHERE id_usuario=:id_usuario";
+        $this->db->prepare($query);
+        $this->db->bindParam(':id_usuario', $id);
+        return $this->db->execute();
     }
 }
 
