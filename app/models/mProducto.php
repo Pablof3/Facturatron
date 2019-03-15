@@ -2,8 +2,7 @@
 class mProducto
 {
     private $db;
-    public function __construct() 
-    {
+    public function __construct() {
         $this->db = new Database;
     }
 
