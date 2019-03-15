@@ -37,7 +37,11 @@ class mUsuario
     }   
     public function Eliminar($id)
     {
-
+        $query="DELETE FROM Usuario 
+                WHERE id_usuario=:id_usuario";
+        $this->db->prepare($query);
+        $this->db->bindParam(':id_usuario', $id);
+        return $this->db->execute();
     }
 }
 
