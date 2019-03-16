@@ -86,10 +86,14 @@ class mCompra
                       VALUES(:compra, :producto, :cantidad, :subtotal)";
             $this->db->prepare($query);
             foreach ($compra->compra_detalles as $key => $compra_detalle) {
-                $this->db->bindParam(":compra");
+				$this->db->bindParam(":compra", $id_compra);
+				$this->db->bindParam(":producto", $compra_detalle->producto);
+				$this->db->bindParam(":cantidad", $compra_detalle->cantidad);
+				$this->db->bindParam(":subtotal", $compra_detalle->subtotal);				
                 $this->db->execute();
             }   
 
+			$this->db->commit();
         }
         catch(Exception $ex)
         {
