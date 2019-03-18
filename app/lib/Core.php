@@ -40,9 +40,9 @@ class Core
             require_once($file);
         }
         //Include Models
-        $models=glob('../models/*.php');
-        foreach ($models as $model) {
-            require_once($model);
+        $files=glob('../app/models/*.php');
+        foreach ($files as $file) {
+            require_once($file);
         }
 
         //echo $this->metodoActual;

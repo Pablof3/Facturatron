@@ -1,25 +1,23 @@
 <?php 
 class Ejemplo extends Controller
 {
-    private $mEjemplo;
-    public function __construct() {
-        //Ejemplo Importar Modelo
-        $this->mEjemplo=$this->modelo('mEjemplo');
-        
+    public function __construct() { 
+
     }
     //Ejemplo de Metodo Controlador
     public function Index()
     {
+        $categoria=new Core\Categoria;
+        $categoria->detalle='prueba';
+        $categoria->id_categoria=1;
+        $categoria->nombre='mi Categoria';
+
+        $mCategoria=new mCategoria;
+        $mCategoria->Insertar($categoria);
         echo 'Index';
-        $cliente=new Core\Cliente;
-        $cliente->nombre='prueba';
-        $cliente->apellidos='apelli';
-        $cliente->id_cliente=1;
-        $cliente->razon='pru';
-        print_r($cliente);
     }
 
-    public function Vista()
+    public function VerVista()
     {
         // Ejemplo mostrar vista
         //$this->Vista('vEjemplo');

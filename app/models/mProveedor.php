@@ -1,7 +1,7 @@
 <?php
 class mProveedor 
 {
-    private $db=new Database;
+    private $db;
     public function __construct() {
         $this->db=new Database;
     }
