@@ -6,6 +6,32 @@ class mVenta
         $this->db=new Database;
     }
 
+    /**
+     * Lista todas las ventas
+     *
+     * Devuelve una lista de registros de venta de la base de datos
+     *
+     * @param Int $offset Inicio paginado
+     * @param Int $limit Fin paginado
+     * @return Array arreglo de objetos de tipo venta
+     **/
+    
+    public function Listar($offset, $limit)
+    {
+        $query = "SELECT *.Venta, Proveedor.nombre AS nombre_proveedor, CONCAT(Usuario.nombre, ' ',Usuario.apellidos) AS nombre_usuario 
+                  FROM Compra 
+                  INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor
+                  INNER JOIN Usuario ON Usuario.id_usuario = Compra.usuario
+                  ORDER BY nro DESC
+                  LIMIT :offset, :limit";
+        $this->db->prepare($query);
+        $this->db->bindParam(":offset", $offset);
+        $this->db->bindParam(":limit", $limit);
+        
+        return $this->db->getRegistros();
+    }
+
+
     public function Insertar($venta)
     {
         $query="INSERT INTO Venta(nro, fecha, usuario, cliente, factura, total)
