@@ -34,6 +34,11 @@ class mVenta
 
     public function Insertar($venta)
     {
+        try
+        {
+            $this->db->beginTransaction();
+            $nro_max = ObtenerNroMax();
+
         $query="INSERT INTO Venta(nro, fecha, usuario, cliente, factura, total)
                 VALUES (:nro, :fecha, :usuario, :cliente, :factura, :total)";
         $this->db->prepare($query);
@@ -44,8 +49,34 @@ class mVenta
         $this->db->bindParam(':factura',$venta->factura);
         $this->db->bindParam(':total',$venta->total);
         return $this->db->execute();
-        
+        $id_compra = $this->db->lastInsertId();
+            
+        $query = "INSERT INTO VentaDetalle(venta, producto, cantidad, total) 
+                  VALUES(:venta, :producto, :cantidad, :total)";
+        $this->db->prepare($query);
+        foreach ($venta->venta_detalles as $key => $venta_detalle) {
+            $this->db->bindParam(":venta", $id_venta);
+            $this->db->bindParam(":producto", $venta_detalle->producto);
+            $this->db->bindParam(":cantidad", $venta_detalle->cantidad);
+            $this->db->bindParam(":total", $venta_detalle->total);				
+            $this->db->execute();
+        }   
+
+        $this->db->commit();
+        }
+        catch(Exception $ex)
+        {
+            $this->db->rollback();
+        }
     }
+    public function ObtenerNroMax() 
+    {
+        $query = "SELECT MAX(nro) FROM Venta";
+        $this->db->prepare($query);
+        return $this->db->fetchColumn();
+    }
+
+
     public function Actualizar($venta)
     {
         $query="UPDATE Venta
