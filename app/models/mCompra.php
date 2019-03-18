@@ -23,7 +23,7 @@ class mCompra
                   FROM Compra 
                   INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor
                   INNER JOIN Usuario ON Usuario.id_usuario = Compra.usuario
-                  ORDER BY nro DESC
+                  ORDER BY Compra.nro DESC
                   LIMIT :offset, :limit";
         $this->db->prepare($query);
         $this->db->bindParam(":offset", $offset);
@@ -46,12 +46,18 @@ class mCompra
                   FROM Compra 
                   INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor
                   INNER JOIN Usuario ON Usuario.id_usuario = Compra.usuario
-                  WHERE id_producto = :id_producto 
+                  WHERE Compra.id_compra = :id_compra 
                   LIMIT 1";
         $this->db->prepare($query);
-        $this->db->bindParam(':id_producto', $id);
+        $this->db->bindParam(':id_compra', $id);
     
-        return $this->db->getRegistro(); 
+        $compra = $this->db->getRegistro();
+        
+        $modeloCompraDetalle = new mCompraDetalle;
+        $modeloCompraDetalle->
+        $query = 
+
+        return ; 
     }
 
 

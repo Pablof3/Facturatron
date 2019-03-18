@@ -39,6 +39,12 @@ class Core
         foreach ($files as $file) {
             require_once($file);
         }
+        //Include Models
+        $models=glob('../models/*.php');
+        foreach ($models as $model) {
+            require_once($model);
+        }
+
         //echo $this->metodoActual;
         //Parametros
         $this->parametros = $url ? array_values($url) : [];
