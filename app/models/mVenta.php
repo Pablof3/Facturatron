@@ -49,7 +49,7 @@ class mVenta
         $this->db->bindParam(':factura',$venta->factura);
         $this->db->bindParam(':total',$venta->total);
         return $this->db->execute();
-        $id_compra = $this->db->lastInsertId();
+        $id_venta = $this->db->lastInsertId();
             
         $query = "INSERT INTO VentaDetalle(venta, producto, cantidad, total) 
                   VALUES(:venta, :producto, :cantidad, :total)";
