@@ -58,7 +58,7 @@ class mVenta
             $this->db->bindParam(":venta", $id_venta);
             $this->db->bindParam(":producto", $venta_detalle->producto);
             $this->db->bindParam(":cantidad", $venta_detalle->cantidad);
-            $this->db->bindParam(":total", $venta_detalle->total);				
+            $this->db->bindParam(":subtotal", $venta_detalle->subtotal);				
             $this->db->execute();
         }   
 
