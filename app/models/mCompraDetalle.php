@@ -8,50 +8,24 @@ class mCompraDetalle
     }
 
     /**
-     * Lista todas las compras
+     * Lista todas los productos de una compra
      *
-     * Devuelve una lista de registros de compra de la base de datos
+     * Devuelve una lista de registros de los productos de compra de la base de datos
      *
-     * @param Int $offset Inicio paginado
-     * @param Int $limit Fin paginado
-     * @return Array arreglo de objetos de tipo compra
+     * @param Int $id identificador de la compra
+     * @return Array arreglo de objetos de tipo compra detalle
      **/
     
-    public function Listar($offset, $limit)
+    public function Listar($id)
     {
-        $query = "SELECT *.Compra, Proveedor.nombre AS nombre_proveedor, CONCAT(Usuario.nombre, ' ',Usuario.apellidos) AS nombre_usuario 
-                  FROM Compra 
-                  INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor
-                  INNER JOIN Usuario ON Usuario.id_usuario = Compra.usuario
-                  ORDER BY nro DESC
-                  LIMIT :offset, :limit";
+        $query = "SELECT *.CompraDetalle, Producto.nombre AS nombre_producto
+                  FROM CompraDetalle 
+                  INNER JOIN Producto ON Producto.id_producto = CompraDetalle.producto
+                  WHERE CompraDetalle.id_compradetalle = :id";
         $this->db->prepare($query);
-        $this->db->bindParam(":offset", $offset);
-        $this->db->bindParam(":limit", $limit);
+        $this->db->bindParam(":id", $id);
         
         return $this->db->getRegistros();
-    }
-
-    /**
-     * Obtiene una compra
-     *
-     * Devuelve un registro de tipo compra
-     *
-     * @param Int $id identificador del compra
-     * @return Object objeto de tipo compra
-     **/
-    public function Ver($id)
-    {
-        $query = "SELECT *.Compra, Proveedor.nombre AS nombre_proveedor, CONCAT(Usuario.nombre, ' ',Usuario.apellidos) AS nombre_usuario 
-                  FROM Compra 
-                  INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor
-                  INNER JOIN Usuario ON Usuario.id_usuario = Compra.usuario
-                  WHERE id_producto = :id_producto 
-                  LIMIT 1";
-        $this->db->prepare($query);
-        $this->db->bindParam(':id_producto', $id);
-    
-        return $this->db->getRegistro(); 
     }
 }
 ?>
