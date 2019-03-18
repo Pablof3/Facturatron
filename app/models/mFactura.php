@@ -53,6 +53,13 @@ class mFactura
         }
     }
 
+    public function ObtenerNroMax() 
+    {
+        $query = "SELECT MAX(numero) FROM Factura";
+        $this->db->prepare($query);
+        return $this->db->fetchColumn();
+    }
+
 
     public function Actualizar($factura)
     {
