@@ -53,11 +53,10 @@ class mCompra
     
         $compra = $this->db->getRegistro();
         
-        $modeloCompraDetalle = new mCompraDetalle;
-        $modeloCompraDetalle->
-        $query = 
+        $modeloCompraDetalle = new mCompraDetalle();
+        $compra->compra_detalles = $modeloCompraDetalle->Listar($compra->id_compra);
 
-        return ; 
+        return $compra; 
     }
 
 
