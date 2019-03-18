@@ -9,6 +9,8 @@ namespace Core
         public $usuario;
         public $proveedor;
         public $total;
+
+        public $compra_detalles;
     }
     
 }

@@ -94,6 +94,22 @@ class Database
         return $this->stmt->rowCount();
 
     }
+
+    /**
+     * Devuelve el primer resultado de una consulta, escalar
+     *
+     * Devuelve la primera columna de la primera fila del resultado
+     *
+     * @param Int $column numero de columna elegida, init en 0
+     * @return String resultado de columna
+     **/
+    public function fetchColumn($column = 0)
+    {
+        $this->execute();
+        return $this->stmt->fetchColumn($column);
+    }
+
+
     /**
      * Retorna ultimo id Autogenerado de la ultima consulta
      * @return Id
