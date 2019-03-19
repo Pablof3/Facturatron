@@ -7,6 +7,7 @@ class mCategoria
     {
        // $this->db= new Database;
     }
+    
     public function Insertar(Core\Categoria $categoria)
     {
         $query="INSERT INTO Categoria(nombre, detalle)
