@@ -1,10 +1,10 @@
 <?php
 //Nombre Sitio
-define('NOMBRE_SITIO', 'MVC FREMEWORK');
+define('NOMBRE_SITIO', 'FACTURATRON');
 
 //Configuracion Base de Datos
 define('DB_HOST','localhost');  //base de datos
-define('DB_PORT','8889');          //Puerto de conexion
+define('DB_PORT','3306');          //Puerto de conexion
 define('DB_USER','root');       //usuario de base de datos
 define('DB_PASSWORD','');       //contraseña de usuario de base de datos
 define('DB_NAME_BD','facturatrondb');   //nombre de base de datos
