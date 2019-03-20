@@ -7,13 +7,13 @@ class Ejemplo extends Controller
     //Ejemplo de Metodo Controlador
     public function Index()
     {
-        $categoria=new Core\Categoria;
-        $categoria->detalle='prueba';
-        $categoria->id_categoria=1;
-        $categoria->nombre='mi Categoria';
+        // $categoria=new Core\Categoria;
+        // $categoria->detalle='prueba';
+        // $categoria->id_categoria=1;
+        // $categoria->nombre='mi Categoria';
 
-        $mCategoria=new mCategoria;
-        $mCategoria->Insertar($categoria);
+        // $mCategoria=new mCategoria;
+        // $mCategoria->Insertar($categoria);
         echo 'Index';
     }
 

@@ -3130,21 +3130,21 @@ $.dore = function(element, options) {
       });
     }
 
-    /* 03.15. Form Validation */
-    var forms = document.getElementsByClassName("needs-validation");
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener(
-        "submit",
-        function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
+    /* 03.15. Form Validation  VALIDACION DE FORMULARIO*/
+    // var forms = document.getElementsByClassName("needs-validation");
+    // var validation = Array.prototype.filter.call(forms, function(form) {
+    //   form.addEventListener(
+    //     "submit",
+    //     function(event) {
+    //       if (form.checkValidity() === false) {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //       }
+    //       form.classList.add("was-validated");
+    //     },
+    //     false
+    //   );
+    // });
 
     /* 03.16. Tooltip */
     if ($().tooltip) {
