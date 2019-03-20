@@ -4,9 +4,10 @@ define('NOMBRE_SITIO', 'MVC FREMEWORK');
 
 //Configuracion Base de Datos
 define('DB_HOST','localhost');  //base de datos
+define('DB_PORT','8889');          //Puerto de conexion
 define('DB_USER','root');       //usuario de base de datos
 define('DB_PASSWORD','');       //contraseña de usuario de base de datos
-define('DB_NAME_BD','Dbmvc');   //nombre de base de datos
+define('DB_NAME_BD','facturatrondb');   //nombre de base de datos
 
 //Configuracion CONTROLADOR y METODO [DEFAULT]
 define('CONTROLLER','Ejemplo');   //Controller
