@@ -1,7 +1,7 @@
 <?php
 class mCategoria
 {
-    private $db=new Database;
+    private $db;
     private $response;
 
     public function __construct()
@@ -19,7 +19,7 @@ class mCategoria
             $this->db->bindParam(':nombre',$categoria->nombre);
             $this->db->bindParam(':detalle',$categoria->detalle);
             if(!$this->db->execute()) {
-                $this->db->error
+                $this->db->error;
             }
         } catch (Exception $ex) {
             $this->response["status"] = "error";

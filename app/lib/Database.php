@@ -9,7 +9,7 @@ class Database
 
     private $dbh;
     private $stmt;
-    private $error;
+    public $error;
 
     public function __construct() 
     {
@@ -75,12 +75,13 @@ class Database
 //ejecuta consulta
     public function execute()
     {
+        $resp;
         try {
-            return $this->stmt->execute();
+            $resp=$this->stmt->execute();
         } catch (PDOException $e) {
             $this->error = $e;
-            return false;
         }
+        return $resp;
     }
 //Obtener registros
     public function getRegistros()
