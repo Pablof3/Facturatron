@@ -12,16 +12,16 @@ class mCliente
      * @param Object  $cliente Objeto tipo Cliente
      * @return Bool
      **/
-    public function Insertar($cliente)
+    public function Insertar($cliente=Core\Cliente)
     {
-        $query="INSERT INTO Cliente(razon, nombre, apellidos, nit) 
-                VALUES(:razon, :nombre, :apellidos, :nit)";
-        $this->db->prepare($query);
-        $this->db->bindParam(':razon', $cliente->razon);
-        $this->db->bindParam(':nombre', $cliente->nombre);
-        $this->db->bindParam(':apellido', $cliente->apellido);
-        $this->db->bindParam(':nit', $cliente->nit);
-        return $this->db->execute();
+            $query="INSERT INTO Cliente(razon, nombre, apellidos, nit) 
+                    VALUES(:razon, :nombre, :apellidos, :nit)";
+            $this->db->prepare($query);
+            $this->db->bindParam(':razon', $cliente->razon);
+            $this->db->bindParam(':nombre', $cliente->nombre);
+            $this->db->bindParam(':apellidos', $cliente->apellidos);
+            $this->db->bindParam(':nit', $cliente->nit);
+            return $this->db->execute();
     }
 
     /**
