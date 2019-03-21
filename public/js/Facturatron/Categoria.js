@@ -13,11 +13,11 @@ form.addEventListener(
                 dataType: "JSON",
                 cache: false,
                 success: function(response) {
-                    console.log(response);
-                    if(response.status == "ok") {
+                    if(response.error !== undefined) {
+                        
+                    } else if(response.status == "ok") {
                         alert('Todo OKEY');
-                    }
-                    else {
+                    } else {
                         alert(response.msgerror);
                     }
                 },
