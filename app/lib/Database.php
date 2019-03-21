@@ -75,7 +75,12 @@ class Database
 //ejecuta consulta
     public function execute()
     {
-        return $this->stmt->execute();
+        try {
+            return $this->stmt->execute();
+        } catch (PDOException $e) {
+            $this->error = $e;
+            return false;
+        }
     }
 //Obtener registros
     public function getRegistros()

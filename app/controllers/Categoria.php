@@ -13,13 +13,15 @@ class Categoria extends Controller
     }
 
     public function Registrar() {
-
+        $validador = new Validador();
+        $validador->Trim($_POST["Categoria"]);
         $categoria=new Core\Categoria;
-
-        $categoria=(object)$_POST['Categoria'];
+        $categoria->nombre = $validador->Validar('nombre', ["required", "maxlength, 25"],$_POST["Categoria"]);
+        $categoria->detalle = $validador->Validar('detalle', ["required"], $_POST["Categoria"]);        
 
         $mCategoria=new mCategoria;
-        
+        $mCategoria->validador = $validador;
+
         echo $mCategoria->Insertar($categoria);
     }
 }

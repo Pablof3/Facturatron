@@ -1,29 +1,25 @@
 <?php
 class mCategoria
 {
-    private $db;
+    private $db=new Database;
     private $response;
 
     public function __construct()
     {
        $this->db= new Database;
-       $this->response=["status" => "ok", "msgerror" => ""];
+       $this->response=["status" => "ok", "errores" => ""];
     }
     
     public function Insertar(Core\Categoria $categoria)
     {
         try {
-            if(empty($categoria->nombre) and !isset($categoria->detalle)) {
-                throw new Exception("El nombre de categoria es necesario");
-            }
             $query="INSERT INTO Categoria(nombre, detalle)
             VALUES(:nombre, :detalle)";
             $this->db->prepare($query);
             $this->db->bindParam(':nombre',$categoria->nombre);
             $this->db->bindParam(':detalle',$categoria->detalle);
             if(!$this->db->execute()) {
-                $this->response["status"] = "error";
-                $this->response["msgerror"] = "No se pudo ejecutar";
+                $this->db->error
             }
         } catch (Exception $ex) {
             $this->response["status"] = "error";
