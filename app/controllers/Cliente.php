@@ -5,7 +5,7 @@ class Cliente extends Controller
     {
         $resp['status']=true;
         
-        $clienteP=['id_cliente'=>1, 'nombre'=>'Pedro','apellidos'=>'Paramo', 'razon'=>'PedroP', 'nit'=>'987652315'];
+        $clienteP=['id_cliente'=>1, 'nombre'=>'Pedro','apellidos'=>'Paramo', 'razon'=>'PedroP', 'nit'=>'987652316'];
         var_dump($clienteP);
 
         $validador=new Validador();
