@@ -3,6 +3,7 @@ class Validador
 {
     public $error;
     public function __construct() {
+        $this->error['status']=true;
     }
     /**
      * Limpia espacios Vacios
@@ -27,7 +28,8 @@ class Validador
                 {
                     if(empty($var[$campo]))
                     {
-                        $this->error[$campo][]="{$campo} esta vacio";
+                        $this->error['status']=false;
+                        $this->error['error'][$campo][]="{$campo} esta vacio";
                     }
                 }
                 if (strpos($opcion,'minlength')!==false) 
@@ -36,7 +38,8 @@ class Validador
                     $long=strlen($var[$campo]);
                     if($long<=0)
                     {
-                        $this->error[$campo][]="{$campo} extension minima mayor a {$parametro}";
+                        $this->error['status']=false;
+                        $this->error['error'][$campo][]="{$campo} extension minima mayor a {$parametro}";
                     }
                 }
                 if(strpos($opcion,'maxlength')!==false)
@@ -45,17 +48,36 @@ class Validador
                     $long=strlen($var[$campo]);
                     if($long>$parametro)
                     {
-                        $this->error[$campo][]="{$campo} extension maxima {$parametro}";
+                        $this->error['status']=false;
+                        $this->error['error'][$campo][]="{$campo} extension maxima {$parametro}";
                     }
                 }
             }
         }
         else
         {
-            $this->error[$campo][]="{$campo} no esta definido";
+            $this->error['status']=false;
+            $this->error['error'][$campo][]="{$campo} no esta definido";
             $var[$campo]=null;
         }
         return $var[$campo];
+    }
+
+    public static function ValidarDB($errors)
+    {
+        $resp['status']=true;
+        if ($errors['status']==false) {
+            $resp['status']=false;
+            foreach ($errors['error'] as $error) {
+                $codError=$error->errorInfo[1];
+                switch ($codError) {
+                    case '1062':
+                        $resp['error'][]='Registro Duplicado';
+                    break;
+                }
+            }
+        }
+        return $resp;
     }
 }
 

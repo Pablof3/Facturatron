@@ -26,9 +26,16 @@ class Database
             $this->dbh = new PDO($dsn, $this->user, $this->password, $options);
             $this->dbh->exec('set names utf8');
         }
-        catch(PDOException $e){
-            $this->error= $e->getMessage();
-            echo $this->error;
+        catch (\Throwable $e) {
+            $this->error[]=$e;
+        }
+        catch(Exception $e)
+        {
+            $this->error[]=$e;
+        }
+        catch(PDOException $e)
+        {
+            $this->error[]=$e;
         }
     }
     /**
@@ -36,7 +43,21 @@ class Database
      */
     public function prepare($sql)
     {
-        $this->stmt =$this->dbh->prepare($sql) ;
+        try {
+            $this->stmt =$this->dbh->prepare($sql);
+            
+        } catch (\Throwable $e) {
+            $this->error[]=$e;
+        }
+        catch(Exception $e)
+        {
+            $this->error[]=$e;
+        }
+        catch(PDOException $e)
+        {
+            $this->error[]=$e;
+        }
+
     }
 
     /**
@@ -47,7 +68,20 @@ class Database
     */
     public function bindParam($campo, $param)
     {
-        $this->stmt->bindParam($campo, $param);
+        try {
+            $this->stmt->bindParam($campo, $param);
+            
+        } catch (\Throwable $e) {
+            $this->error[]=$e;
+        }
+        catch(Exception $e)
+        {
+            $this->error[]=$e;
+        }
+        catch(PDOException $e)
+        {
+            $this->error[]=$e;
+        }
     }
 //parametrisa consulta
     public function bind($param, $val, $type = null)
@@ -75,11 +109,19 @@ class Database
 //ejecuta consulta
     public function execute()
     {
-        $resp;
+        $resp=false;
         try {
             $resp=$this->stmt->execute();
-        } catch (PDOException $e) {
-            $this->error = $e;
+        } catch (\Throwable $e) {
+            $this->error[]=$e;
+        }
+        catch(Exception $e)
+        {
+            $this->error[]=$e;
+        }
+        catch(PDOException $e)
+        {
+            $this->error[]=$e;
         }
         return $resp;
     }
