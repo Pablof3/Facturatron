@@ -4,18 +4,16 @@ class Cliente extends Controller
     public function Registrar()
     {
         $resp['status']=true;
-        
-        $clienteP=['id_cliente'=>1, 'nombre'=>'Pedro','apellidos'=>'Paramo', 'razon'=>'PedroP', 'nit'=>'987652316'];
-        var_dump($clienteP);
-
         $validador=new Validador();
-        $validador->Trim($clienteP);
+        $validador->Trim($_POST['Cliente']);
+        
         $cliente=new Core\Cliente;
         $cliente->id_cliente=1;
-        $cliente->nombre=$validador->Validar('nombre',['required','minlength,0','maxlength,25'],$clienteP);
-        $cliente->apellidos=$validador->Validar('apellidos',['required','minlength,0','maxlength,35'],$clienteP);
-        $cliente->razon=$validador->Validar('razon',['required','minlength,0','maxlenght,20'],$clienteP);
-        $cliente->nit=$validador->Validar('nit',['required','minlength,0','maxlenght,10'],$clienteP);
+        $cliente->nombre=$validador->Validar('nombre',['required','minlength,0','maxlength,25'],$_POST['Cliente']);
+        $cliente->apellidos=$validador->Validar('apellidos',['required','minlength,0','maxlength,35'],$_POST['Cliente']);
+        $cliente->razon=$validador->Validar('razon',['required','minlength,0','maxlenght,20'],$_POST['Cliente']);
+        $cliente->nit=$validador->Validar('nit',['required','minlength,0','maxlenght,10'],$_POST['Cliente']);
+
         $resp['validate']=$validador->error;
         if ($validador->error['status']==true) {
             $mCliente=new mCliente;
