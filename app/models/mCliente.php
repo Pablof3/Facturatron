@@ -14,7 +14,7 @@ class mCliente
      **/
     public function Insertar($cliente)
     {
-        $execute;
+        $resp;
         $query="INSERT INTO Cliente(razon, nombre, apellidos, nit) 
                 VALUES(:razon, :nombre, :apellidos, :nit)";
         $this->db->prepare($query);
@@ -22,8 +22,11 @@ class mCliente
         $this->db->bindParam(':nombre', $cliente->nombre);
         $this->db->bindParam(':apellidos', $cliente->apellidos);
         $this->db->bindParam(':nit', $cliente->nit);
-        $execute=$this->db->execute();
-        var_dump($this->db->error);
+
+        $resp['status']=$this->db->execute();
+        $resp['error']=$this->db->error;
+
+        return $resp;
     }
 
     /**
