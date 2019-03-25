@@ -38,7 +38,7 @@
                                 <input type="text" class="form-control" name="Cliente[nit]"
                                         placeholder="Nit"
                                         value="<?= $data['Cliente']->nit; ?>" 
-                                        maxlength="10" pattern="[0-9]*">
+                                        maxlength="10" pattern="[0-9]*" required> 
                                 <div class="invalid-feedback">
                                     Permitido solo numeros
                                 </div>

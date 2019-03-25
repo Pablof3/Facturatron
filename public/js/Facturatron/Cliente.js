@@ -12,7 +12,8 @@ form.addEventListener(
               data: $('#form_ClienteRegistro').serialize(),
               dataType: "JSON",
               success: function (response) {
-                console.log(response);
+                  showNotification('top', 'right', 'primary', 'Error', 'mensaje');
+
               }
           });  
         }
