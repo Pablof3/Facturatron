@@ -92,7 +92,7 @@
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Precio de compra</label>
-                                <input type="number" class="form-control"
+                                <input type="number" step="0.01" class="form-control"
                                 placeholder="Precio de compra"
                                         value="" 
                                         maxlength="11" 
