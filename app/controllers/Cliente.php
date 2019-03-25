@@ -55,7 +55,7 @@ class Cliente extends Controller
 
     public function vActualizar()
     {
-        $id_cliente=$_POST['Cliente']['id_cliente'];
+        $id_cliente=42;
         $mCliente=new mCliente;
         $cliente=$mCliente->GetCliente($id_cliente);
         $data=['Cliente'=>$cliente];
