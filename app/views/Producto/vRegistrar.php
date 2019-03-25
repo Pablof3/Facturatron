@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Precio Unitario</label>
-                                <input type="text" class="form-control" name="Producto[precio_unitario]"
+                                <input type="number" class="form-control" name="Producto[precio_unitario]"
                                         placeholder="Precio unitario"
                                         value="" 
                                         maxlength="11" 
@@ -64,6 +64,44 @@
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom02">Imagen</label>
+                                <input type="text" class="form-control"
+                                        name="Producto[imagen]"
+                                        placeholder="Imagen"
+                                        value="" maxlength="100" required>
+                                <div class="invalid-feedback">
+                                    Campo Requerido
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom02">Stock Minimo</label>
+                                <input type="number" class="form-control" 
+                                placeholder="Stock minimo"
+                                        value="" 
+                                        maxlength="11" 
+                                        pattern="[0-9]*" required >
+                                <div class="invalid-feedback">
+                                    Campo Requerido
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom02">Precio de compra</label>
+                                <input type="number" class="form-control"
+                                placeholder="Precio de compra"
+                                        value="" 
+                                        maxlength="11" 
+                                        pattern="[0-9]*" required >
+                                <div class="invalid-feedback">
+                                    Campo Requerido
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Registrar</button>
