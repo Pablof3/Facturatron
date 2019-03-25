@@ -36,8 +36,11 @@
                                 <label for="validationCustom02">Nit</label>
                                 <input type="text" class="form-control" name="Cliente[nit]"
                                         placeholder="Nit"
-                                        value="" maxlength="10" pattern="[0-9]*">
+                                        value="" 
+                                        maxlength="10" 
+                                        pattern="[0-9]*" required >
                                 <div class="invalid-feedback">
+                                    Requerido <br>
                                     Permitido solo numeros
                                 </div>
                             </div>

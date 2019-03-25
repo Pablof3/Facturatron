@@ -11,9 +11,10 @@ class Cliente extends Controller
         $cliente->nombre=$validador->Validar('nombre',['required','minlength,0','maxlength,25'],$_POST['Cliente']);
         $cliente->apellidos=$validador->Validar('apellidos',['required','minlength,0','maxlength,35'],$_POST['Cliente']);
         $cliente->razon=$validador->Validar('razon',['required','minlength,0','maxlenght,20'],$_POST['Cliente']);
-        $cliente->nit=$validador->Validar('nit',['minlength,0','maxlenght,10'],$_POST['Cliente']);
+        $cliente->nit=$validador->Validar('nit',['required','minlength,0','maxlenght,10'],$_POST['Cliente']);
 
         $resp['validate']=$validador->error;
+        $resp['status']=($resp['status']&&$resp['validate']['status']);
         if ($validador->error['status']==true) {
             $mCliente=new mCliente;
             $mresp=$mCliente->Insertar($cliente);
@@ -41,6 +42,7 @@ class Cliente extends Controller
         $cliente->nit=$validador->Validar('nit',['maxlenght,10'],$_POST['Cliente']);
 
         $resp['validate']=$validador->error;
+        $resp['status']=$resp['status']&&$resp['validate']['status'];
         if ($validador->error['status']==true) 
         {
             $mCliente=new mCliente;
@@ -68,6 +70,7 @@ class Cliente extends Controller
         $cliente=new Core\Cliente;
         $cliente->id_cliente=$validador->Validar('id_cliente',['required', 'maxlength,11']);
         $resp['validate']=$validador->error;
+        $resp['status']=$resp['status']&&$resp['validate']['status'];
         if ($validador->error['validate']==true) {
             $mCliente=new mCliente;
             $mResp=$mCliente->Eliminar($cliente->id_cliente);

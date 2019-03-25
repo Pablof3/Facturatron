@@ -2824,7 +2824,7 @@ $.dore = function(element, options) {
     }
 
     /* 03.12. Notification */
-    function showNotification(placementFrom, placementAlign, type, title, message) {
+      function showNotification(placementFrom, placementAlign, type, title, message) {
       $.notify(
         {
           title: title,
@@ -2875,7 +2875,7 @@ $.dore = function(element, options) {
 
     $("body").on("click", ".notify-btn", function(event) {
       event.preventDefault();
-      showNotification($(this).data("from"), $(this).data("align"), "primary");
+      //showNotification($(this).data("from"), $(this).data("align"), "primary");
     });
 
     /* 03.13. Owl carousel */
