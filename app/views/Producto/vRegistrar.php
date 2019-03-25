@@ -81,6 +81,7 @@
                                 <label for="validationCustom02">Stock Minimo</label>
                                 <input type="number" class="form-control" 
                                 placeholder="Stock minimo"
+                                name="Producto[stock_minimo]"
                                         value="" 
                                         maxlength="11" 
                                         pattern="[0-9]*" required >
@@ -94,6 +95,7 @@
                                 <label for="validationCustom02">Precio de compra</label>
                                 <input type="number" step="0.01" class="form-control"
                                 placeholder="Precio de compra"
+                                name="Producto[precio_compra]"
                                         value="" 
                                         maxlength="11" 
                                         pattern="[0-9]*" required >

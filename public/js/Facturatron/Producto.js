@@ -12,6 +12,7 @@ form.addEventListener(
               data: $('#form_ProductoRegistro').serialize(),
               dataType: "JSON",
               success: function (response) {
+                  console.log(response)
                 if(response.status == true) {
                   Swal.fire({
                       title: 'Correcto',
