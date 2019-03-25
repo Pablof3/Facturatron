@@ -3,26 +3,28 @@ class Producto extends Controller
 {
     public function Registrar()
     {
-        
-        $productoP=['id_producto'=>1, 'descripcion'=>'Tinta negra epson 3xss', 'precio_unitario'=>'99.6', 'medida'=>'1L', 'categoria'=>'Chapi', 
-                    'imagen'=>'', 'stock_minimo'=>'10', 'precio_compra'=>'50'];
-        var_dump($ProductoP);
-
+        $resp['status']=true;
         $validador=new Validador();
-        $validador->Trim($productoP);
+        $validador->Trim($_POST['Producto']);    
+
         $producto=new Core\Producto;
         $producto->id_producto=1;
-        $producto->descripcion=$validador->Validar('descripcion',['required','minlength,0','maxlength,50'],$productoP);
-        $producto->precio_unitario=$validador->Validar('precio_unitario',['required'],$productoP);
-        $producto->medida=$validador->Validar('medida',['required','minlength,0','maxlenght,10'],$productoP);
-        $producto->categoria=$validador->Validar('categoria',['required'],$productoP);
-        $producto->imagen=$validador->Validar('imagen',['required'],$productoP);
-        $producto->stock_minimo=$validador->Validar('stock_minimo',['required','minlength,0','maxlenght,10'],$productoP);
-        $producto->precio_compra=$validador->Validar('precio_compra',['required'],$productoP);
+        $producto->descripcion=$validador->Validar('descripcion',['required','minlength,0','maxlength,50'],$_POST['Producto']);
+        $producto->precio_unitario=$validador->Validar('precio_unitario',['required','minlength,0','maxlenght,11'],$_POST['Producto']);
+        $producto->medida=$validador->Validar('medida',['required','minlength,0','maxlenght,10'],$_POST['Producto']);
+        $producto->categoria=$validador->Validar('categoria',['required'],$_POST['Producto']);
+        $producto->imagen=$validador->Validar('imagen',['required'],$_POST['Producto']);
+        $producto->stock_minimo=$validador->Validar('stock_minimo',['required','minlength,0','maxlenght,10'],$_POST['Producto']);
+        $producto->precio_compra=$validador->Validar('precio_compra',['required','minlength,0','maxlenght,11'],$_POST['Producto']);
 
-
-        var_dump($producto);
-        var_dump($validador->error);
+        $resp['validate']=$validador->error;
+        if ($validador->error['status']==true) {
+            $mProducto=new mProducto;
+            $mresp=$mProducto->Insertar($producto);
+            $resp['db']=Validador::ValidarDB($mresp);
+            $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
+        }
+        echo json_encode($resp);
     }
     public function vRegistrar()
     {
