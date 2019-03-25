@@ -87,5 +87,19 @@ class mCliente
         $this->db->bindParam(':limit', $limit);
         return $this->db->getRegistros();
     }
+
+    /**
+     * Obtiene un cliente de la base de datos por id
+     * @param Int $id Id de Cliente 
+     * @return Core\Cliente
+     **/
+    public function GetCliente($id)
+    {
+        $query="SELECT * FROM Cliente
+                WHERE  id_cliente=:id_cliente";
+        $this->db->prepare($query);
+        $this->db->bindParam(':id_cliente', $id);
+        return $this->db->getRegistro();
+    }
 }
 ?>

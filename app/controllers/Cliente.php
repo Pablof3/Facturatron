@@ -51,6 +51,14 @@ class Cliente extends Controller
         echo json_encode($resp);
     }
 
+    public function vActualizar()
+    {
+        $id_cliente=$_POST['Cliente']['id_cliente'];
+        $mCliente=new mCliente;
+        $cliente=$mCliente->GetCliente($id_cliente);
+        $data=['Cliente'=>$cliente];
+        $this->vista('Cliente/vActualizar', $data);
+    }
     public function Eliminar()
     {
         $resp['status']=true;
@@ -68,7 +76,6 @@ class Cliente extends Controller
         }
         echo json_encode($resp);
     }
-
 
 }
 
