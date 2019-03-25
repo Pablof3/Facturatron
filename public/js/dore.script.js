@@ -2824,11 +2824,11 @@ $.dore = function(element, options) {
     }
 
     /* 03.12. Notification */
-    function showNotification(placementFrom, placementAlign, type) {
+    function showNotification(placementFrom, placementAlign, type, title, message) {
       $.notify(
         {
-          title: "Bootstrap Notify",
-          message: "Here is a notification!",
+          title: title,
+          message: message,
           target: "_blank"
         },
         {

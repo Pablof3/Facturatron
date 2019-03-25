@@ -24,7 +24,7 @@
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="nombre_categoria">Nombre</label>
-                                <input type="text" class="form-control" id="nombre_categoria" name="Categoria[nombre]" placeholder="Nombre Categoria"
+                                <input type="text" class="form-control" id="nombre_categoria" name="Categoria[nombre]" maxlength="25" placeholder="Nombre Categoria"
                                     value="" required>
                                 <div class="valid-feedback">
                                     Campo correcto!

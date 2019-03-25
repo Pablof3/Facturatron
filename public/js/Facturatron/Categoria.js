@@ -13,12 +13,17 @@ form.addEventListener(
                 dataType: "JSON",
                 cache: false,
                 success: function(response) {
-                    if(response.error !== undefined) {
-                        
-                    } else if(response.status == "ok") {
-                        alert('Todo OKEY');
+                    if(response.status == true) {
+                      showNotification('top', 'right', "success", "Correcto", "Categoria Registrada con exito");
                     } else {
-                        alert(response.msgerror);
+                        if(response.validate.status == false) {
+                            var msgError = "";
+                            errores = Object.keys(response.validate.error).map(i => response.validate.error[i])
+                            errores.forEach(function(element) {
+                                msgError += element[0] + "<br>";
+                            });
+                            showNotification('top', 'right', 'danger', 'Error', msgError);
+                        }
                     }
                 },
                 error: function(err) {
