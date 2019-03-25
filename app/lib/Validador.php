@@ -34,22 +34,26 @@ class Validador
                 }
                 if (strpos($opcion,'minlength')!==false) 
                 {
-                    $parametro=explode(',',$opcion)[1];
-                    $long=strlen($var[$campo]);
-                    if($long<=0)
-                    {
-                        $this->error['status']=false;
-                        $this->error['error'][$campo][]="{$campo} extension minima mayor a {$parametro}";
+                    if (!empty($var[$campo])) {
+                        $parametro=explode(',',$opcion)[1];
+                        $long=strlen($var[$campo]);
+                        if($long<=0)
+                        {
+                            $this->error['status']=false;
+                            $this->error['error'][$campo][]="{$campo} extension minima mayor a {$parametro}";
+                        }
                     }
                 }
                 if(strpos($opcion,'maxlength')!==false)
                 {
-                    $parametro=explode(',',$opcion)[1];
-                    $long=strlen($var[$campo]);
-                    if($long>$parametro)
-                    {
-                        $this->error['status']=false;
-                        $this->error['error'][$campo][]="{$campo} extension maxima {$parametro}";
+                    if (!empty($var[$campo])) {
+                        $parametro=explode(',',$opcion)[1];
+                        $long=strlen($var[$campo]);
+                        if($long>$parametro)
+                        {
+                            $this->error['status']=false;
+                            $this->error['error'][$campo][]="{$campo} extension maxima {$parametro}";
+                        }
                     }
                 }
             }

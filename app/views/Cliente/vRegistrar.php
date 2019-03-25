@@ -20,7 +20,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h6 class="mb-3">Registro Cliente</h6>
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" id="form_ClienteRegistro" novalidate>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom01">Razon</label>
@@ -71,5 +71,5 @@
         </div>
     </div>
 </div>
-<?= $data['prueba'];?>
+<?php $libs=['0'=>'Cliente'] ?>
 <?php require RUTA_APP .'/views/inc/Footer.php';?>

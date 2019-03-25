@@ -37,6 +37,7 @@ class mCliente
      **/
     public function Actualizar($cliente)
     {
+        $resp;
         $query="UPDATE Cliente 
                 SET razon=:razon, nombre=:nombre, apellidos=:apellidos, nit=:nit
                 WHERE id_cliente=:id_cliente";
@@ -46,7 +47,9 @@ class mCliente
         $this->db->bindParam(':apellido', $cliente->apellido);
         $this->db->bindParam(':nit', $cliente->nit);
         $this->db->bindParam(':nit', $cliente->id_cliente);
-        return $this->db->execute();
+        $resp['status']= $this->db->execute();
+        $resp['error']=$this->db->error;
+        return $resp;
     }
 
     /**
@@ -58,11 +61,14 @@ class mCliente
      **/
     public function Eliminar($id)
     {
+        $resp;
         $query="DELETE FROM Cliente 
                 WHERE id_cliente=:id_cliente";
         $this->db->prepare($query);
         $this->db->bindParam(':id_cliente', $id);
-        return $this->db->execute();
+        $resp['status']=$this->db->execute();
+        $resp['error']=$this->db->error;
+        return $resp;
     }
 
     /**
