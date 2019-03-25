@@ -59,8 +59,33 @@ class Producto extends Controller
         }
         echo json_encode($resp);
     }
+
+    
+    public function vActualizar()
+    {
+        $id_producto=$_POST['Producto']['id_producto'];
+        $mProducto=new mProducto;
+        $producto=$mProducto->GetProducto($id_producto);
+        $data=['Producto'=>$producto];
+        $this->vista('Producto/vActualizar', $data);
+    }
+    public function Eliminar()
+    {
+        $resp['status']=true;
+        $validador=new Validador();
+        $validador->Trim($_POST['Producto']);
+
+        $producto=new Core\Producto;
+        $producto->id_producto=$validador->Validar('id_producto',['required', 'maxlength,11']);
+        $resp['validate']=$validador->error;
+        $resp['status']=$resp['status']&&$resp['validate']['status'];
+        if ($validador->error['validate']==true) {
+            $mProducto=new mProducto;
+            $mResp=$mProducto->Eliminar($producto->id_producto);
+            $resp['db']=Validador::ValidarDB($mResp);
+            $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
+        }
+        echo json_encode($resp);
+    }
 }
-
-
-
 ?>
