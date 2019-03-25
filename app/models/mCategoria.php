@@ -23,7 +23,7 @@ class mCategoria
             }
         } catch (Exception $ex) {
             $this->response["status"] = "error";
-            $this->response["msgerror"] = $ex->getMessage();
+            $this->response["msgerror"] = w$ex->getMessage();
         }
         finally {
             return json_encode($this->response);

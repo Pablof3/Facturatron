@@ -16,6 +16,7 @@
     <script src="<?= RUTA_URL;?>/js/vendor/bootstrap-datepicker.js"></script>
     <script src="<?= RUTA_URL;?>/js/vendor/Sortable.js"></script>
     <script src="<?= RUTA_URL;?>/js/vendor/mousetrap.min.js"></script>
+    <script src="<?= RUTA_URL;?>/js/vendor/sweetalert/sweetalert2.all.js"></script>
     <script src="<?= RUTA_URL;?>/js/dore.script.js"></script>
     <script src="<?= RUTA_URL;?>/js/scripts.js"></script>
 <?php if(isset($libs)): ?>

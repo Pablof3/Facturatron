@@ -13,7 +13,7 @@ class Categoria extends Controller
 
         $categoria=new Core\Categoria;
         $categoria->nombre = $validador->Validar('nombre', ["required", "maxlength, 25"], $_POST["Categoria"]);
-        $categoria->detalle = $validador->Validar('detalle', ["required", "maxlength, 25"], $_POST["Categoria"]);        
+        $categoria->detalle = $validador->Validar('detalle', ["required"], $_POST["Categoria"]);        
 
         $resp['validate']=$validador->error;
         $resp['status']=$resp['validate']['status'];        
