@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?= RUTA_URL;?>/css/vendor/bootstrap-stars.css" />
     <link rel="stylesheet" href="<?= RUTA_URL;?>/css/vendor/nouislider.min.css" />
     <link rel="stylesheet" href="<?= RUTA_URL;?>/css/vendor/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="<?= RUTA_URL;?>/js/vendor/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="<?= RUTA_URL;?>/css/main.css" />
 </head>
 

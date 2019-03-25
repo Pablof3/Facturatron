@@ -14,15 +14,25 @@ form.addEventListener(
                 cache: false,
                 success: function(response) {
                     if(response.status == true) {
-                      showNotification('top', 'right', "success", "Correcto", "Categoria Registrada con exito");
+                        Swal.fire({
+                            title: 'Correcto',
+                            text: 'Categoria creada correctamente',
+                            type: 'success',
+                            confirmButtonText: 'Correcto'
+                        });
                     } else {
                         if(response.validate.status == false) {
                             var msgError = "";
                             errores = Object.keys(response.validate.error).map(i => response.validate.error[i])
                             errores.forEach(function(element) {
-                                msgError += element[0] + "<br>";
+                                msgError += element[0] + "\n";
                             });
-                            showNotification('top', 'right', 'danger', 'Error', msgError);
+                            Swal.fire({
+                                title: 'Error',
+                                text: msgError,
+                                type: 'error',
+                                confirmButtonText: 'Cerrar'
+                            });
                         }
                     }
                 },
