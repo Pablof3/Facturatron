@@ -62,8 +62,7 @@
 
         <div class="navbar-right">
             <div class="header-icons d-inline-block align-middle">
-                <a class="btn btn-sm btn-outline-primary mr-2 d-none d-md-inline-block mb-2" href="https://1.envato.market/5kAb">&nbsp;BUY&nbsp;</a>
-
+                
                 <div class="position-relative d-none d-sm-inline-block">
                     <button class="header-icon btn btn-empty" type="button" id="iconMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">

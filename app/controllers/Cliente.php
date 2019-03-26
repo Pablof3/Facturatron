@@ -52,9 +52,8 @@ class Cliente extends Controller
         }
         echo json_encode($resp);
     }
-    public function vActualizar()
+    public function vActualizar($id_cliente)
     {
-        $id_cliente=50;
         $mCliente=new mCliente;
         $cliente=$mCliente->GetCliente($id_cliente);
         $data=['Cliente'=>$cliente];
@@ -78,13 +77,17 @@ class Cliente extends Controller
         }
         echo json_encode($resp);
     }
-    public function vEliminar()
+    public function vEliminar($id_cliente)
     {
-        $id_cliente=42;
         $mCliente=new mCliente;
         $cliente = $mCliente->GetCliente($id_cliente);
         $data=['Cliente'=>$cliente];
         $this->vista('Cliente/vEliminar', $data);
+    }
+
+    public function Listar()
+    {
+        $this->vista('Cliente/vListar');
     }
 
     public function vListarClientes($pagActual, $limit)
