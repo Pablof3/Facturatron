@@ -87,5 +87,13 @@ class Producto extends Controller
         }
         echo json_encode($resp);
     }
+
+    public function vEliminar($id_producto)
+    {
+        $mProducto=new mProducto;
+        $producto = $mProducto->GetProducto($id_producto);
+        $data=['Producto'=>$producto];
+        $this->vista('Producto/vEliminar', $data);
+    }
 }
 ?>
