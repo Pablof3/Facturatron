@@ -66,10 +66,10 @@ class Database
     * @param string $campo nombre de columna bd
     * @param string $param valor a asignar
     */
-    public function bindParam($campo, $param)
+    public function bindParam($campo, $param, $tipo=PDO::PARAM_STR)
     {
         try {
-            $this->stmt->bindParam($campo, $param);
+            $this->stmt->bindParam($campo, $param, $tipo);
             
         } catch (\Throwable $e) {
             $this->error[]=$e;

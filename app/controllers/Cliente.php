@@ -52,10 +52,9 @@ class Cliente extends Controller
         }
         echo json_encode($resp);
     }
-
     public function vActualizar()
     {
-        $id_cliente=42;
+        $id_cliente=50;
         $mCliente=new mCliente;
         $cliente=$mCliente->GetCliente($id_cliente);
         $data=['Cliente'=>$cliente];
@@ -68,16 +67,34 @@ class Cliente extends Controller
         $validador->Trim($_POST['Cliente']);
 
         $cliente=new Core\Cliente;
-        $cliente->id_cliente=$validador->Validar('id_cliente',['required', 'maxlength,11']);
+        $cliente->id_cliente=$validador->Validar('id_cliente',['required', 'maxlength,11'],$_POST['Cliente']);
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
-        if ($validador->error['validate']==true) {
+        if ($validador->error['status']==true) {
             $mCliente=new mCliente;
             $mResp=$mCliente->Eliminar($cliente->id_cliente);
             $resp['db']=Validador::ValidarDB($mResp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
         }
         echo json_encode($resp);
+    }
+    public function vEliminar()
+    {
+        $id_cliente=42;
+        $mCliente=new mCliente;
+        $cliente = $mCliente->GetCliente($id_cliente);
+        $data=['Cliente'=>$cliente];
+        $this->vista('Cliente/vEliminar', $data);
+    }
+
+    public function vListarClientes($pagActual, $limit)
+    {
+        $mCliente=new mCliente;
+        $numReg=$mCliente->CountClientes();
+        $numPag=ceil($numReg/$limit);
+        $offset=($pagActual-1)*$limit;
+        $clientes=$mCliente->GetList($offset, $limit);
+        var_dump($clientes);
     }
 
 }

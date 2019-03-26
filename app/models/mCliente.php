@@ -44,9 +44,9 @@ class mCliente
         $this->db->prepare($query);
         $this->db->bindParam(':razon', $cliente->razon);
         $this->db->bindParam(':nombre', $cliente->nombre);
-        $this->db->bindParam(':apellido', $cliente->apellido);
+        $this->db->bindParam(':apellidos', $cliente->apellidos);
         $this->db->bindParam(':nit', $cliente->nit);
-        $this->db->bindParam(':nit', $cliente->id_cliente);
+        $this->db->bindParam(':id_cliente', $cliente->id_cliente);
         $resp['status']= $this->db->execute();
         $resp['error']=$this->db->error;
         return $resp;
@@ -83,8 +83,8 @@ class mCliente
         $query="SELECT * FROM Cliente
                 LIMIT :offset, :limit";
         $this->db->prepare($query);
-        $this->db->bindParam(':offset', $offset);
-        $this->db->bindParam(':limit', $limit);
+        $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
         return $this->db->getRegistros();
     }
 
@@ -100,6 +100,18 @@ class mCliente
         $this->db->prepare($query);
         $this->db->bindParam(':id_cliente', $id);
         return $this->db->getRegistro();
+    }
+
+    /**
+     * Numero de Registros de Clientes en Base de Datos
+     *
+     * @return type
+     **/
+    public function CountClientes()
+    {
+        $sql="SELECT COUNT(*) FROM Cliente";
+        $this->db->prepare($sql);
+        return $this->db->fetchColumn();
     }
 }
 ?>

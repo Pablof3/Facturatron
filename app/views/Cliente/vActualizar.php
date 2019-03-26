@@ -8,7 +8,7 @@
                     <li class="breadcrumb-item">
                         <a href="#">Cliente</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Registrar</li>
+                    <li class="breadcrumb-item active" aria-current="page">Actualizar</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -21,13 +21,12 @@
                 <div class="card-body">
                     <h6 class="mb-3">Actualizar Cliente</h6>
                     <form class="needs-validation" id="form_ClienteActualizar" novalidate>
-                        <input type="hidden" name="Cliente[id_cliente]" value="<?= $data['Cliente']->id_cliente; ?>" hidden>
+                        <input type="hidden" name="Cliente[id_cliente]" value="<?= $data['Cliente']->id_cliente; ?>"
+                            hidden>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="">Razon</label>
-                                <input type="text" class="form-control"
-                                    name="Cliente[razon]"
-                                    placeholder="Razon"
+                                <input type="text" class="form-control" name="Cliente[razon]" placeholder="Razon"
                                     value="<?= $data['Cliente']->razon; ?>" maxlength="20" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
@@ -35,10 +34,8 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Nit</label>
-                                <input type="text" class="form-control" name="Cliente[nit]"
-                                        placeholder="Nit"
-                                        value="<?= $data['Cliente']->nit; ?>" 
-                                        maxlength="10" pattern="[0-9]*" required> 
+                                <input type="text" class="form-control" name="Cliente[nit]" placeholder="Nit"
+                                    value="<?= $data['Cliente']->nit; ?>" maxlength="10" pattern="[0-9]*" required>
                                 <div class="invalid-feedback">
                                     Permitido solo numeros
                                 </div>
@@ -47,22 +44,17 @@
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Nombre</label>
-                                <input type="text" class="form-control"
-                                        name="Cliente[nombre]"
-                                        placeholder="Nombre"
-                                        value="<?= $data['Cliente']->nombre; ?>" 
-                                        maxlength="25" required>
+                                <input type="text" class="form-control" name="Cliente[nombre]" placeholder="Nombre"
+                                    value="<?= $data['Cliente']->nombre; ?>" maxlength="25" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Apellidos</label>
-                                <input type="text" class="form-control" 
-                                        name="Cliente[apellidos]" 
-                                        placeholder="Apellidos"
-                                        value="<?= $data['Cliente']->apellidos; ?>" 
-                                        maxlength="35" required>
+                                <input type="text" class="form-control" name="Cliente[apellidos]"
+                                    placeholder="Apellidos" value="<?= $data['Cliente']->apellidos; ?>" maxlength="35"
+                                    required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
