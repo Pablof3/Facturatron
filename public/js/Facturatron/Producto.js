@@ -1,6 +1,7 @@
 var url = "http://"+window.location.host+"/Facturatron/"
-var form = document.getElementById("form_ProductoRegistro");
-form.addEventListener(
+if (document.getElementById("form_ProductoRegistro")) {
+    var form = document.getElementById("form_ProductoRegistro");
+    form.addEventListener(
     "submit",
     function(event) {
         event.preventDefault();
@@ -50,9 +51,12 @@ form.addEventListener(
     },
     false
 );
+}
 
 // Producto Actualizar
-document.getElementById('form_ProductoActualizar').addEventListener(
+if (document.getElementById("form_ProductoActualizar")) {
+    var form = document.getElementById("form_ProductoActualizar");
+    form.addEventListener(
     "submit",
     function(event) {
         event.preventDefault();
@@ -101,3 +105,4 @@ document.getElementById('form_ProductoActualizar').addEventListener(
     },
     false
   );
+}
