@@ -8,7 +8,7 @@
                     <li class="breadcrumb-item">
                         <a href="#">Producto</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Registrar</li>
+                    <li class="breadcrumb-item active" aria-current="page">Actualizar</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -19,28 +19,28 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h6 class="mb-3">Registro Producto</h6>
-                    <form class="needs-validation" id="form_ProductoRegistro" novalidate>
+                    <h6 class="mb-3">Actualizar Producto</h6>
+                    <form class="needs-validation" id="form_ProductoActualizar" novalidate>
+                        <input type="hidden" name="Producto[id_producto]" value="<?= $data['producto']->id_producto; ?>" hidden>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="validationCustom01">Descripcion</label>
+                                <label for="">Descripcion</label>
                                 <input type="text" class="form-control"
                                     name="Producto[descripcion]"
                                     placeholder="Descripcion"
-                                    value="" maxlength="50" required>
+                                    value="<?= $data['Producto']->descripcion; ?>" maxlength="50" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Precio Unitario</label>
-                                <input type="number " step="0.01" class="form-control" name="Producto[precio_unitario]"
+                                <label for="validationCustom02">Precio unitario</label>
+                                <input type="number" step="0.01" class="form-control" name="Producto[precio_unitario]"
                                         placeholder="Precio unitario"
-                                        value="" 
-                                        maxlength="11" 
-                                        pattern="[0-9]*" required >
+                                        value="<?= $data['Producto']->precio_unitario; ?>" 
+                                        maxlength="11" pattern="[0-9]*" required> 
                                 <div class="invalid-feedback">
-                                    Campo Requerido
+                                    Permitido solo numeros
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,8 @@
                                 <input type="text" class="form-control"
                                         name="Producto[medida]"
                                         placeholder="Medida"
-                                        value="" maxlength="10" required>
+                                        value="<?= $data['Producto']->medida; ?>" 
+                                        maxlength="10" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
@@ -60,7 +61,8 @@
                                 <input type="text" class="form-control" 
                                         name="Producto[categoria]" 
                                         placeholder="Categoria"
-                                        value="" maxlength="11" required>
+                                        value="<?= $data['Producto']->categoria; ?>" 
+                                        maxlength="11" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
@@ -72,19 +74,19 @@
                                 <input type="text" class="form-control"
                                         name="Producto[imagen]"
                                         placeholder="Imagen"
-                                        value="" maxlength="100" required>
+                                        value="<?= $data['Producto']->imagen; ?>" 
+                                        maxlength="100" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Stock Minimo</label>
+                                <label for="validationCustom02">Stock minimo</label>
                                 <input type="number" class="form-control" 
-                                placeholder="Stock minimo"
-                                name="Producto[stock_minimo]"
-                                        value="" 
-                                        maxlength="11" 
-                                        pattern="[0-9]*" required >
+                                        name="Producto[stock_minimo]" 
+                                        placeholder="Stock minimo"
+                                        value="<?= $data['Producto']->stock_minimo; ?>" 
+                                        maxlength="11" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
@@ -94,11 +96,10 @@
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Precio de compra</label>
                                 <input type="number" step="0.01" class="form-control"
-                                placeholder="Precio de compra"
-                                name="Producto[precio_compra]"
-                                        value="" 
-                                        maxlength="11" 
-                                        pattern="[0-9]*" required >
+                                        name="Producto[precio_compra]"
+                                        placeholder="Precio de compra"
+                                        value="<?= $data['Producto']->precio_compra; ?>" 
+                                        maxlength="11" required>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
@@ -106,7 +107,8 @@
                             <div class="col-md-4 mb-3">
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Registrar</button>
+                        <button class="btn btn-primary" type="submit">Actualizar</button>
+                        <button class="btn btn-primary" type="reset">Cancelar</button>
                     </form>
                 </div>
             </div>

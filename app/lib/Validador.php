@@ -78,6 +78,9 @@ class Validador
                     case '1062':
                         $resp['error'][]='Registro Duplicado';
                     break;
+                    case '1452':
+                        $resp['error'][]='Error de Relacion en Registro';
+                    break;
                 }
             }
         }

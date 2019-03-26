@@ -114,14 +114,17 @@ class Database
             $resp=$this->stmt->execute();
         } catch (\Throwable $e) {
             $this->error[]=$e;
+
         }
         catch(Exception $e)
         {
             $this->error[]=$e;
+
         }
         catch(PDOException $e)
         {
             $this->error[]=$e;
+
         }
         return $resp;
     }
