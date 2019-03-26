@@ -39,7 +39,7 @@ class Producto extends Controller
         $validador->Trim($_POST['Producto']);
 
         $producto=new Core\Producto;
-        $producto->id_producto=$validador->Validar('id_producto',['required','maxlength,11'],$_POST['Producto']);
+        $producto->id_producto=$validador->Validar('id_producto',['required','minlength,0','maxlength,11'],$_POST['Producto']);
         $producto->descripcion=$validador->Validar('descripcion',['required','minlength,0','maxlength,50'],$_POST['Producto']);
         $producto->precio_unitario=$validador->Validar('precio_unitario',['required','minlength,0','maxlenght,11'],$_POST['Producto']);
         $producto->medida=$validador->Validar('medida',['required','minlength,0','maxlenght,10'],$_POST['Producto']);

@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <h6 class="mb-3">Actualizar Producto</h6>
                     <form class="needs-validation" id="form_ProductoActualizar" novalidate>
-                        <input type="hidden" name="Producto[id_producto]" value="<?= $data['producto']->id_producto; ?>" hidden>
+                        <input type="hidden" name="Producto[id_producto]" value="<?= $data['Producto']->id_producto; ?>" hidden>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="">Descripcion</label>
