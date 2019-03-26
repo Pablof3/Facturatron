@@ -96,7 +96,9 @@ class mProducto
         $this->db->bindParam(':stock_minimo', $producto->stock_minimo);
         $this->db->bindParam(':precio_compra', $producto->precio_compra);
         $this->db->bindParam(':id_producto', $producto->id_producto);		
-        return $this->db->execute();
+        $resp['status']= $this->db->execute();
+        $resp['error']=$this->db->error;
+        return $resp;
     }
 
     /**
@@ -114,6 +116,15 @@ class mProducto
         $this->db->prepare($query);
         $this->db->bindParam(':id_producto', $id);
         return $this->db->execute();
+    }
+
+    public function GetProducto($id)
+    {
+        $query="SELECT * FROM Producto
+                WHERE  id_producto=:id_producto";
+        $this->db->prepare($query);
+        $this->db->bindParam(':id_producto', $id);
+        return $this->db->getRegistro();
     }
 }
 

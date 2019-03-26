@@ -52,7 +52,7 @@ class Producto extends Controller
         $resp['status']=$resp['status']&&$resp['validate']['status'];
         if ($validador->error['status']==true) 
         {
-            $mProducto=new mCliente;
+            $mProducto=new mProducto;
             $mResp=$mProducto->Actualizar($producto);
             $resp['db']=Validador::ValidarDB($mResp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
@@ -63,7 +63,7 @@ class Producto extends Controller
     
     public function vActualizar()
     {
-        $id_producto=$_POST['Producto']['id_producto'];
+        $id_producto=1;
         $mProducto=new mProducto;
         $producto=$mProducto->GetProducto($id_producto);
         $data=['Producto'=>$producto];
