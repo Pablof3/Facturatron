@@ -118,6 +118,23 @@ class mProducto
         return $this->db->execute();
     }
 
+    /**
+     * Obtiene un Arreglo de Clientes con Offset y Limit
+     *
+     * @param Int $offset Indice inicial
+     * @param Int $limit Indice inicial
+     * @return Array 
+     **/
+    public function GetList($offset, $limit)
+    {
+        $query="SELECT * FROM Producto
+                LIMIT :offset, :limit";
+        $this->db->prepare($query);
+        $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        return $this->db->getRegistros();
+    }
+
     public function GetProducto($id)
     {
         $query="SELECT * FROM Producto
@@ -125,6 +142,18 @@ class mProducto
         $this->db->prepare($query);
         $this->db->bindParam(':id_producto', $id);
         return $this->db->getRegistro();
+    }
+
+    /**
+     * Numero de Registros de Clientes en Base de Datos
+     *
+     * @return type
+     **/
+    public function CountProducto()
+    {
+        $sql="SELECT COUNT(*) FROM Producto";
+        $this->db->prepare($sql);
+        return $this->db->fetchColumn();
     }
 }
 
