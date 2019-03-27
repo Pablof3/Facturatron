@@ -81,6 +81,9 @@ class Validador
                     case '1452':
                         $resp['error'][]='Error de Relacion en Registro';
                     break;
+                    default:
+                        $resp['error'][]='Error Desconocido';
+                    break;
                 }
             }
         }
