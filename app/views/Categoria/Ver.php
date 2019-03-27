@@ -3,13 +3,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h1>Eliminar Categoria</h1>
+            <h1>Ver Categoria</h1>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
                         <a href="#">Categoria</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+                    <li class="breadcrumb-item active" aria-current="page">Ver</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -20,8 +20,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h6 class="mb-3">Eliminar</h6>
-                    <form id="categoria_eliminar" class="needs-validation" novalidate>
+                    <h6 class="mb-3">Ver</h6>
+                    <div class="needs-validation" novalidate>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="nombre_categoria">Nombre</label>
@@ -44,10 +44,8 @@
                                 </div>
                             </div>
 						</div>
-						<input type="hidden" id="id_categoria" name="Categoria[id_categoria]" value="<?= $categoria->id_categoria ?>">
-                        <button class="btn btn-danger" type="submit">Eliminar</button>
                         <a href="<?=RUTA_URL?>/Categoria/vListar" class="btn btn-danger">Volver Atras</a>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

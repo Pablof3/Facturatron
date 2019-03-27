@@ -46,6 +46,7 @@
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Registrar</button>
+                        <a href="<?=RUTA_URL?>/Categoria/vListar" class="btn btn-danger">Volver Atras</a>
                     </form>
                 </div>
             </div>

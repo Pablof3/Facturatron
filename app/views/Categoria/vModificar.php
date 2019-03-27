@@ -48,6 +48,7 @@
 						</div>
 						<input type="hidden" id="id_categoria" name="Categoria[id_categoria]" value="<?= $categoria->id_categoria ?>">
                         <button class="btn btn-warning" type="submit">Modificar</button>
+                        <a href="<?=RUTA_URL?>/Categoria/vListar" class="btn btn-danger">Volver Atras</a>
                     </form>
                 </div>
             </div>

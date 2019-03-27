@@ -3,7 +3,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-2">
-                        <h1>Categorias</h1>
+                        <h1>Proveedor</h1>
                         <div class="float-sm-right text-zero">
                             <a href="<?= RUTA_URL . "/Proveedor/vRegistrar"?>" class="btn btn-primary btn-lg top-right-button mr-1">Nuevo Proveedor</a>
 
@@ -114,11 +114,12 @@
                                 <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="Layouts.Details.html">
                                     <?=$categoria->nombre?>
                                 </a>
-                                <p class="mb-1 text-muted text-small w-15 w-xs-100"><?=$categoria->detalle?></p>
+                                <p class="mb-1 text-muted text-small w-15 w-xs-100"><?=$categoria->telefono?></p>
                             </div>
                             <div class="custom-control custom-checkbox pl-1 align-self-center pr-4">
-								<a href="<?= RUTA_URL . "/Proveedor/vModificar/".$categoria->id_categoria ?>" class="btn btn-warning mb-1">Modificar</a>
-								<a href="<?= RUTA_URL . "/Proveedor/vEliminar/".$categoria->id_categoria ?>" class="btn btn-danger mb-1">Eliminar</a>
+								<a href="<?= RUTA_URL . "/Proveedor/Ver/".$categoria->id_proveedor ?>" class="btn btn-info mb-1">Ver</a>
+								<a href="<?= RUTA_URL . "/Proveedor/vModificar/".$categoria->id_proveedor ?>" class="btn btn-warning mb-1">Modificar</a>
+								<a href="<?= RUTA_URL . "/Proveedor/vEliminar/".$categoria->id_proveedor ?>" class="btn btn-danger mb-1">Eliminar</a>
                             </div>
                         </div>
 					</div>

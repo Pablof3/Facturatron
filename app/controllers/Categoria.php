@@ -2,17 +2,64 @@
 class Categoria extends Controller
 {
 
-    public function vListar($offset = 0, $limit = 10) 
+    public function vListar() 
     {
-        $mCategoria = new mCategoria;
-        $data = $mCategoria->Listar($offset, $limit);
+        $this->vista('Categoria/vListar');
+    }
 
-        $this->vista('Categoria/vListar', $data);
+    public function vTabla()
+    {
+        $mCategoria=new mCategoria;
+        $pagActual=$_POST['Tabla']['pagActual']; 
+        $limit=$_POST['Tabla']['limit'];
+        $busqueda=$_POST['Tabla']['busqueda'];
+        if (empty($busqueda)) 
+        {
+            $numReg=$mCategoria->CountCategorias();
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $categorias=$mCategoria->GetList($offset, $limit);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
+            $data=['Categorias'=>$categorias,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual,
+                    'cantRegistros' => $cantRegistros];
+            $this->vista('Categoria/Component/Tabla', $data);
+        }
+        else
+        {
+            $numReg=$mCategoria->CountCategoriasSearch($busqueda);
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $categorias=$mCategoria->GetListSearch($offset,$limit,$busqueda);
+            
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
+            $data=['Categorias'=>$categorias,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual,
+                    'cantRegistros' => $cantRegistros];
+            $this->vista('Categoria/Component/Tabla', $data);
+        }
     }
 
     public function vRegistrar()
     {
         $this->vista('Categoria/vRegistrar');
+    }
+
+    public function Ver($id) 
+    {
+        $mCategoria = new mCategoria;
+        $data = $mCategoria->Ver($id);
+        
+        $this->vista('Categoria/Ver', $data);
     }
 
     public function Registrar() {

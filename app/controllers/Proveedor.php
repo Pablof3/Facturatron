@@ -10,6 +10,14 @@ class Proveedor extends Controller
         $this->vista('Proveedor/vListar', $data);
     }
 
+    public function Ver($id) 
+    {
+        $mProveedor = new mProveedor;
+        $data = $mProveedor->Ver($id);
+        
+        $this->vista('Proveedor/Ver', $data);
+    }
+
     public function vRegistrar()
     {
         $this->vista('Proveedor/vRegistrar');

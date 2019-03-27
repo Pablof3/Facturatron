@@ -1,33 +1,80 @@
 <?php
 class mCategoria
 {
-    private $db;
-    public function __construct()
-    {
-       $this->db= new Database;
-    }
-    
     /**
-     * Lista todos las categorias
+     * Obtiene un Arreglo de Clientes con Offset y Limit
      *
-     * Devuelve una lista de registros de categoria de la base de datos
-     *
-     * @param Int $offset Inicio paginado
-     * @param Int $limit Fin paginado
-     * @return Array arreglo de objetos de tipo categoria
+     * @param Int $offset Indice inicial
+     * @param Int $limit Indice inicial
+     * @return Array 
      **/
-    
-    public function Listar($offset, $limit)
+    public function GetList($offset, $limit)
     {
+        $db=new Database;
         $query = "SELECT * FROM Categoria
                   ORDER BY id_categoria DESC
                   LIMIT :offset, :limit";
-        $this->db->prepare($query);
-        $this->db->bindParam(":offset", $offset, PDO::PARAM_INT);
-        $this->db->bindParam(":limit", $limit, PDO::PARAM_INT);
-        
-        return $this->db->getRegistros();
+        $db->prepare($query);
+        $db->bindParam(":offset", $offset, PDO::PARAM_INT);
+        $db->bindParam(":limit", $limit, PDO::PARAM_INT);
+        return $db->getRegistros();
     }
+
+    /**
+     * Get List Clientes
+     *
+     * Devuelve una lista de clientes con un offset y limit dado un criterio de busqueda
+     *
+     * @param Int $offset registro inicio
+     * @param Int $limit numero de registros a partir de offset
+     * @param String $busqueda  parametro de busqueda 
+     * @return Array Arreglo de Clientes coincidentes con busqueda
+     **/
+    public function GetListSearch($offset, $limit, $busqueda)
+    {
+        $db = new Database;
+        $busqueda="%{$busqueda}%";
+        $query="SELECT *
+                FROM Categoria
+                WHERE nombre LIKE :busqueda 
+                ORDER BY id_categoria DESC
+                LIMIT :offset, :limit";
+        $db->prepare($query);
+        $db->bindParam(':busqueda',$busqueda);
+        $db->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        return $db->getRegistros();
+    }
+
+    /**
+     * Numero de Registros de Clientes en Base de Datos
+     *
+     * @return type
+     **/
+    public function CountCategorias()
+    {
+        $db = new Database;
+        $sql="SELECT COUNT(*) FROM Categoria";
+        $db->prepare($sql);
+        return $db->fetchColumn();
+    }
+    /**
+     * Numero de Registros Coincidentes con una Busqueda
+     * @param String $busqueda Parametro de Busqueda
+     * @return Int
+     **/
+    public function CountCategoriasSearch($busqueda)
+    {
+        $db = new Database;
+        $busqueda="%{$busqueda}%";
+        $query="SELECT COUNT(*)
+                FROM Categoria
+                WHERE nombre LIKE :busqueda";
+        $db->prepare($query);
+        $db->bindParam(':busqueda',$busqueda);
+        return $db->fetchColumn();
+    }
+
 
     /**
      * Obtiene una categoria
@@ -39,58 +86,62 @@ class mCategoria
      **/
     public function Ver($id) 
     {
+        $db = new Database;
         $query = "SELECT * FROM Categoria
                   WHERE id_categoria = :id_categoria 
                   LIMIT 1";
-        $this->db->prepare($query);
-        $this->db->bindParam(':id_categoria', $id, PDO::PARAM_INT);
+        $db->prepare($query);
+        $db->bindParam(':id_categoria', $id, PDO::PARAM_INT);
     
-        return $this->db->getRegistro(); 
+        return $db->getRegistro(); 
     }
 
 
     public function Insertar(Core\Categoria $categoria)
     {
+        $db = new Database;
         $resp;
         $query="INSERT INTO Categoria(nombre, detalle)
                 VALUES(:nombre, :detalle)";
-        $this->db->prepare($query);
-        $this->db->bindParam(':nombre',$categoria->nombre);
-        $this->db->bindParam(':detalle',$categoria->detalle);
+        $db->prepare($query);
+        $db->bindParam(':nombre',$categoria->nombre);
+        $db->bindParam(':detalle',$categoria->detalle);
         
-        $resp['status'] = $this->db->execute();
-        $resp['error'] = $this->db->error;
+        $resp['status'] = $db->execute();
+        $resp['error'] = $db->error;
 
         return $resp;
     }
 
     public function Actualizar(Core\Categoria $categoria)
     {
+        $db = new Database;
         $resp;
         $query="UPDATE Categoria
                 SET nombre= :nombre , detalle= :detalle
                 WHERE id_categoria= :id_categoria";
-        $this->db->prepare($query);
-        $this->db->bindParam(':nombre',$categoria->nombre);
-        $this->db->bindParam(':detalle',$categoria->detalle);
-        $this->db->bindParam(':id_categoria', $categoria->id_categoria, PDO::PARAM_INT);
+        $db->prepare($query);
+        $db->bindParam(':nombre',$categoria->nombre);
+        $db->bindParam(':detalle',$categoria->detalle);
+        $db->bindParam(':id_categoria', $categoria->id_categoria, PDO::PARAM_INT);
         
-        $resp['status'] = $this->db->execute();
-        $resp['error'] = $this->db->error;
+        $resp['status'] = $db->execute();
+        $resp['error'] = $db->error;
         
         return $resp;
     }
 
     public function Eliminar($id)
     {
+        $db = new Database;
         $resp;
         $query="DELETE FROM Categoria
                 WHERE id_categoria= :id_categoria";
-        $this->db->prepare($query);
-        $this->db->bindParam(':id_categoria',$id, PDO::PARAM_INT);
+        $db->prepare($query);
+        $db->bindParam(':id_categoria',$id, PDO::PARAM_INT);
         
-        $resp['status'] = $this->db->execute();
-        $resp['error'] = $this->db->error;
+        $resp['status'] = $db->execute();
+        $resp['error'] = $db->error;
         
         return $resp;
     }
