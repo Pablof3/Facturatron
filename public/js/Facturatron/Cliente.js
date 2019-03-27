@@ -25,6 +25,7 @@ if (document.getElementById("form_ClienteRegistro")) {
                 type: "success",
                 confirmButtonText: "Correcto"
               });
+              setTimeout(function (){document.location.href=url+'Cliente/vLista'},2000);
             } else {
               if (response.validate.status == false) {
                 var msgError = "";
@@ -82,6 +83,7 @@ if (document.getElementById("form_ClienteActualizar")) {
                 type: "success",
                 confirmButtonText: "Correcto"
               });
+              setTimeout(function (){document.location.href=url+'Cliente/vLista'},2000);
             } else {
               if (response.validate.status == false) {
                 var msgError = "";
@@ -139,6 +141,7 @@ if (document.getElementById('form_ClienteEliminar')) {
                 type: "success",
                 confirmButtonText: "Correcto"
               });
+              setTimeout(function (){document.location.href=url+'Cliente/vLista'},2000);
             } else {
               if (response.validate.status == false) {
                 var msgError = "";
@@ -174,7 +177,7 @@ if (document.getElementById('form_ClienteEliminar')) {
 }
 
 // Tabla
-var limit=10;
+var limit=5;
 var busqueda='';
 function SetNumRegistros(num)
 {

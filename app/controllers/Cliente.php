@@ -1,6 +1,7 @@
 <?php
 class Cliente extends Controller 
 {
+
     public function Registrar()
     {
         $resp['status']=true;
@@ -28,6 +29,13 @@ class Cliente extends Controller
         $this->vista('Cliente/vRegistrar');
     }
 
+    public function vDetalle($id_cliente)
+    {
+        $mCliente=new mCliente;
+        $cliente = $mCliente->GetCliente($id_cliente);
+        $data=['Cliente'=>$cliente];
+        $this->vista('Cliente/vDetalle', $data);
+    }
     public function Actualizar()
     {
         $resp['status']=true;

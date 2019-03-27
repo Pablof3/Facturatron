@@ -8,7 +8,7 @@
                     <li class="breadcrumb-item">
                         <a href="#">Cliente</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
+                    <li class="breadcrumb-item active" aria-current="page">Detalle</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -19,8 +19,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h6 class="mb-3">Eliminar Cliente ?</h6>
-                    <form class="needs-validation" id="form_ClienteEliminar" novalidate>
+                    <h6 class="mb-3">Detalle Cliente</h6>
+                    <form class="needs-validation" novalidate>
                         <input type="hidden" name="Cliente[id_cliente]" value="<?= $data['Cliente']->id_cliente; ?>"
                             hidden>
                         <div class="form-row">
@@ -60,8 +60,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Eliminar</button>
-                        <button class="btn btn-primary" type="reset" onclick="document.location.href='<?= RUTA_URL ?>/Cliente/vLista';">Cancelar</button>
+                        <a class="btn btn-primary" href="<?= RUTA_URL;?>\Cliente\vLista" >Cancelar</a>
                     </form>
                 </div>
             </div>

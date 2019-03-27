@@ -6,7 +6,7 @@
         <div class="mb-2">
             <h1>Lista Clientes</h1>
             <div class="float-sm-right text-zero">
-                <a class="btn btn-primary btn-lg text-white" href="<?= RUTA_URL.'/Cliente/vRegistrar' ?>" >Nuevo Cliente</a>
+                <a class="btn btn-primary btn-lg text-white" href="<?= RUTA_URL.'/Cliente/vRegistrar' ?>">Nuevo Cliente</a>
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
@@ -29,18 +29,8 @@
             </a>
             <div class="collapse d-md-block" id="displayOptions">
                 <div class="d-block d-md-inline-block">
-                    <div class="btn-group float-md-left mr-1 mb-1">
-                        <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Order By
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                        </div>
-                    </div>
                     <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
-                        <input placeholder="Search..." onkeyup="SetBusqueda(this)">
+                        <input placeholder="Search..." onkeyup="SetBusqueda(this)" >
                     </div>
                 </div>
                 <div class="float-md-right">
@@ -50,9 +40,10 @@
                         aria-haspopup="true" 
                         aria-expanded="false"
                         id="dropdownNumRegistros">
-                        10
+                        5
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" onclick="SetNumRegistros(5)">5</a>
                         <a class="dropdown-item" onclick="SetNumRegistros(10)">10</a>
                         <a class="dropdown-item" onclick="SetNumRegistros(20)">20</a>
                         <a class="dropdown-item" onclick="SetNumRegistros(30)">30</a>
