@@ -41,7 +41,18 @@ class mUsuario
         return $this->db->execute();
     }
 
-
+    /**
+     * Retorna una Arreglo de Usuarios de Base de datos
+     *
+     *
+     * @param Type $var Description
+     * @return type
+     * @throws conditon
+     **/
+    public function FunctionName(Type $var = null)
+    {
+        # code...
+    }
     public function VerificarUsuario(Core\Usuario $usuario) 
     {
         $db=new Database;

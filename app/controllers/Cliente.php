@@ -28,7 +28,6 @@ class Cliente extends Controller
     {
         $this->vista('Cliente/vRegistrar');
     }
-
     public function vDetalle($id_cliente)
     {
         $mCliente=new mCliente;

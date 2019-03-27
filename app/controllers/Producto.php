@@ -81,7 +81,7 @@ class Producto extends Controller
         $resp['status']=$resp['status']&&$resp['validate']['status'];
         if ($validador->error['status']==true) {
             $mProducto=new mProducto;
-            $mResp=$mProducto->Eliminar($producto->id_producto);
+            $mResp=$mProducto->Eliminar($producto->id_producto);           
             $resp['db']=Validador::ValidarDB($mResp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
         }

@@ -116,8 +116,7 @@ class mProducto
                 WHERE id_producto = :id_producto";
         $this->db->prepare($query);
         $this->db->bindParam(':id_producto', $id);
-        return $this->db->execute();
-        $resp['status']= $this->db->execute();
+        $resp['status']=$this->db->execute();
         $resp['error']=$this->db->error;
         return $resp;
     }
