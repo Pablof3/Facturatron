@@ -79,7 +79,7 @@ class Producto extends Controller
         $producto->id_producto=$validador->Validar('id_producto',['required', 'maxlength,11'],$_POST['Producto']);
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
-        if ($validador->error['validate']==true) {
+        if ($validador->error['status']==true) {
             $mProducto=new mProducto;
             $mResp=$mProducto->Eliminar($producto->id_producto);
             $resp['db']=Validador::ValidarDB($mResp);
