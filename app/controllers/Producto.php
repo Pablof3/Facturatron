@@ -76,7 +76,7 @@ class Producto extends Controller
         $validador->Trim($_POST['Producto']);
 
         $producto=new Core\Producto;
-        $producto->id_producto=$validador->Validar('id_producto',['required', 'maxlength,11']);
+        $producto->id_producto=$validador->Validar('id_producto',['required', 'maxlength,11'],$_POST['Producto']);
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
         if ($validador->error['validate']==true) {
@@ -95,5 +95,43 @@ class Producto extends Controller
         $data=['Producto'=>$producto];
         $this->vista('Producto/vEliminar', $data);
     }
+
+    public function vLista()
+    {
+        $this->vista('Producto/vListar');
+    }
+
+    public function vTabla()
+    {
+        $mProducto=new mProducto;
+        $pagActual=$_POST['Tabla']['pagActual']; 
+        $limit=$_POST['Tabla']['limit'];
+        $busqueda=$_POST['Tabla']['busqueda'];
+        if (empty($busqueda)) 
+        {
+            $numReg=$mProducto->CountProductos();
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $productos=$mProducto->GetList($offset, $limit);
+            $data=['Productos'=>$productos,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual];
+            $this->vista('Producto/Component/Tabla', $data);
+        }
+        else
+        {
+            $numReg=$mProducto->CountProductosSearch($busqueda);
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $productos=$mProducto->GetListSearch($offset,$limit,$busqueda);
+            $data=['Producto'=>$productos,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual];
+            $this->vista('Producto/Component/Tabla', $data);
+        }
+    }
+
 }
+
+
 ?>

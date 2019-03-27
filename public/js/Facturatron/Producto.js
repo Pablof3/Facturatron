@@ -106,3 +106,149 @@ if (document.getElementById("form_ProductoActualizar")) {
     false
   );
 }
+
+//Producto Actualizar
+if (document.getElementById("form_ClienteActualizar")) {
+    var formActualizar = document.getElementById("form_ClienteActualizar");
+    formActualizar.addEventListener(
+      "submit",
+      function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (formActualizar.checkValidity() === true) {
+          $.ajax({
+            type: "POST",
+            url: url + "Cliente/Actualizar",
+            data: $("#form_ClienteActualizar").serialize(),
+            dataType: "JSON",
+            success: function(response) {
+              console.log(response);
+              if (response.status == true) {
+                Swal.fire({
+                  title: "Correcto",
+                  text: "Cliente Actualizado correctamente",
+                  type: "success",
+                  confirmButtonText: "Correcto"
+                });
+              } else {
+                if (response.validate.status == false) {
+                  var msgError = "";
+                  errores = Object.keys(response.validate.error).map(
+                    i => response.validate.error[i]
+                  );
+                  errores.forEach(function(element) {
+                    msgError += element[0] + "\n";
+                  });
+                  Swal.fire({
+                    title: "Error",
+                    text: msgError,
+                    type: "error",
+                    confirmButtonText: "Cerrar"
+                  });
+                }
+                if (response.db.status == false) {
+                  Swal.fire({
+                    title: "Error",
+                    text: response.db.error,
+                    type: "error",
+                    confirmButtonText: "Cerrar"
+                  });
+                }
+              }
+            }
+          });
+        }
+        formActualizar.classList.add("was-validated");
+      },
+      false
+    );
+  }
+  
+  // Eliminar Producto
+  if (document.getElementById('form_ProductoEliminar')) {
+    var form = document.getElementById("form_ProductoEliminar");
+    form.addEventListener(
+      "submit",
+      function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (form.checkValidity() === true) {
+          $.ajax({
+            type: "POST",
+            url: url + "Producto/Eliminar",
+            data: $("#form_ProductoEliminar").serialize(),
+            dataType: "JSON",
+            success: function(response) {
+              console.log(response);
+              if (response.status == true) {
+                Swal.fire({
+                  title: "Correcto",
+                  text: "Producto Eliminado Exitosamente",
+                  type: "success",
+                  confirmButtonText: "Correcto"
+                });
+              } else {
+                if (response.validate.status == false) {
+                  var msgError = "";
+                  errores = Object.keys(response.validate.error).map(
+                    i => response.validate.error[i]
+                  );
+                  errores.forEach(function(element) {
+                    msgError += element[0] + "\n";
+                  });
+                  Swal.fire({
+                    title: "Error",
+                    text: msgError,
+                    type: "error",
+                    confirmButtonText: "Cerrar"
+                  });
+                }
+                if (response.db.status == false) {
+                  Swal.fire({
+                    title: "Error",
+                    text: response.db.error,
+                    type: "error",
+                    confirmButtonText: "Cerrar"
+                  });
+                }
+              }
+            }
+          });
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+}
+
+// Tabla
+var limit=10;
+var busqueda='';
+function SetNumRegistros(num)
+{
+  $('#dropdownNumRegistros').html(num);
+  limit=num;
+  getListaProducto();
+}
+function SetBusqueda(input) 
+{  
+  busqueda=input.value;
+  getListaCliente();
+}
+
+function getListaProducto(pag=1) 
+{  
+  $.post(url+"Producto/vTabla", {
+    'Tabla':{
+      'pagActual':pag,
+      'limit':limit,
+      'busqueda':busqueda
+    } 
+  },
+    function (data, textStatus, jqXHR) {
+      $('#ProductoLista').html(data);
+    },
+    "HTML"
+  );
+
+}
