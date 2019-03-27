@@ -104,9 +104,9 @@ class Producto extends Controller
     public function vTabla()
     {
         $mProducto=new mProducto;
-        $pagActual=$_POST['Tabla']['pagActual']; 
-        $limit=$_POST['Tabla']['limit'];
-        $busqueda=$_POST['Tabla']['busqueda'];
+        $pagActual=1; 
+        $limit=5;
+        $busqueda='';
         if (empty($busqueda)) 
         {
             $numReg=$mProducto->CountProductos();

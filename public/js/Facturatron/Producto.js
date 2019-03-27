@@ -1,4 +1,7 @@
-var url = "http://"+window.location.host+"/Facturatron/"
+var url = "http://" + window.location.host + "/Facturatron/";
+$(document).ready(function () {
+  getListaProducto();
+});
 if (document.getElementById("form_ProductoRegistro")) {
     var form = document.getElementById("form_ProductoRegistro");
     form.addEventListener(
@@ -233,7 +236,7 @@ function SetNumRegistros(num)
 function SetBusqueda(input) 
 {  
   busqueda=input.value;
-  getListaCliente();
+  getListaProducto();
 }
 
 function getListaProducto(pag=1) 

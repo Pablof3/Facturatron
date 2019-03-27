@@ -149,12 +149,23 @@ class mProducto
      *
      * @return type
      **/
-    public function CountProducto()
+    public function CountProductos()
     {
         $sql="SELECT COUNT(*) FROM Producto";
         $this->db->prepare($sql);
         return $this->db->fetchColumn();
     }
-}
 
+    public function CountProductosSearch($busqueda)
+    {
+        $busqueda="%{$busqueda}%";
+        $query="SELECT COUNT(*)
+                FROM Producto
+                WHERE descripcion LIKE :busqueda";
+                
+        $this->db->prepare($query);
+        $this->db->bindParam(':busqueda',$busqueda);
+        return $this->db->fetchColumn();
+    }
+}
 ?>
