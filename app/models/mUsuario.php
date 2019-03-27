@@ -1,11 +1,6 @@
 <?php
 class mUsuario 
 {
-    private $db;
-    public function __construct() {
-        $this->db=new Database; 
-    }
-
     public function Insertar($usuario)
     {
         $query="INSERT INTO Usuario(usuario, password, esAdmin, ci, nombre, apellido)
@@ -45,6 +40,21 @@ class mUsuario
         $this->db->bindParam(':id_usuario', $id);
         return $this->db->execute();
     }
+
+
+    public function VerificarUsuario(Core\Usuario $usuario) 
+    {
+        $db=new Database;
+        $query = "SELECT * FROM Usuario
+                  WHERE usuario = :usuario AND password = :password";
+
+        $db->prepare($query);
+        $db->bindParam("usuario", $usuario->usuario);
+        $db->bindParam("password", $usuario->password);
+    
+        return $db->getRegistro();
+    }
+
 }
 
 ?>

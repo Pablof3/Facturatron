@@ -12,7 +12,7 @@ class Core
     
     public function __construct()
     {
-        //print_r($this-> getUrl());
+        // print_r($this-> getUrl());
         $url= $this->getUrl();
         //buscar controllador  Existe?
         if (file_exists('../app/controllers/'. ucwords($url[0]) .'.php'))

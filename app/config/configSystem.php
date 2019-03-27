@@ -10,7 +10,7 @@ define('DB_PASSWORD','');       //contraseña de usuario de base de datos
 define('DB_NAME_BD','facturatrondb');   //nombre de base de datos
 
 //Configuracion CONTROLADOR y METODO [DEFAULT]
-define('CONTROLLER','Ejemplo');   //Controller
+define('CONTROLLER','Login');   //Controller
 define('METHOD','Index');           //Method
 
 //Ruta App
