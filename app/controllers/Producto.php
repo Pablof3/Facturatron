@@ -131,6 +131,14 @@ class Producto extends Controller
         }
     }
 
+    public function vDetalle($id_producto)
+    {
+        $mProducto=new mProducto;
+        $producto = $mProducto->GetProducto($id_producto);
+        $data=['Producto'=>$producto];
+        $this->vista('Producto/vDetalle', $data);
+    }
+
 }
 
 

@@ -6,7 +6,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#">Cliente</a>
+                        <a href="#">Producto</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Eliminar</li>
                 </ol>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Eliminar</button>
-                        <button class="btn btn-primary" type="reset">Cancelar</button>
+                        <button class="btn btn-primary" type="reset" onclick="document.location.href='<?= RUTA_URL ?>/Producto/vLista';">Cancelar</button>
                     </form>
                 </div>
             </div>

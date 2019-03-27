@@ -6,7 +6,7 @@
         <div class="mb-2">
             <h1>Lista Productos</h1>
             <div class="float-sm-right text-zero">
-                <a class="btn btn-primary btn-lg text-white" href="<?= RUTA_URL.'/Producto/vProducto' ?>" >Nuevo Producto</a>
+                <a class="btn btn-primary btn-lg text-white" href="<?= RUTA_URL.'/Producto/vRegistrar' ?>" >Nuevo Producto</a>
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
