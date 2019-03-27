@@ -1,4 +1,7 @@
 var url = "http://" + window.location.host + "/Facturatron/";
+$(document).ready(function () {
+  getListaCliente();
+});
 
 // Cliente Registrar
 if (document.getElementById("form_ClienteRegistro")) {
@@ -168,4 +171,36 @@ if (document.getElementById('form_ClienteEliminar')) {
     },
     false
   );
+}
+
+// Tabla
+var limit=10;
+var busqueda='';
+function SetNumRegistros(num)
+{
+  $('#dropdownNumRegistros').html(num);
+  limit=num;
+  getListaCliente();
+}
+function SetBusqueda(input) 
+{  
+  busqueda=input.value;
+  getListaCliente();
+}
+
+function getListaCliente(pag=1) 
+{  
+  $.post(url+"Cliente/vTabla", {
+    'Tabla':{
+      'pagActual':pag,
+      'limit':limit,
+      'busqueda':busqueda
+    } 
+  },
+    function (data, textStatus, jqXHR) {
+      $('#ClienteLista').html(data);
+    },
+    "HTML"
+  );
+
 }

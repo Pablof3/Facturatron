@@ -85,19 +85,39 @@ class Cliente extends Controller
         $this->vista('Cliente/vEliminar', $data);
     }
 
-    public function Listar()
+    public function vLista()
     {
         $this->vista('Cliente/vListar');
     }
 
-    public function vListarClientes($pagActual, $limit)
+    public function vTabla()
     {
         $mCliente=new mCliente;
-        $numReg=$mCliente->CountClientes();
-        $numPag=ceil($numReg/$limit);
-        $offset=($pagActual-1)*$limit;
-        $clientes=$mCliente->GetList($offset, $limit);
-        var_dump($clientes);
+        $pagActual=$_POST['Tabla']['pagActual']; 
+        $limit=$_POST['Tabla']['limit'];
+        $busqueda=$_POST['Tabla']['busqueda'];
+        if (empty($busqueda)) 
+        {
+            $numReg=$mCliente->CountClientes();
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $clientes=$mCliente->GetList($offset, $limit);
+            $data=['Clientes'=>$clientes,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual];
+            $this->vista('Cliente/Component/Tabla', $data);
+        }
+        else
+        {
+            $numReg=$mCliente->CountClientesSearch($busqueda);
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $clientes=$mCliente->GetListSearch($offset,$limit,$busqueda);
+            $data=['Clientes'=>$clientes,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual];
+            $this->vista('Cliente/Component/Tabla', $data);
+        }
     }
 
 }

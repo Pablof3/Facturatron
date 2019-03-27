@@ -81,11 +81,40 @@ class mCliente
     public function GetList($offset, $limit)
     {
         $query="SELECT * FROM Cliente
+                ORDER BY id_cliente DESC
                 LIMIT :offset, :limit";
         $this->db->prepare($query);
         $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
         $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
         return $this->db->getRegistros();
+    }
+
+    /**
+     * Get List Clientes
+     *
+     * Devuelve una lista de clientes con un offset y limit dado un criterio de busqueda
+     *
+     * @param Int $offset registro inicio
+     * @param Int $limit numero de registros a partir de offset
+     * @param String $busqueda  parametro de busqueda 
+     * @return Array Arreglo de Clientes coincidentes con busqueda
+     **/
+    public function GetListSearch($offset, $limit, $busqueda)
+    {
+        $busqueda="%{$busqueda}%";
+        $query="SELECT *
+                FROM Cliente
+                WHERE razon LIKE :busqueda 
+                OR nombre LIKE :busqueda 
+                OR apellidos LIKE :busqueda
+                ORDER BY id_cliente DESC
+                LIMIT :offset, :limit";
+        $this->db->prepare($query);
+        $this->db->bindParam(':busqueda',$busqueda);
+        $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        return $this->db->getRegistros();
+        
     }
 
     /**
@@ -111,6 +140,23 @@ class mCliente
     {
         $sql="SELECT COUNT(*) FROM Cliente";
         $this->db->prepare($sql);
+        return $this->db->fetchColumn();
+    }
+    /**
+     * Numero de Registros Coincidentes con una Busqueda
+     * @param String $busqueda Parametro de Busqueda
+     * @return Int
+     **/
+    public function CountClientesSearch($busqueda)
+    {
+        $busqueda="%{$busqueda}%";
+        $query="SELECT COUNT(*)
+                FROM Cliente
+                WHERE razon LIKE :busqueda 
+                OR nombre LIKE :busqueda 
+                OR apellidos LIKE :busqueda";
+        $this->db->prepare($query);
+        $this->db->bindParam(':busqueda',$busqueda);
         return $this->db->fetchColumn();
     }
 }
