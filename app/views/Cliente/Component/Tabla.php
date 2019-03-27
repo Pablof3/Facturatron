@@ -11,15 +11,15 @@
                         <?= $cliente->razon; ?>
                     </a>
                     <p class="mb-1 text-muted text-small w-15 w-xs-100">Nit: <?= $cliente->nit; ?></p>
-                    <button class="btn btn-primary m-1">
-                        Detalle
-                    </button>
-                    <button class="btn btn-primary m-1">
-                        Editar
-                    </button>
-                    <button class="btn btn-primary m-1">
-                        Eliminar
-                    </button>
+                    <a class="btn btn-primary m-1" href="<?= RUTA_URL?>/Cliente/vDetalle/<?= $cliente->id_cliente ?>" >
+                        <div class="glyph-icon simple-icon-eyeglass"></div>
+                    </a>
+                    <a class="btn btn-primary m-1" href="<?= RUTA_URL;?>/Cliente/vActualizar/<?= $cliente->id_cliente; ?>">
+                        <div class="glyph-icon simple-icon-note"></div>
+                    </a>
+                    <a class="btn btn-primary m-1" href="<?= RUTA_URL;?>/Cliente/vEliminar/<?= $cliente->id_cliente; ?>">
+                        <div class=" glyph-icon simple-icon-trash"></div>
+                    </a>
                 </div>
             </div>
         </div>

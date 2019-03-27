@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="<?= RUTA_URL;?>/css/vendor/bootstrap-datepicker3.min.css" />
     <link rel="stylesheet" href="<?= RUTA_URL;?>/js/vendor/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="<?= RUTA_URL;?>/css/main.css" />
+    <?php if(isset($libcss)): ?>
+        <?php foreach ($libcss as $lib): ?>
+    <link rel="stylesheet" href="<?= RUTA_URL;?>/css/<?=$lib;?>.css" />
+        <?php endforeach; ?>
+    <?php endif;?>
 </head>
 
 <body id="app-container" class="menu-default show-spinner">

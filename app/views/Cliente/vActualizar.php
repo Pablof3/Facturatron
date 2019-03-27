@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Actualizar</button>
-                        <button class="btn btn-primary" type="reset">Cancelar</button>
+                        <button class="btn btn-primary" type="reset" onclick="document.location.href='<?= RUTA_URL ?>/Cliente/vLista';" >Cancelar</button>
                     </form>
                 </div>
             </div>
