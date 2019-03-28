@@ -84,7 +84,7 @@ class Venta extends Controller
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
         if ($validador->error['status']==true) {
-            $mVenta=new mCliente;
+            $mVenta=new mVenta;
             $mResp=$mVenta->Eliminar($venta->id_venta);
             $resp['db']=Validador::ValidarDB($mResp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
