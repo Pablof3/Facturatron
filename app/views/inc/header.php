@@ -198,19 +198,19 @@
             <div class="scroll">
                 <ul class="list-unstyled">
                     <li class="active">
-                        <a href="#dashboard">
+                        <a href="<?=RUTA_URL?>/Producto/vLista">
                             <i class="iconsmind-Shop-4"></i>
-                            <span>Dashboards</span>
+                            <span>Productos</span>
                         </a>
                     </li>
                     <li>
                         <a href="#layouts">
-                            <i class="iconsmind-Digital-Drawing"></i> Layouts
+                            <i class="iconsmind-Digital-Drawing"></i> Compras
                         </a>
                     </li>
                     <li>
                         <a href="#applications">
-                            <i class="iconsmind-Air-Balloon"></i> Applications
+                            <i class="iconsmind-Air-Balloon"></i> Ventas
                         </a>
                     </li>
                     <li>

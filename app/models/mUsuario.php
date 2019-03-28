@@ -29,7 +29,7 @@ class mUsuario
         $db->prepare($query);
         $db->bindParam(':usuario',$usuario->usuario);
         $db->bindParam(':password',$usuario->password);
-        $db->bindParam(':esAdmin',$usuario->esAdmin);
+        $db->bindParam(':esAdmin',$usuario->esAdmin,PDO::PARAM_BOOL);
         $db->bindParam(':ci',$usuario->ci);
         $db->bindParam(':nombre',$usuario->nombre);
         $db->bindParam(':apellidos',$usuario->apellidos);

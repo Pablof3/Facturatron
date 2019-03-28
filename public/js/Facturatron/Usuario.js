@@ -1,6 +1,6 @@
 var url = "http://" + window.location.host + "/Facturatron/";
 $(document).ready(function () {
-  //getListaCliente();
+  getListaUsuario();
 });
 
 // Cliente Registrar

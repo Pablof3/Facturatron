@@ -51,7 +51,7 @@ class Usuario extends Controller
         $usuario->ci=$validador->Validar('ci',['required','maxlength,15'],$_POST['Usuario']);
         $usuario->nombre=$validador->Validar('nombre',['required','maxlength,35'],$_POST['Usuario']);
         $usuario->apellidos=$validador->Validar('apellidos',['required','maxlength,45'],$_POST['Usuario']);
-        $usuario->esAdmin=$validador->Validar('esAdmin',['required'],$_POST['Usuario']);
+        $usuario->esAdmin=(isset($_POST['Usuario']['esAdmin'])?'1':'0');
 
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
@@ -78,7 +78,7 @@ class Usuario extends Controller
         $validador->Trim($_POST['Usuario']);
 
         $usuario=new Core\Usuario;
-        $usuario->id_usuario=$validador->Validar('id_usaurio',['required', 'maxlength,11'],$_POST['Usuario']);
+        $usuario->id_usuario=$validador->Validar('id_usuario',['required', 'maxlength,11'],$_POST['Usuario']);
 
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
@@ -115,20 +115,32 @@ class Usuario extends Controller
             $numPag=ceil($numReg/$limit);
             $offset=($pagActual-1)*$limit;
             $usuarios=$mUsuario->GetList($offset, $limit);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
             $data=['Usuarios'=>$usuarios,
                     'numPaginas'=>$numPag,
-                    'pagActual'=>$pagActual];
+                    'pagActual'=>$pagActual,
+                    'cantRegistros'=>$cantRegistros];
             $this->vista('Usuario/Component/Tabla', $data);
         }
         else
         {
-            $numReg=$mCliente->CountUsuariosSearch($busqueda);
+            $numReg=$mUsuario->CountUsuariosSearch($busqueda);
             $numPag=ceil($numReg/$limit);
             $offset=($pagActual-1)*$limit;
-            $usuarios=$mCliente->GetListSearch($offset,$limit,$busqueda);
+            $usuarios=$mUsuario->GetListSearch($offset,$limit,$busqueda);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
             $data=['Usuarios'=>$usuarios,
                     'numPaginas'=>$numPag,
-                    'pagActual'=>$pagActual];
+                    'pagActual'=>$pagActual,
+                    'cantRegistros'=> $cantRegistros];
             $this->vista('Usuario/Component/Tabla', $data);
         }
     }
