@@ -14,6 +14,8 @@ if (document.getElementById("form_ProductoRegistro")) {
               type: "POST",
               url: url+'Producto/Registrar',
               data: $('#form_ProductoRegistro').serialize(),
+              contentType: false,
+              processData: false,
               dataType: "JSON",
               success: function (response) {
                   console.log(response)
@@ -254,4 +256,17 @@ function getListaProducto(pag=1)
     "HTML"
   );
 
+}
+
+
+//Previsualizar Imagen a subir
+function preview_image(event) 
+{
+ var reader = new FileReader();
+ reader.onload = function()
+ {
+  var output = document.getElementById('imagen_preview');
+  output.src = reader.result;
+ }
+ reader.readAsDataURL(event.target.files[0]);
 }

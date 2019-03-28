@@ -29,7 +29,10 @@ class Producto extends Controller
     }
     public function vRegistrar()
     {
-        $this->vista('Producto/vRegistrar');
+        $mCategoria = new mCategoria;
+        $data = $mCategoria->GetList();
+
+        $this->vista('Producto/vRegistrar', $data);
     }
 
     public function Actualizar()
