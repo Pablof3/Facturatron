@@ -204,28 +204,23 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#layouts">
-                            <i class="iconsmind-Digital-Drawing"></i> Compras
+                        <a href="<?=RUTA_URL?>/Categoria/vListar">
+                            <i class=" iconsmind-Tag"></i> Categorias
                         </a>
                     </li>
                     <li>
-                        <a href="#applications">
-                            <i class="iconsmind-Air-Balloon"></i> Ventas
+                        <a href="<?=RUTA_URL?>/Cliente/vLista">
+                            <i class="iconsmind-Business-ManWoman"></i> Clientes
                         </a>
                     </li>
                     <li>
-                        <a href="#ui">
-                            <i class="iconsmind-Pantone"></i> UI
+                        <a href="<?=RUTA_URL?>/Proveedor/vListar">
+                            <i class="iconsmind-Business-Man"></i> Proveedor
                         </a>
                     </li>
                     <li>
-                        <a href="#landingPage">
-                            <i class="iconsmind-Space-Needle"></i> Landing Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#menu">
-                            <i class="iconsmind-Three-ArrowFork"></i> Menu
+                        <a href="<?=RUTA_URL?>/Usuario/vLista">
+                            <i class="iconsmind-Administrator"></i> Usuarios
                         </a>
                     </li>
                 </ul>
