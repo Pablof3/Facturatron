@@ -103,7 +103,7 @@ class mVenta
     //Numero de regidtros de clientes
     public function CountVentas()
     {
-        $sql="SELECT COUNT(*) FROM Ventas";
+        $sql="SELECT COUNT(*) FROM Venta";
         $this->db->prepare($sql);
         return $this->db->fetchColumn();
     }
