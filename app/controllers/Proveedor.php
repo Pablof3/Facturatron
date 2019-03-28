@@ -2,12 +2,51 @@
 class Proveedor extends Controller
 {
 
-    public function vListar($offset = 0, $limit = 10) 
+    public function vListar() 
     {
-        $mProveedor = new mProveedor;
-        $data = $mProveedor->Listar($offset, $limit);
+        $this->vista('Proveedor/vListar');
+    }
 
-        $this->vista('Proveedor/vListar', $data);
+    public function vTabla()
+    {
+        $mProveedor=new mProveedor;
+        $pagActual=$_POST['Tabla']['pagActual']; 
+        $limit=$_POST['Tabla']['limit'];
+        $busqueda=$_POST['Tabla']['busqueda'];
+        if (empty($busqueda)) 
+        {
+            $numReg=$mProveedor->CountProveedores();
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $proveedores=$mProveedor->GetList($offset, $limit);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
+            $data=['Proveedores'=>$proveedores,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual,
+                    'cantRegistros' => $cantRegistros];
+            $this->vista('Proveedor/Component/Tabla', $data);
+        }
+        else
+        {
+            $numReg=$mProveedor->CountProveedoresSearch($busqueda);
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $proveedores=$mProveedor->GetListSearch($offset,$limit,$busqueda);
+            
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
+            $data=['Proveedores'=>$proveedores,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual,
+                    'cantRegistros' => $cantRegistros];
+            $this->vista('Proveedor/Component/Tabla', $data);
+        }
     }
 
     public function Ver($id) 
