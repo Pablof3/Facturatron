@@ -12,13 +12,13 @@
 						<?=$usuario->nombre.' '.$usuario->apellidos?>
                     </a>
                     <p class="mb-1 text-muted text-small w-15 w-xs-100"><?=$usuario->ci ?></p>
-                    <a class="btn btn-lg btn-info m-1" href="<?= RUTA_URL . "/Categoria/Ver/" . $usuario->id_usuario ?>" >
+                    <a class="btn btn-lg btn-info m-1" href="<?= RUTA_URL . "/Usuario/vDetalle/" . $usuario->id_usuario ?>" >
                         <div class="glyph-icon fsize-15 simple-icon-eye"></div>
                     </a>
-                    <a class="btn btn-lg btn-warning m-1" href="<?= RUTA_URL . "/Categoria/vModificar/" . $usuario->id_usuario ?>">
+                    <a class="btn btn-lg btn-warning m-1" href="<?= RUTA_URL . "/Usuario/vActualizar/" . $usuario->id_usuario ?>">
                         <div class="glyph-icon fsize-15 simple-icon-note"></div>
                     </a>
-                    <a class="btn btn-lg btn-danger m-1" href="<?= RUTA_URL . "/Categoria/vEliminar/" . $usuario->id_usuario ?>">
+                    <a class="btn btn-lg btn-danger m-1" href="<?= RUTA_URL . "/Usuario/vEliminar/" . $usuario->id_usuario ?>">
                         <div class=" glyph-icon fsize-15 simple-icon-trash"></div>
                     </a>
                 </div>
