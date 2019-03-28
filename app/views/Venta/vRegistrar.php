@@ -19,7 +19,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h6 class="mb-3">Registro de Venta</h6>
-                    <form class="needs-validation" id="form_ClienteRegistro" novalidate>
+                    <form class="needs-validation" id="form_VentaRegistro" novalidate>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom01">Numero</label>

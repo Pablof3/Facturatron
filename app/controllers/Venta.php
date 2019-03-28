@@ -101,4 +101,39 @@ class Venta extends Controller
         $this->vista('Venta/vEliminar', $data);
     }
 
+    public function vLista()
+    {
+        $this->vista('Venta/vListar');
+    }
+
+    public function vTabla()
+    {
+        $mVenta=new mVenta;
+        $pagActual=$_POST['Tabla']['pagActual']; 
+        $limit=$_POST['Tabla']['limit'];
+        $busqueda=$_POST['Tabla']['busqueda'];
+        if (empty($busqueda)) 
+        {
+            $numReg=$mVenta->CountVentas();
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $ventas=$mVenta->GetList($offset, $limit);
+            $data=['Ventas'=>$ventas,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual];
+            $this->vista('Venta/Component/Tabla', $data);
+        }
+        else
+        {
+            $numReg=$mVenta->CountVentasSearch($busqueda);
+            $numPag=ceil($numReg/$limit);
+            $offset=($pagActual-1)*$limit;
+            $ventas=$mVenta->GetListSearch($offset,$limit,$busqueda);
+            $data=['Venta'=>$ventas,
+                    'numPaginas'=>$numPag,
+                    'pagActual'=>$pagActual];
+            $this->vista('Venta/Component/Tabla', $data);
+        }
+    }
+
 }
