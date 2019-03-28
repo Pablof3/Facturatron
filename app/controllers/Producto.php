@@ -61,9 +61,9 @@ class Producto extends Controller
     }
 
     
-    public function vActualizar()
+    public function vActualizar($id_producto)
     {
-        $id_producto=1;
+       
         $mProducto=new mProducto;
         $producto=$mProducto->GetProducto($id_producto);
         $data=['Producto'=>$producto];
