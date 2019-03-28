@@ -134,7 +134,7 @@ class mCliente
     /**
      * Numero de Registros de Clientes en Base de Datos
      *
-     * @return type
+     * @return Int
      **/
     public function CountClientes()
     {
@@ -142,6 +142,7 @@ class mCliente
         $this->db->prepare($sql);
         return $this->db->fetchColumn();
     }
+
     /**
      * Numero de Registros Coincidentes con una Busqueda
      * @param String $busqueda Parametro de Busqueda
