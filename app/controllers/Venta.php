@@ -57,4 +57,24 @@ class Venta extends Controller
         echo json_encode($resp);
     }
 
+    //Eliminar
+    public function Eliminar()
+    {
+        $resp['status']=true;
+        $validador=new Validador();
+        $validador->Trim($_POST['Venta']);
+
+        $venta=new Core\Venta;
+        $venta->id_venta=$validador->Validar('id_venta',['required', 'maxlength,11'],$_POST['Venta']);
+        $resp['validate']=$validador->error;
+        $resp['status']=$resp['status']&&$resp['validate']['status'];
+        if ($validador->error['status']==true) {
+            $mVenta=new mCliente;
+            $mResp=$mVenta->Eliminar($venta->id_venta);
+            $resp['db']=Validador::ValidarDB($mResp);
+            $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
+        }
+        echo json_encode($resp);
+    }
+
 }
