@@ -28,6 +28,12 @@ class Venta extends Controller
         echo json_encode($resp);
     }
 
+    //Vista registrar
+    public function vRegistrar()
+    {
+        $this->vista('Venta/vRegistrar');
+    }
+
 
     //Actualizar
     public function Actualizar()
@@ -57,6 +63,15 @@ class Venta extends Controller
         echo json_encode($resp);
     }
 
+    //Vista Actualizar
+    public function vActualizar($id_venta)
+    {
+        $mVenta=new mVenta;
+        $cliente=$mVenta->GetVenta($id_venta);
+        $data=['Venta'=>$venta];
+        $this->vista('Venta/vActualizar', $data);
+    }
+
     //Eliminar
     public function Eliminar()
     {
@@ -75,6 +90,15 @@ class Venta extends Controller
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
         }
         echo json_encode($resp);
+    }
+
+    //Vista ELiminar
+    public function vEliminar($id_venta)
+    {
+        $mVenta=new mVenta;
+        $venta = $mVenta->GetVenta($id_venta);
+        $data=['Venta'=>$venta];
+        $this->vista('Venta/vEliminar', $data);
     }
 
 }
