@@ -13,6 +13,8 @@ class Venta extends Controller
         $venta->fecha=$validador->Validar('fecha',['required'],$_POST['Venta']);
         $venta->usuario=$validador->Validar('usuario',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
         $venta->cliente=$validador->Validar('cliente',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
+        $venta->factura=$validador->Validar('factura',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
+        $venta->total=$validador->Validar('total',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
 
         $resp['validate']=$validador->error;
         $resp['status']=($resp['status']&&$resp['validate']['status']);
