@@ -7,7 +7,7 @@ class mVenta
     }
 
     //Insertar
-    public function Insertar($venta)
+    public function Insertar(Core\Venta $venta)
     {
         $resp;
         $query="INSERT INTO Venta(nro, fecha, usuario, cliente, factura, total)
@@ -15,7 +15,7 @@ class mVenta
         $this->db->prepare($query);
         $this->db->bindParam(':nro',$venta->nro);
         $this->db->bindParam(':fecha',$venta->fecha);
-        $this->db->bindParam(':usuario',$venta->esAdmin); //preguntar que chingados hace esto
+        $this->db->bindParam(':usuario',$venta->usuario); 
         $this->db->bindParam(':cliente',$venta->cliente);
         $this->db->bindParam(':factura',$venta->factura);
         $this->db->bindParam(':total',$venta->total);

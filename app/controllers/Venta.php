@@ -67,7 +67,7 @@ class Venta extends Controller
     public function vActualizar($id_venta)
     {
         $mVenta=new mVenta;
-        $cliente=$mVenta->GetVenta($id_venta);
+        $venta=$mVenta->GetVenta($id_venta);
         $data=['Venta'=>$venta];
         $this->vista('Venta/vActualizar', $data);
     }
