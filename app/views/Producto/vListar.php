@@ -29,30 +29,21 @@
             </a>
             <div class="collapse d-md-block" id="displayOptions">
                 <div class="d-block d-md-inline-block">
-                    <div class="btn-group float-md-left mr-1 mb-1">
-                        <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Order By
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                        </div>
-                    </div>
                     <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
-                        <input placeholder="Search..." onkeyup="SetBusqueda(this)">
+                        <input placeholder="Search..." onkeyup="SetBusqueda(this)" >
                     </div>
                 </div>
                 <div class="float-md-right">
-                    <span class="text-muted text-small">Displaying 1-10 of 210 items </span>
+                    <span class="text-muted text-small">Cantidad de Registros: </span>
                     <button class="btn btn-outline-dark btn-xs dropdown-toggle" 
                         type="button" data-toggle="dropdown"
                         aria-haspopup="true" 
                         aria-expanded="false"
                         id="dropdownNumRegistros">
-                        10
+                        5
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" onclick="SetNumRegistros(5)">5</a>
                         <a class="dropdown-item" onclick="SetNumRegistros(10)">10</a>
                         <a class="dropdown-item" onclick="SetNumRegistros(20)">20</a>
                         <a class="dropdown-item" onclick="SetNumRegistros(30)">30</a>

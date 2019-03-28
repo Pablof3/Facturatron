@@ -26,7 +26,7 @@ class Validador
             foreach ($opciones as $key => $opcion) {
                 if($opcion==='required')
                 {
-                    if(empty($var[$campo]))
+                    if(empty($var[$campo]) and !isset($var[$campo]))
                     {
                         $this->error['status']=false;
                         $this->error['error'][$campo][]="{$campo} esta vacio";

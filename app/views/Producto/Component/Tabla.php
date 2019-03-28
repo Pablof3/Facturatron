@@ -1,5 +1,6 @@
 <div class="col-12 list">
     <?php $indice=1;?>
+    <?php if(isset($data["Productos"]) and count($data["Productos"]) > 0): ?>
     <?php foreach ($data['Productos'] as $producto): ?>
         <div class="card d-flex flex-row mb-3">
             <div class="d-flex flex-grow-1 min-width-zero">
@@ -27,6 +28,7 @@
     <?php endforeach; ?>
 
     <nav class="mt-4 mb-3">
+		<span class="text-muted text-small"> <?= $data["cantRegistros"] ?></span>
         <ul class="pagination justify-content-center mb-0">
             <li class="page-item ">
                 <a class="page-link first" onclick="getListaProducto()">
@@ -64,4 +66,17 @@
             </li>
         </ul>
     </nav>
+
+
+    <?php else: ?>
+		<div class="card d-flex flex-row mb-3">
+            <div class="d-flex flex-grow-1 min-width-zero">
+                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                    <span class="list-item-heading mb-1">
+                        No se encontraron resultados
+                    </span>
+                </div>
+            </div>
+        </div>
+	<?php endif; ?>
 </div>

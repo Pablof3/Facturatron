@@ -7,15 +7,17 @@ if (document.getElementById("form_ProductoRegistro")) {
     form.addEventListener(
     "submit",
     function(event) {
+        var form1 = $('form')[0];
+        var formData = new FormData(form1);
         event.preventDefault();
         event.stopPropagation();
         if(form.checkValidity() === true) {
           $.ajax({
               type: "POST",
               url: url+'Producto/Registrar',
-              data: $('#form_ProductoRegistro').serialize(),
+              data: formData,
               contentType: false,
-              processData: false,
+              processData: false, 
               dataType: "JSON",
               success: function (response) {
                   console.log(response)
@@ -24,38 +26,40 @@ if (document.getElementById("form_ProductoRegistro")) {
                       title: 'Correcto',
                       text: 'Producto creado correctamente',
                       type: 'success',
-                      confirmButtonText: 'Correcto'
+                      confirmButtonText: 'Correcto',
+                      onAfterClose: function() {
+                          window.location.href = url + 'Producto/vLista'
+                      }
                   });
-              } else {
-                  if(response.validate.status == false) {
-                      var msgError = "";
-                      errores = Object.keys(response.validate.error).map(i => response.validate.error[i])
-                      errores.forEach(function(element) {
-                          msgError += element[0] + "\n";
-                      });
-                      Swal.fire({
+                } else {
+                    if(response.validate.status == false) {
+                        var msgError = "";
+                        errores = Object.keys(response.validate.error).map(i => response.validate.error[i])
+                        errores.forEach(function(element) {
+                            msgError += element[0] + "\n";
+                        });
+                        Swal.fire({
+                            title: 'Error',
+                            text: msgError,
+                            type: 'error',
+                            confirmButtonText: 'Cerrar'
+                        });
+                    } else {
+                        Swal.fire({
                           title: 'Error',
-                          text: msgError,
+                          text: response.db.error,
                           type: 'error',
                           confirmButtonText: 'Cerrar'
-                      });
-                  }
-                  if (response.db.status==false) {
-                      Swal.fire({
-                        title: 'Error',
-                        text: response.db.error,
-                        type: 'error',
-                        confirmButtonText: 'Cerrar'
-                      });
-                  }
-              }
+                        });
+                    }
+                }
               }
           });  
         }
         form.classList.add("was-validated");
     },
     false
-);
+    );
 }
 
 // Producto Actualizar
@@ -64,45 +68,52 @@ if (document.getElementById("form_ProductoActualizar")) {
     form.addEventListener(
     "submit",
     function(event) {
+        var form1 = $('form')[0];
+        var formData = new FormData(form1);
         event.preventDefault();
         event.stopPropagation();
         if(form.checkValidity() === true) {
           $.ajax({
               type: "POST",
               url: url+'Producto/Actualizar',
-              data: $('#form_ProductoActualizar').serialize(),
+              data: formData,
+              contentType: false,
+              processData: false,
               dataType: "JSON",
               success: function (response) {
                 if(response.status == true) {
                   Swal.fire({
                       title: 'Correcto',
-                      text: 'Producto creado correctamente',
+                      text: 'Producto actualizado correctamente',
                       type: 'success',
-                      confirmButtonText: 'Correcto'
+                      confirmButtonText: 'Correcto',
+                      onAfterClose: function() {
+                        window.location.href = url + 'Producto/vLista'
+                      }
                   });
-              } else {
-                  if(response.validate.status == false) {
-                      var msgError = "";
-                      errores = Object.keys(response.validate.error).map(i => response.validate.error[i])
-                      errores.forEach(function(element) {
-                          msgError += element[0] + "\n";
-                      });
-                      Swal.fire({
+                } else {
+                    if(response.validate.status == false) {
+                        var msgError = "";
+                        errores = Object.keys(response.validate.error).map(i => response.validate.error[i])
+                        errores.forEach(function(element) {
+                            msgError += element[0] + "\n";
+                        });
+                        Swal.fire({
+                            title: 'Error',
+                            text: msgError,
+                            type: 'error',
+                            confirmButtonText: 'Cerrar'
+                        });
+                    }
+                    if (response.db.status==false) {
+                        Swal.fire({
                           title: 'Error',
-                          text: msgError,
+                          text: response.db.error,
                           type: 'error',
                           confirmButtonText: 'Cerrar'
-                      });
-                  }
-                  if (response.db.status==false) {
-                      Swal.fire({
-                        title: 'Error',
-                        text: response.db.error,
-                        type: 'error',
-                        confirmButtonText: 'Cerrar'
-                      });
-                  }
-              }
+                        });
+                    }
+                }
               }
           });  
         }
@@ -135,7 +146,10 @@ if (document.getElementById("form_ProductoActualizar")) {
                   title: "Correcto",
                   text: "Producto Eliminado Exitosamente",
                   type: "success",
-                  confirmButtonText: "Correcto"
+                  confirmButtonText: "Correcto",
+                  onAfterClose: function() {
+                    window.location.href = url + 'Producto/vLista'
+                  }
                 });
               } else {
                 if (response.validate.status == false) {
