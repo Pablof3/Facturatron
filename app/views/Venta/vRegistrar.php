@@ -36,8 +36,7 @@
                                 <input type="text" class="form-control datepicker" name="Venta[fecha]"
                                         placeholder="Fecha"
                                         value="" 
-                                        maxlength="10" 
-                                        pattern="[0-9]*" required >
+                                         required >
                                 <div class="invalid-feedback">
                                     Requerido <br>
                                     
@@ -70,7 +69,7 @@
                             <div class="col-md-4 mb-3">
                             <label for="validationCustom02">Factura</label>
                                 <input type="text" class="form-control" 
-                                        name="Venta[facturar]" 
+                                        name="Venta[factura]" 
                                         placeholder="Factura"
                                         value="" maxlength="11" required>
                                 <div class="invalid-feedback">

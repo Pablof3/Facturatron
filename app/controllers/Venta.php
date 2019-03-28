@@ -136,4 +136,13 @@ class Venta extends Controller
         }
     }
 
+    //Vista detalle
+    public function vDetalle($id_venta)
+    {
+        $mVenta=new mVenta;
+        $cliente = $mVenta->GetVenta($id_venta);
+        $data=['Venta'=>$cliente];
+        $this->vista('Venta/vDetalle', $data);
+    }
+
 }
