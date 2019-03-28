@@ -64,9 +64,9 @@ class Producto extends Controller
     }
 
     
-    public function vActualizar()
+    public function vActualizar($id_producto)
     {
-        $id_producto=1;
+       
         $mProducto=new mProducto;
         $producto=$mProducto->GetProducto($id_producto);
         $data=['Producto'=>$producto];
@@ -82,9 +82,9 @@ class Producto extends Controller
         $producto->id_producto=$validador->Validar('id_producto',['required', 'maxlength,11'],$_POST['Producto']);
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
-        if ($validador->error['validate']==true) {
+        if ($validador->error['status']==true) {
             $mProducto=new mProducto;
-            $mResp=$mProducto->Eliminar($producto->id_producto);
+            $mResp=$mProducto->Eliminar($producto->id_producto);           
             $resp['db']=Validador::ValidarDB($mResp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
         }

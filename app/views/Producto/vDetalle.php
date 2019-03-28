@@ -99,5 +99,5 @@
         </div>
     </div>
 </div>
-<?php $libs=['0'=>'Cliente'] ?>
+<?php $libs=['0'=>'Producto'] ?>
 <?php require RUTA_APP .'/views/inc/Footer.php';?>

@@ -20,7 +20,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h6 class="mb-3">Eliminar Producto ?</h6>
-                    <form class="needs-validation" id="form_ClienteEliminar" novalidate>
+                    <form class="needs-validation" id="form_ProductoEliminar" novalidate>
                         <input type="hidden" name="Producto[id_producto]" value="<?= $data['Producto']->id_producto; ?>"
                             hidden>
                         <div class="form-row">
@@ -100,5 +100,5 @@
         </div>
     </div>
 </div>
-<?php $libs=['0'=>'Cliente'] ?>
+<?php $libs=['0'=>'Producto'] ?>
 <?php require RUTA_APP .'/views/inc/Footer.php';?>

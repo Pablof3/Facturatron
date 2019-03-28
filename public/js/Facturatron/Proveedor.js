@@ -1,4 +1,7 @@
 var url = "http://"+window.location.host+"/Facturatron/"
+$(document).ready(function () {
+    getListaProveedor();
+  });
 
 if(document.getElementById("proveedor_registrar")) {
     var form = document.getElementById("proveedor_registrar");
@@ -177,3 +180,34 @@ if(document.getElementById("proveedor_eliminar")) {
     );
 }
 
+// Tabla
+var limit=5;
+var busqueda='';
+function SetNumRegistros(num)
+{
+  $('#dropdownNumRegistros').html(num);
+  limit=num;
+  getListaProveedor();
+}
+function SetBusqueda(input) 
+{  
+  busqueda=input.value;
+  getListaProveedor();
+}
+
+function getListaProveedor(pag=1) 
+{  
+  $.post(url+"Proveedor/vTabla", {
+    'Tabla':{
+      'pagActual':pag,
+      'limit':limit,
+      'busqueda':busqueda
+    } 
+  },
+    function (data, textStatus, jqXHR) {
+      $('#ProveedorLista').html(data);
+    },
+    "HTML"
+  );
+
+}
