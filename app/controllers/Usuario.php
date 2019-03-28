@@ -14,8 +14,8 @@ class Usuario extends Controller
        $usuario->password=$validador->Validar('password',['required','maxlength,50'],$_POST['Usuario']);
        $usuario->ci=$validador->Validar('ci',['required','maxlength,15'],$_POST['Usuario']);
        $usuario->nombre=$validador->Validar('nombre',['required','maxlength,35'],$_POST['Usuario']);
-       $usuario->nombre=$validador->Validar('apellidos',['required','maxlength,45'],$_POST['Usuario']);
-       $usuario->nombre=$validador->Validar('esAdmin',['required'],$_POST['Usuario']);
+       $usuario->apellidos=$validador->Validar('apellidos',['required','maxlength,45'],$_POST['Usuario']);
+       $usuario->esAdmin=(isset($_POST['Usuario']['esAdmin'])?'1':'0');
 
         $resp['validate']=$validador->error;
         $resp['status']=($resp['status']&&$resp['validate']['status']);
@@ -50,8 +50,8 @@ class Usuario extends Controller
         $usuario->password=$validador->Validar('password',['required','maxlength,50'],$_POST['Usuario']);
         $usuario->ci=$validador->Validar('ci',['required','maxlength,15'],$_POST['Usuario']);
         $usuario->nombre=$validador->Validar('nombre',['required','maxlength,35'],$_POST['Usuario']);
-        $usuario->nombre=$validador->Validar('apellidos',['required','maxlength,45'],$_POST['Usuario']);
-        $usuario->nombre=$validador->Validar('esAdmin',['required'],$_POST['Usuario']);
+        $usuario->apellidos=$validador->Validar('apellidos',['required','maxlength,45'],$_POST['Usuario']);
+        $usuario->esAdmin=$validador->Validar('esAdmin',['required'],$_POST['Usuario']);
 
         $resp['validate']=$validador->error;
         $resp['status']=$resp['status']&&$resp['validate']['status'];
