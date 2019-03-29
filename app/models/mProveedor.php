@@ -14,7 +14,7 @@ class mProveedor
     {
         $db=new Database;
         $query = "SELECT * FROM Proveedor
-                  ORDER BY id_proveedor DESC";
+                  ORDER BY id_proveedor DESC ";
         if (is_null($offset) || is_null($limit)) {
             $db->prepare($query);
         }
