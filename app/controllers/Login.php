@@ -28,15 +28,12 @@ class Login extends Controller
 			if($usuario == false) {
 				$resp['status'] = false;
 			} else {
-                $sesion_usuario = new Core\Usuario;
-                $sesion_usuario->id_usuario = $usuario->id_usuario;
-                $sesion_usuario->usuario = $usuario->usuario;
-                $sesion_usuario->nombre = $usuario->nombre;
-                $sesion_usuario->apellidos = $usuario->apellidos;
-                $sesion_usuario->esAdmin = $usuario->esAdmin;
-                //$_SESSION["usuario"] = $sesion_usuario;
                 $_SESSION["usuario"] = array(
-                    'usuario' => $sesion_usuario->usuario
+                    "id_usuario" => $usuario->id_usuario,
+                    "usuario" => $usuario->usuario,
+                    "nombre" => $usuario->nombre,
+                    "apellidos" => $usuario->apellidos,
+                    "esAdmin" => $usuario->esAdmin
                 );
             }
 		}

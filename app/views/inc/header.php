@@ -179,7 +179,7 @@ $controlador=trim(explode('/',$_GET['url'])[0]);
             <div class="user d-inline-block">
                 <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <span class="name"><?=isset($_SESSION["usuario"]) ? $_SESSION["usuario"]["usuario"] : "Invitado" ?></span>
+                    <span class="name"><?= $_SESSION["usuario"]["usuario"] ?></span>
                     <span>
                         <img alt="Profile Picture" src="<?= RUTA_URL?>/img/profile-pic-l-2.jpg" />
                     </span>

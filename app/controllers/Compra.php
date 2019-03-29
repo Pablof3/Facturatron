@@ -1,6 +1,10 @@
 <?php
 class Compra extends Controller
 {
+   public function __construct() {
+      $this->GuardSession();
+   }
+
    /**
     * Registra nueva Compra
     *

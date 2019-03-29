@@ -2,6 +2,10 @@
 class Venta extends Controller 
 {
 
+    public function __construct() {
+        $this->GuardSession();
+    }
+
     //Registrar
     public function Registrar()
     {

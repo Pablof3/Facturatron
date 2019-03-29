@@ -1,6 +1,10 @@
 <?php
 class Producto extends Controller 
 {
+    public function __construct() {
+        $this->GuardSession();
+    }
+
     public function Registrar()
     {
         $resp['status']=true;

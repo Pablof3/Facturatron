@@ -1,6 +1,9 @@
 <?php
 class Categoria extends Controller
 {
+    public function __construct() {
+        $this->GuardSession();
+    }
 
     public function vListar() 
     {

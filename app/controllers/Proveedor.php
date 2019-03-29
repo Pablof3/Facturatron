@@ -1,6 +1,9 @@
 <?php
 class Proveedor extends Controller
 {
+    public function __construct() {
+        $this->GuardSession();
+    }
 
     public function vListar() 
     {

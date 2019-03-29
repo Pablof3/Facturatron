@@ -1,7 +1,10 @@
 <?php
 class Usuario extends Controller 
 {
-    
+    public function __construct() {
+        $this->GuardSession();
+    }
+
     public function Registrar()
     {
         $resp['status']=true;

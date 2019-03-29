@@ -1,6 +1,9 @@
 <?php
 class Cliente extends Controller 
 {
+    public function __construct() {
+        $this->GuardSession();
+    }
 
     public function Registrar()
     {
