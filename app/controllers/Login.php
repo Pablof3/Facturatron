@@ -34,7 +34,10 @@ class Login extends Controller
                 $sesion_usuario->nombre = $usuario->nombre;
                 $sesion_usuario->apellidos = $usuario->apellidos;
                 $sesion_usuario->esAdmin = $usuario->esAdmin;
-                $_SESSION["usuario"] = $sesion_usuario;
+                //$_SESSION["usuario"] = $sesion_usuario;
+                $_SESSION["usuario"] = array(
+                    'usuario' => $sesion_usuario->usuario
+                );
             }
 		}
         echo json_encode($resp);  
