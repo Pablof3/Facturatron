@@ -177,18 +177,16 @@
             <div class="user d-inline-block">
                 <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <span class="name">Sarah Kortney</span>
+                    <span class="name"><?=isset($_SESSION["usuario"]) ? $_SESSION["usuario"]->usuario : "Invitado" ?></span>
                     <span>
-                        <img alt="Profile Picture" src="<?= RUTA_URL?>/img/profile-pic-l.jpg" />
+                        <img alt="Profile Picture" src="<?= RUTA_URL?>/img/profile-pic-l-2.jpg" />
                     </span>
                 </button>
 
                 <div class="dropdown-menu dropdown-menu-right mt-3">
-                    <a class="dropdown-item" href="#">Account</a>
-                    <a class="dropdown-item" href="#">Features</a>
-                    <a class="dropdown-item" href="#">History</a>
-                    <a class="dropdown-item" href="#">Support</a>
-                    <a class="dropdown-item" href="#">Sign out</a>
+                    <a class="dropdown-item" href="#">Cuenta</a>
+                    <a class="dropdown-item" href="#">Configuracion</a>
+                    <a class="dropdown-item" href="<?= RUTA_URL;?>/Login/Logout">Cerrar Sesion</a>
                 </div>
             </div>
         </div>
