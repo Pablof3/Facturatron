@@ -44,6 +44,7 @@ class Login extends Controller
         if(isset($_SESSION["usuario"])) {
             unset($_SESSION["usuario"]);
         }
+        session_destroy();
 
         header('Location: '.RUTA_URL.'/Login/Index');
     }
