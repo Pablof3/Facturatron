@@ -1,6 +1,8 @@
+<?php 
+$controlador=trim(explode('/',$_GET['url'])[0]);
+?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title><?= NOMBRE_SITIO;?></title>
@@ -195,30 +197,35 @@
         <div class="main-menu">
             <div class="scroll">
                 <ul class="list-unstyled">
-                    <li class="active">
+                    <li class="<?=($controlador=='Producto')?'active':''?>">
                         <a href="<?=RUTA_URL?>/Producto/vLista">
                             <i class="iconsmind-Shop-4"></i>
                             <span>Productos</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?=($controlador=='Categoria')?'active':'' ?>">
                         <a href="<?=RUTA_URL?>/Categoria/vListar">
                             <i class=" iconsmind-Tag"></i> Categorias
                         </a>
                     </li>
-                    <li>
+                    <li class="<?= ($controlador=='Cliente')?'active':'' ?>">
                         <a href="<?=RUTA_URL?>/Cliente/vLista">
                             <i class="iconsmind-Business-ManWoman"></i> Clientes
                         </a>
                     </li>
-                    <li>
+                    <li class="<?=($controlador=='Proveedor')?'active':''?>">
                         <a href="<?=RUTA_URL?>/Proveedor/vListar">
                             <i class="iconsmind-Business-Man"></i> Proveedor
                         </a>
                     </li>
-                    <li>
+                    <li class="<?=($controlador=='Usuario')?'active':''?>">
                         <a href="<?=RUTA_URL?>/Usuario/vLista">
                             <i class="iconsmind-Administrator"></i> Usuarios
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="<?=RUTA_URL?>/Usuario/vLista">
+                            <i class="iconsmind-Administrator"></i> Por El Error
                         </a>
                     </li>
                 </ul>

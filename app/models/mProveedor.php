@@ -10,15 +10,20 @@ class mProveedor
      * @param Int $limit Fin paginado
      * @return Array arreglo de objetos de tipo proveedor
      **/
-    public function GetList($offset, $limit)
+    public function GetList($offset=null, $limit=null)
     {
         $db=new Database;
         $query = "SELECT * FROM Proveedor
-                  ORDER BY id_proveedor DESC
-                  LIMIT :offset, :limit";
-        $db->prepare($query);
-        $db->bindParam(":offset", $offset, PDO::PARAM_INT);
-        $db->bindParam(":limit", $limit, PDO::PARAM_INT);
+                  ORDER BY id_proveedor DESC";
+        if (is_null($offset) || is_null($limit)) {
+            $db->prepare($query);
+        }
+        else{
+            $query.="LIMIT :offset, :limit";
+            $db->prepare($query);
+            $db->bindParam(":offset", $offset, PDO::PARAM_INT);
+            $db->bindParam(":limit", $limit, PDO::PARAM_INT);
+        }
         return $db->getRegistros();
     }
 

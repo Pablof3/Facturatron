@@ -10,6 +10,7 @@ namespace Core
         public $proveedor;
         public $total;
 
+        /** @compra_detalles ArrayCompraDetalle $compra_detalles Arreglo de Objetos detalle de compra */
         public $compra_detalles;
     }
     
