@@ -141,7 +141,7 @@ class mCompra
     }
 
     //Obtener una compra de la base de datos 
-    public function GetConpra($id)
+    public function GetCompra($id)
     {
         $db=new Database;
         $query="SELECT * FROM Compra

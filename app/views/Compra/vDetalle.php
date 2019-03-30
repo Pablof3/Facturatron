@@ -19,25 +19,24 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h6 class="mb-3">Detalle Producto</h6>
-                    <form class="needs-validation" id="form_ProductoEliminar" novalidate>
+                    <h6 class="mb-3">Detalle Compra</h6>
+                    <form class="needs-validation" id="form_CompraEliminar" novalidate>
                     <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="producto_descripcion">Descripcion</label>
-                                <input id="producto_descripcion" type="text" class="form-control"
-                                    placeholder="Descripcion"
-                                    value="<?=$data["Producto"]->descripcion?>" maxlength="50" disabled>
+                                <label for="compra_descripcion">Numero</label>
+                                <input id="compra_descripcion" type="text" class="form-control"
+                                    placeholder="Numero"
+                                    value="<?=$data["Compra"]->numero?>" maxlength="11" disabled>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="producto_precio">Precio Unitario</label>
-                                <input id="producto_precio" type="number" step="0.01" class="form-control"
-                                        placeholder="Precio unitario"
-                                        value="<?=$data["Producto"]->precio_unitario?>" 
-                                        maxlength="11" 
-                                        pattern="[0-9]*" disabled>
+                                <label for="compra_fecha">Fecha</label>
+                                <input id="compra_fecha" type="text" class="form-control"
+                                        placeholder="Fecha"
+                                        value="<?=$data["Compra"]->fecha?>" 
+                                         disabled>
                                 <div class="invalid-feedback">
                                     Campo Requerido
                                 </div>
@@ -45,8 +44,8 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="producto_medida">Medida</label>
-                                <select id="producto_medida" class="form-control"
+                                <label for="compra_usuario">Usuario</label>
+                                <select id="compra_usuario" class="form-control"
                                      disabled>
                                     <option value="Unidad" <?= "Unidad" == $data["Producto"]->medida ? "selected" : ""?>>Unidad</option>
                                     <option value="Peso" <?= "Peso" == $data["Producto"]->medida ? "selected" : ""?>>Peso</option>
