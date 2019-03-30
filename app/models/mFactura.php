@@ -13,7 +13,7 @@ class mFactura
             $this->db->beginTransaction();
             $nro_max = ObtenerNroMax();
 
-        $query="INSERT INTO Factura(nit, razon, numero, autorizacion, fecha, monto, anulada, sucursal, modalidad, tipo_emision, 
+            $query="INSERT INTO Factura(nit, razon, numero, autorizacion, fecha, monto, anulada, sucursal, modalidad, tipo_emision, 
                 cod_fiscal, tipo_sector, cod_autoverificador)
                 VALUES(:nit, :razon, :numero, :autorizacion, :fecha, :monto, :anulada, :sucursal, :modalidad, :tipo_emision, 
                 :cod_fiscal, :tipo_sector, :cod_autoverificador)";
@@ -35,15 +35,15 @@ class mFactura
                 $id_factura = $this->db->lastInsertId();
 
                 $query = "INSERT INTO FacturaDetalle(factura, concepto, cantidad, precio_unitario) 
-                  VALUES(:factura, :concepto, :cantidad, :precio_unitario)";
-        $this->db->prepare($query);
-        foreach ($factura->factura_detalles as $key => $factura_detalle) {
-            $this->db->bindParam(":factura", $id_factura);
-            $this->db->bindParam(":concepto", $factura_detalle->concepto);
-            $this->db->bindParam(":cantidad", $factura_detalle->cantidad);
-            $this->db->bindParam(":precio_unitario", $factura_detalle->precio_unitario);				
-            $this->db->execute();
-            }
+                          VALUES(:factura, :concepto, :cantidad, :precio_unitario)";
+                $this->db->prepare($query);
+                foreach ($factura->factura_detalles as $key => $factura_detalle) {
+                    $this->db->bindParam(":factura", $id_factura);
+                    $this->db->bindParam(":concepto", $factura_detalle->concepto);
+                    $this->db->bindParam(":cantidad", $factura_detalle->cantidad);
+                    $this->db->bindParam(":precio_unitario", $factura_detalle->precio_unitario);				
+                    $this->db->execute();
+                }
 
             $this->db->commit();
         }

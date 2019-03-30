@@ -4,73 +4,59 @@ class mVenta
     //Insertar
     public function Insertar(Core\Venta $venta)
     {
+        $db=new Database;
+        $resp;
         try
         {
-            $this->db->beginTransaction();
+            $db->beginTransaction();
             $nro_max = ObtenerNroMax(); 
 
-        $query="INSERT INTO Venta(nro, fecha, usuario, cliente, factura, total)
+            $query="INSERT INTO Venta(nro, fecha, usuario, cliente, factura, total)
                 VALUES (:nro, :fecha, :usuario, :cliente, :factura, :total)";
-        $db->prepare($query);
+            $db->prepare($query);
 
-        $db->bindParam(':nro',$venta->nro);
-        $db->bindParam(':fecha',$venta->fecha);
-        $db->bindParam(':usuario',$venta->usuario); 
-        $db->bindParam(':cliente',$venta->cliente);
-        $db->bindParam(':factura',$venta->factura);
-        $db->bindParam(':total',$venta->total);
-        $this->db->execute();
+            $db->bindParam(':nro',$nro_max);
+            $db->bindParam(':fecha',$venta->fecha);
+            $db->bindParam(':usuario',$venta->usuario); 
+            $db->bindParam(':cliente',$venta->cliente);
+            $db->bindParam(':factura',null, PDO::PARAM_NULL);
+            $db->bindParam(':total',$venta->total);
+            $db->execute();
 
-        $id_compra = $this->db->lastInsertId();
+            $id_compra = $db->lastInsertId();                                           
             
             $query = "INSERT INTO VentaDetalle(venta, producto, precio, cantidad, subtotal) 
                       VALUES(:venta, :producto, :precio, :cantidad, :subtotal)";
-            $this->db->prepare($query);
+            $db->prepare($query);
             foreach ($venta->venta_detalles as $key => $venta_detalle) {
-				$this->db->bindParam(":venta", $id_venta);
-                $this->db->bindParam(":producto", $venta_detalle->producto);
-                $this->db->bindParam(":producto", $venta_detalle->precio);
-				$this->db->bindParam(":cantidad", $venta_detalle->cantidad);
-				$this->db->bindParam(":subtotal", $venta_detalle->subtotal);				
-                $this->db->execute();
+				$db->bindParam(":venta", $id_venta);
+                $db->bindParam(":producto", $venta_detalle->producto);
+                $db->bindParam(":precio", $venta_detalle->precio);
+				$db->bindParam(":cantidad", $venta_detalle->cantidad);
+				$db->bindParam(":subtotal", $venta_detalle->subtotal);				
+                $db->execute();
             }  
-            $this->db->commit(); 
-
+            $resp['status']= $db->commit();
         }
         catch(Exception $ex)
         {
-            $this->db->rollback();
+            $db->rollback();
+            $resp['error']=$db->error;
+        }
+        finally
+        {
+            return $resp;
         }
         
     }
 
     public function ObtenerNroMax() 
     {
-        $query = "SELECT MAX(nro) FROM Venta";
-        $this->db->prepare($query);
-        return $this->db->fetchColumn();
-    }
-
-    //Actualizar
-    public function Actualizar($venta)
-    {
         $db=new Database;
-        $resp;
-        $query="UPDATE Venta
-                SET nro=:nro, fecha=:fecha, usuario=:usuario, cliente=:cliente, factura=:factura, total=:total
-                WHERE id_venta=:id_venta";
+        $query = "SELECT MAX(nro) FROM Venta";
         $db->prepare($query);
-        $db->bindParam(':nro',$venta->nro);
-        $db->bindParam(':fecha',$venta->fecha);
-        $db->bindParam(':usuario',$venta->usuario);
-        $db->bindParam(':cliente',$venta->cliente);
-        $db->bindParam(':factura',$venta->factura);
-        $db->bindParam(':total',$venta->total);
-        $db->bindParam(':id_venta',$venta->id_venta);
-        $resp['status']= $db->execute();
-        $resp['error']=$db->error;
-        return $resp;
-    }  
+        return $db->fetchColumn();
+    }
     
     //Eliminar
     public function Eliminar($id)
