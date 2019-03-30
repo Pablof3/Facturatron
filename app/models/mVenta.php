@@ -28,7 +28,7 @@ class mVenta
             $query = "INSERT INTO VentaDetalle(venta, producto, precio, cantidad, subtotal) 
                       VALUES(:venta, :producto, :precio, :cantidad, :subtotal)";
             $db->prepare($query);
-            foreach ($venta->venta_detalles as $key => $venta_detalle) {
+            foreach ($venta->venta_detalles as $venta_detalle) {
 				$db->bindParam(":venta", $id_venta);
                 $db->bindParam(":producto", $venta_detalle->producto);
                 $db->bindParam(":precio", $venta_detalle->precio);

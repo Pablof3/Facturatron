@@ -13,13 +13,30 @@ class Venta extends Controller
         $validador=new Validador();
         $validador->Trim($_POST['Venta']);
         
+        $productos = [];
+        if(!isset($_SESSION["VentaDetalle"]) or empty($_SESSION["VentaDetalle"])) {
+            $resp['status']=false;
+            $resp['validador']['status']=false;
+            $resp['validador']['error']["Productos"][]="Lista de Productos de la Venta Vacia";
+        }
+
+        foreach($_SESSION["VentaDetalle"] as $key => $producto) {
+            $venta_detalle=new Core\VentaDetalle;
+            $venta_detalle->producto = $producto["producto"];
+            $venta_detalle->cantidad = $producto["cantidad"];
+            $venta_detalle->precio = $producto["precio"];
+            $venta_detalle->subtotal = $producto["precio"] * $producto["cantidad"];
+      
+            $productos[]  = $venta_detalle;
+        }
+
         $venta=new Core\Venta;
-        $venta->nro=$validador->Validar('nro',['required','minlength,0','maxlength,11'],$_POST['Venta']);
         $venta->fecha=$validador->Validar('fecha',['required'],$_POST['Venta']);
-        $venta->usuario=$validador->Validar('usuario',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
-        $venta->cliente=$validador->Validar('cliente',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
-        $venta->factura=$validador->Validar('factura',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
+        $venta->usuario=$_SESSION["usuario"]["id"];
+        $venta->cliente=$validador->Validar('cliente',['required'],$_POST['Venta']);
+        // $venta->factura= Respuesta de la Factura Generada;
         $venta->total=$validador->Validar('total',['required','minlength,0','maxlenght,11'],$_POST['Venta']);
+        $venta->venta_detalles = $productos;
 
         $resp['validate']=$validador->error;
         $resp['status']=($resp['status']&&$resp['validate']['status']);

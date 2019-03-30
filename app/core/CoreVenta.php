@@ -10,5 +10,8 @@ namespace Core
         public $factura;
         public $cliente;
         public $total;
+
+        /** @venta_detalles ArrayCompraDetalle $venta_detalles Arreglo de Objetos detalle de compra */
+        public $venta_detalles;
     }
 }
