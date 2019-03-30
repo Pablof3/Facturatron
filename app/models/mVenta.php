@@ -4,10 +4,10 @@ class mVenta
     //Insertar
     public function Insertar(Core\Venta $venta)
     {
-        $db=new Database;
-        $resp;
-
-        $db->beginTransaction();
+        try
+        {
+            $this->db->beginTransaction();
+            $nro_max = ObtenerNroMax(); 
 
         $query="INSERT INTO Venta(nro, fecha, usuario, cliente, factura, total)
                 VALUES (:nro, :fecha, :usuario, :cliente, :factura, :total)";
@@ -19,22 +19,36 @@ class mVenta
         $db->bindParam(':cliente',$venta->cliente);
         $db->bindParam(':factura',$venta->factura);
         $db->bindParam(':total',$venta->total);
-        
-        $status_venta = $db->execute();
+        $this->db->execute();
 
-        if($status_venta) {
-
-            $id_venta = $db->lastInsertId();
-
-            foreach ($variable as $key => $value) {
-                # code...
-            }
+        $id_compra = $this->db->lastInsertId();
+            
+            $query = "INSERT INTO VentaDetalle(venta, producto, precio, cantidad, subtotal) 
+                      VALUES(:venta, :producto, :precio, :cantidad, :subtotal)";
+            $this->db->prepare($query);
+            foreach ($venta->venta_detalles as $key => $venta_detalle) {
+				$this->db->bindParam(":venta", $id_venta);
+                $this->db->bindParam(":producto", $venta_detalle->producto);
+                $this->db->bindParam(":producto", $venta_detalle->precio);
+				$this->db->bindParam(":cantidad", $venta_detalle->cantidad);
+				$this->db->bindParam(":subtotal", $venta_detalle->subtotal);				
+                $this->db->execute();
+            }  
+            $this->db->commit(); 
 
         }
+        catch(Exception $ex)
+        {
+            $this->db->rollback();
+        }
+        
+    }
 
-        $resp['status']=
-        $resp['error']=$db->error;
-        return $resp;
+    public function ObtenerNroMax() 
+    {
+        $query = "SELECT MAX(nro) FROM Venta";
+        $this->db->prepare($query);
+        return $this->db->fetchColumn();
     }
 
     //Actualizar
