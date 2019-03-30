@@ -70,6 +70,9 @@ class mCompra
      **/
     public function Insertar($compra)
     {
+        $db=new Database;
+        $resp;
+
         try
         {
             $this->db->beginTransaction();
@@ -96,22 +99,111 @@ class mCompra
 				$this->db->bindParam(":cantidad", $compra_detalle->cantidad);
 				$this->db->bindParam(":subtotal", $compra_detalle->subtotal);				
                 $this->db->execute();
-            }   
-
-			$this->db->commit();
+            }
+            $resp['status']= $db->commit();
         }
         catch(Exception $ex)
         {
             $this->db->rollback();
+            $resp['error']=$db->error;
+        }
+        finally
+        {
+            return $resp;
         }
     }
 
     public function ObtenerNroMax() 
     {
+        $db=new Database;
         $query = "SELECT MAX(nro) FROM Compra";
         $this->db->prepare($query);
         return $this->db->fetchColumn();
     }
 
+    //Eliminar
+    public function Eliminar($id)
+    {
+        $db=new Database;
+        $resp;
+        $query="DELETE FROM Compra 
+                WHERE id_compra=:id_compra";
+        $db->prepare($query);
+        $db->bindParam(':id_compra', $id);
+        $resp['status']=$db->execute();
+        $resp['error']=$db->error;
+        return $resp;
+    }
+
+    public function GetList($offset, $limit)
+    {
+        $db=new Database;
+        $query="SELECT * FROM Compra
+                ORDER BY id_compra DESC
+                LIMIT :offset, :limit";
+        $db->prepare($query);
+        $db->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        return $db->getRegistros();
+    }
+
+    //Devuelve loista de compras
+    public function GetListSearch($offset, $limit, $busqueda)
+    {
+        $db=new Database;
+        $busqueda="%{$busqueda}%";
+        $query="SELECT *
+                FROM Compra
+                WHERE nro LIKE :busqueda
+                OR fecha LIKE :busqueda  
+                OR usuario LIKE :busqueda 
+                OR proveedor LIKE :busqueda
+                OR total LIKE :busqueda
+                ORDER BY id_compra DESC
+                LIMIT :offset, :limit";
+        $db->prepare($query);
+        $db->bindParam(':busqueda',$busqueda);
+        $db->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        return $db->getRegistros();
+        
+    }
+
+    //Obtener una compra de la base de datos 
+    public function GetConpra($id)
+    {
+        $db=new Database;
+        $query="SELECT * FROM Compra
+                WHERE  id_compra=:id_compra";
+        $db->prepare($query);
+        $db->bindParam(':id_compra', $id);
+        return $db->getRegistro();
+    }
+     //Numero de regidtros de compras
+     public function CountCompras()
+     {
+         $db=new Database;
+         $sql="SELECT COUNT(*) FROM Compra";
+         $db->prepare($sql);
+         return $db->fetchColumn();
+     }
+
+     //Numeros de registros que coinsiden con una busqueda
+    public function CountComprasSearch($busqueda)
+    {
+        $db=new Database;
+        $busqueda="%{$busqueda}%";
+        $query="SELECT COUNT(*)
+                FROM Compra
+                WHERE nro LIKE :busqueda 
+                OR fecha LIKE :busqueda
+                OR usuario LIKE :busqueda 
+                OR proveedor LIKE :busqueda
+                OR total LIKE :busqueda";
+        $db->prepare($query);
+        $db->bindParam(':busqueda',$busqueda);
+        return $db->fetchColumn();
+    }
+ 
 }
 ?>
