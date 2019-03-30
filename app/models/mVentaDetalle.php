@@ -42,4 +42,16 @@ class mVentaDetalle
                 $this->db->bindParam(':id_ventadetalle', $id);
                 return $this->db->execute();
     }
+
+    public function Listar($id)
+    {
+        $query = "SELECT *.VentaDetalle, Producto.nombre AS nombre_producto
+                  FROM VentaDetalle 
+                  INNER JOIN Producto ON Producto.id_producto = VentaDetalle.producto
+                  WHERE VentaDetalle.id_compradetalle = :id";
+        $this->db->prepare($query);
+        $this->db->bindParam(":id", $id);
+        
+        return $this->db->getRegistros();
+    }
 }
