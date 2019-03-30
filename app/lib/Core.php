@@ -12,6 +12,12 @@ class Core
     
     public function __construct()
     {
+        
+        if(!isset($_SESSION["usuario"])) {
+            $this->controladorActual = "Login";
+            $this->metodoActual = "Index";
+        }
+         
         // print_r($this-> getUrl());
         $url= $this->getUrl();
         //buscar controllador  Existe?
