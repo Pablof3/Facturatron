@@ -148,15 +148,22 @@ class mProducto
      * @param Int $limit Indice inicial
      * @return Array 
      **/
-    public function GetList($offset, $limit)
+    public function GetList($offset=null, $limit=null)
     {
         $db=new Database;
         $query="SELECT * FROM Producto
-                ORDER BY id_producto DESC
-                LIMIT :offset, :limit";
-        $db->prepare($query);
-        $db->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $db->bindParam(':limit', $limit, PDO::PARAM_INT);
+                ORDER BY id_producto DESC ";
+        if (!is_null($offset) and !is_null($limit)) {
+            $query.= "LIMIT :offset, :limit";
+            $db->prepare($query);
+            $db->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        }
+        else
+        {
+            $db->prepare($query);
+        }
+               
         return $db->getRegistros();
     }
 

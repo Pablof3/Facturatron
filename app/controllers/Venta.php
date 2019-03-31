@@ -52,7 +52,11 @@ class Venta extends Controller
     //Vista registrar
     public function vRegistrar()
     {
-        $this->vista('Venta/vRegistrar');
+        $mCliente=new mCliente;
+        $clientes=$mCliente->GetList();
+        $data=['Clientes'=>$clientes];
+
+        $this->vista('Venta/vRegistrar',$data);
     }
 
 
@@ -166,4 +170,13 @@ class Venta extends Controller
         $this->vista('Venta/vDetalle', $data);
     }
 
+    public function vDetalleRegistro()
+    {
+        $id=$_GET['id'];
+        $mProducto=new mProducto;
+        $productos=$mProducto->GetList();
+        $data=['Productos'=>$productos,
+                'id'=>$id];
+        $this->vista('Venta/Component/DetalleRegistro',$data);
+    }
 }

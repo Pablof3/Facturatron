@@ -199,6 +199,15 @@ class Producto extends Controller
         $this->vista('Producto/vDetalle', $data);
     }
 
+    public function getPrecioProducto()
+    {
+        $id_producto=$_POST['id_producto'];
+        $mProducto=new mProducto;
+        $producto=$mProducto->GetProducto($id_producto);
+        $precio=$producto->precio_unitario;
+        echo json_encode($precio);
+    }
+
 }
 
 

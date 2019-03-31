@@ -1,6 +1,6 @@
 var url = "http://" + window.location.host + "/Facturatron/";
 $(document).ready(function () {
-  getListaVenta();
+  agregarDetalle();
 });
 
 //Venta registrar
@@ -207,4 +207,63 @@ function getListaVenta(pag=1)
     "HTML"
   );
 
+}
+// Detalles Producto
+var id_detalleVenta=0;//Auto incrementar
+function agregarDetalle () 
+{  
+
+  $.get(url+'Venta/vDetalleRegistro',{
+    'id': id_detalleVenta
+  },
+    function (data, textStatus, jqXHR) {
+      $('#VentaDetalle_RegistroLista').append(data);
+      $(".select2-single, .select2-multiple").select2({
+        theme: "bootstrap",
+        placeholder: "",
+        maximumSelectionSize: 6,
+        containerCssClass: ":all:"
+      });
+    },
+    "HTML"
+  );
+  id_detalleVenta+=1;
+}
+
+function selectProducto_onchange(element)
+{
+  var idProducto=$(element).val();
+  var id_element=$(element).data('id');
+  $.post(url+'Producto/getPrecioProducto', {
+    'id_producto':idProducto
+  },
+    function (data, textStatus, jqXHR) {
+      $(`#inp${id_element}`).val(data);
+    },
+    "JSON"
+  );
+}
+
+function CalcularSubtotal(element)
+{
+  var cantidad=$(element).val();
+  var id_element=$(element).data('id');
+  var precio=$(`#inp${id_element}`).val();
+  $(`#inSub${id_element}`).val((cantidad* precio).toFixed(2));
+  SumarVenta();
+}
+
+function SumarVenta()
+{ 
+  var i =0;
+  var suma=0;
+  while (i<=id_detalleVenta) {
+    var subt=$(`#inSub${i}`).val()
+    if(subt!=0 && subt!=undefined)
+    {
+      suma+=parseInt(subt);
+    }
+    i+=1;
+  }
+  $('#ventaTotal').val(suma.toFixed(2));
 }

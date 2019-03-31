@@ -23,7 +23,7 @@ class mVenta
             $db->bindParam(':total',$venta->total);
             $db->execute();
 
-            $id_compra = $db->lastInsertId();                                           
+            $id_venta = $db->lastInsertId();                                           
             
             $query = "INSERT INTO VentaDetalle(venta, producto, precio, cantidad, subtotal) 
                       VALUES(:venta, :producto, :precio, :cantidad, :subtotal)";
