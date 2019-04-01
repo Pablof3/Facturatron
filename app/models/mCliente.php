@@ -78,14 +78,19 @@ class mCliente
      * @param Int $limit Indice inicial
      * @return Array 
      **/
-    public function GetList($offset, $limit)
+    public function GetList($offset=null, $limit=null)
     {
         $query="SELECT * FROM Cliente
-                ORDER BY id_cliente DESC
-                LIMIT :offset, :limit";
-        $this->db->prepare($query);
-        $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
+                ORDER BY id_cliente DESC ";
+        if (!is_null($offset) and !is_null($limit)) {
+            $query.="LIMIT :offset, :limit";
+            $this->db->prepare($query);
+            $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        }
+        else{
+            $this->db->prepare($query);
+        }
         return $this->db->getRegistros();
     }
 
