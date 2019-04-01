@@ -71,6 +71,12 @@ class Venta extends Controller
             $resp['db']=Validador::ValidarDB($mresp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
         }
+
+        unset($_SESSION["Venta"]);
+        if($resp["status"]) {
+            $_SESSION["Venta"] = $venta;
+        }
+
         echo json_encode($resp);
     }
 
