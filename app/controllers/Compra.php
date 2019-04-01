@@ -11,16 +11,15 @@ class Compra extends Controller
     {
         $resp['status']=true;
         $validador=new Validador();
-        $validador->Trim($_POST['Compra']);
         
         $productos = [];
-        if(!isset($_SESSION["CompraDetalle"]) or empty($_SESSION["CompraDetalle"])) {
+        if(!isset($_POST["Compra"]["CompraDetalle"]) or empty($_POST["Compra"]["CompraDetalle"])) {
             $resp['status']=false;
             $resp['validador']['status']=false;
             $resp['validador']['error']["Productos"][]="Lista de Productos de la Compra Vacia";
         }
 
-        foreach($_SESSION["CompraDetalle"] as $key => $producto) {
+        foreach($_POST["Compra"]["CompraDetalle"] as $key => $producto) {
             $compra_detalle=new Core\CompraDetalle;
             $compra_detalle->producto = $producto["producto"];
             $compra_detalle->cantidad = $producto["cantidad"];
@@ -31,8 +30,9 @@ class Compra extends Controller
         }
 
         $compra=new Core\Compra;
-        $compra->fecha=$validador->Validar('fecha',['required'],$_POST['Compra']);
-        $compra->usuario=$_SESSION["usuario"]["id"];
+        $fecha_actual = new DateTime();
+        $compra->fecha = $fecha_actual->format('Y-m-d');
+        $compra->usuario=$_SESSION["usuario"]["id_usuario"];
         $compra->proveedor=$validador->Validar('proveedor',['required'],$_POST['Compra']);
         $compra->total=$validador->Validar('total',['required','minlength,0','maxlenght,11'],$_POST['Compra']);
         $compra->compra_detalles = $productos;
@@ -40,7 +40,7 @@ class Compra extends Controller
         $resp['validate']=$validador->error;
         $resp['status']=($resp['status']&&$resp['validate']['status']);
         if ($validador->error['status']==true) {
-            $mCompra=new mVenta;
+            $mCompra=new mCompra;
             $mresp=$mCompra->Insertar($compra);
             $resp['db']=Validador::ValidarDB($mresp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);

@@ -18,11 +18,11 @@ if (document.getElementById("form_CompraRegistro")) {
             if (response.status == true) {
               Swal.fire({
                 title: "Correcto",
-                text: "Venta creada correctamente",
+                text: "Compra creada correctamente",
                 type: "success",
                 confirmButtonText: "Correcto"
               });
-              setTimeout(function (){document.location.href=url+'Venta/vLista'},2000);
+              setTimeout(function (){document.location.href=url+'Compra/vLista'},2000);
             } else {
               if (response.validate.status == false) {
                 var msgError = "";
@@ -57,7 +57,37 @@ if (document.getElementById("form_CompraRegistro")) {
   );
 }
 
+// Tabla
+var limit=5;
+var busqueda='';
+function SetNumRegistros(num)
+{
+  $('#dropdownNumRegistros').html(num);
+  limit=num;
+  getListaCompra();
+}
+function SetBusqueda(input) 
+{  
+  busqueda=input.value;
+  getListaCompra();
+}
 
+function getListaCompra(pag=1) 
+{  
+  $.post(url+"Compra/vTabla", {
+    'Tabla':{
+      'pagActual':pag,
+      'limit':limit,
+      'busqueda':busqueda
+    } 
+  },
+    function (data, textStatus, jqXHR) {
+      $('#CompraLista').html(data);
+    },
+    "HTML"
+  );
+
+}
 // Detalles Producto
 $(document).ready(function () {
   agregarDetalle();
@@ -114,7 +144,7 @@ function SumarVenta()
     var subt=$(`#inSub${i}`).val()
     if(subt!=0 && subt!=undefined)
     {
-      suma+=parseInt(subt);
+      suma+=parseFloat(subt);
     }
     i+=1;
   }

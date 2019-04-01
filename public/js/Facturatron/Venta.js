@@ -184,7 +184,7 @@ function SetNumRegistros(num)
 {
   $('#dropdownNumRegistros').html(num);
   limit=num;
-  getListaCliente();
+  getListaVenta();
 }
 function SetBusqueda(input) 
 {  
@@ -261,7 +261,7 @@ function SumarVenta()
     var subt=$(`#inSub${i}`).val()
     if(subt!=0 && subt!=undefined)
     {
-      suma+=parseInt(subt);
+      suma+=parseFloat(subt);
     }
     i+=1;
   }

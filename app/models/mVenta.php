@@ -8,8 +8,13 @@ class mVenta
         $resp;
         try
         {
-            $db->beginTransaction();
-            $nro_max = ObtenerNroMax(); 
+            $nro_max = $this->ObtenerNroMax();
+
+            if($nro_max == null) {
+                $nro_max = 1;
+            } else {
+                $nro_max = $nro_max +  1;
+            }
 
             $query="INSERT INTO Venta(nro, fecha, usuario, cliente, factura, total)
                 VALUES (:nro, :fecha, :usuario, :cliente, :factura, :total)";
@@ -21,7 +26,10 @@ class mVenta
             $db->bindParam(':cliente',$venta->cliente);
             $db->bindParam(':factura',null, PDO::PARAM_NULL);
             $db->bindParam(':total',$venta->total);
-            $db->execute();
+            $resp["status"] = $db->execute();
+            if(!$resp["status"]){
+                throw new Exception();
+            }
 
             $id_venta = $db->lastInsertId();                                           
             
@@ -36,11 +44,9 @@ class mVenta
 				$db->bindParam(":subtotal", $venta_detalle->subtotal);				
                 $db->execute();
             }  
-            $resp['status']= $db->commit();
         }
         catch(Exception $ex)
         {
-            $db->rollback();
             $resp['error']=$db->error;
         }
         finally

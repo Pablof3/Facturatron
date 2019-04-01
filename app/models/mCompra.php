@@ -38,25 +38,34 @@ class mCompra
      * @param Object $compra Objeto de tipo compra
      * @return Bool devuelve una confirmacion de Insercion o error
      **/
-    public function Insertar($compra)
+    public function Insertar(Core\Compra $compra)
     {
         $db=new Database;
         $resp;
 
         try
         {
-            $db->beginTransaction();
-            $nro_max = ObtenerNroMax();        
-         
+            $nro_max = $this->ObtenerNroMax();        
+            
+            if($nro_max == null) {
+                $nro_max = 1;
+            } else {
+                $nro_max = $nro_max +  1;
+            }
+
             $query="INSERT INTO Compra(nro, fecha, usuario, proveedor, total)
                     VALUES (:nro, :fecha, :usuario, :proveedor, :total)";
             $db->prepare($query);
             $db->bindParam(':nro', $nro_max);
-            $db->bindParam(':fecha', $producto->fecha);
-            $db->bindParam(':usuario', $producto->usuario);
-            $db->bindParam(':proveedor', $producto->proveedor);
-            $db->bindParam(':total', $producto->total);
-            $db->execute();
+            $db->bindParam(':fecha', $compra->fecha);
+            $db->bindParam(':usuario', $compra->usuario);
+            $db->bindParam(':proveedor', $compra->proveedor);
+            $db->bindParam(':total', $compra->total);
+            $resp["status"] = $db->execute();
+            if(!$resp["status"]){
+                throw new Exception();
+            }
+
 
             $id_compra = $db->lastInsertId();
             
@@ -70,11 +79,9 @@ class mCompra
 				$db->bindParam(":subtotal", $compra_detalle->subtotal);				
                 $db->execute();
             }
-            $resp['status']= $db->commit();
         }
         catch(Exception $ex)
         {
-            $db->rollback();
             $resp['error']=$db->error;
         }
         finally
