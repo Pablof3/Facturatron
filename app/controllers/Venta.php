@@ -5,10 +5,32 @@ class Venta extends Controller
     public function __construct() {
         $this->GuardSession();
     }
-
+    // public function Registrar()
+    // {
+    //     $venta=new Core\Venta;
+    //     $venta->id_venta=1;
+    //     $venta->nro=1;
+    //     $venta->fecha=date_create();
+    //     $venta->usuario=$_SESSION["usuario"]["id_usuario"];
+    //     $venta->cliente=$_POST['Venta']['cliente'];
+    //     $venta->factura='';
+    //     $venta->total=$_POST['Venta']['total'];
+    //     foreach ($_POST['Venta']['VentaDetalle'] as $key => $ventaDetalle) {
+    //         $VeDe=new Core\VentaDetalle;
+    //         $VeDe->id_ventadetalle=1;
+    //         $VeDe->venta=1;
+    //         $VeDe->producto=$ventaDetalle['producto'];
+    //         $VeDe->precio=$ventaDetalle['precio'];
+    //         $VeDe->cantidad=$ventaDetalle['cantidad'];
+    //         $VeDe->subtotal=$ventaDetalle['subtotal'];
+    //         $venta->venta_detalles[]=$VeDe;
+    //     }
+    //     var_dump($venta);
+    // }
     //Registrar
     public function Registrar()
     {
+        
         $resp['status']=true;
         $validador=new Validador();
         $validador->Trim($_POST['Venta']);

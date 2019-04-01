@@ -35,8 +35,12 @@ $clientes=$data['Clientes'];
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="">Total</label>
-                            <input type="number" step="0.01" class="form-control" placeholder="Total" maxlength="11"
-                                id="ventaTotal" required>
+                            <input type="number" step="0.01" 
+                                    class="form-control" 
+                                    placeholder="Total" 
+                                    maxlength="11"
+                                    name="Venta[total]"
+                                    id="ventaTotal" required>
                             <div class="invalid-feedback">
                                 Campo Requerido
                             </div>

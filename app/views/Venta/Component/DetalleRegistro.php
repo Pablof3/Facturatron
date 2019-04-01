@@ -20,8 +20,12 @@ $id=$data['id'];
             </div>
             <div class="w-20">
                 <label for="validationCustom02">Precio</label>
-                <input id="<?= 'inp'.$id ?>" type="number" step="0.01" class="form-control" name="" placeholder="Precio" value=""
-                    maxlength="11" required>
+                <input id="<?= 'inp'.$id ?>" 
+                        type="number" step="0.01" 
+                        class="form-control" 
+                        name="Venta[VentaDetalle][<?=$id?>][precio]" 
+                        placeholder="Precio" value=""
+                        maxlength="11" required>
                 <div class="invalid-feedback">
                     Campo Requerido
                 </div>
@@ -31,8 +35,7 @@ $id=$data['id'];
                 <input type="number" 
                         step="0.01" 
                         class="form-control" 
-                        name="Venta[VentaDetalle][<?=$id?>][cantidad]
-                        " 
+                        name="Venta[VentaDetalle][<?=$id?>][cantidad]" 
                         placeholder="Total" 
                         value=""
                         maxlength="11" data-id="<?=$id?>" 
@@ -43,8 +46,12 @@ $id=$data['id'];
             </div>
             <div class="w-20">
                 <label for="validationCustom02">Subtotal</label>
-                <input id="<?= 'inSub'.$id ?>" type="number" step="0.01" class="form-control" placeholder="Subtotal"
-                    value="" maxlength="11" required>
+                <input id="<?= 'inSub'.$id ?>" 
+                        type="number" step="0.01" 
+                        class="form-control" 
+                        placeholder="Subtotal"
+                        name="Venta[VentaDetalle][<?=$id?>][subtotal]"
+                        value="" maxlength="11" required>
                 <div class="invalid-feedback">
                     Campo Requerido
                 </div>
