@@ -5,9 +5,16 @@ namespace Core
     {
         public $id_facturadetalle;
         public $factura;
-        public $concepto;
+        public $actividadEconomica;
+        public $codigoProductoSin;
+        public $codigoProducto;
+        public $descripcion;
         public $cantidad;
-        public $precio_unitario;
+        public $unidadMedida;
+        public $precioUnitario;
+        public $montoDescuento;
+        public $subTotal;
+        public $numeroSerie;
     }
 }
 ?>

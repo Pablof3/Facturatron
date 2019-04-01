@@ -4,18 +4,31 @@ namespace Core
     class Factura  
     {
         public $id_factura;
-        public $razon;
-        public $numero;
-        public $autorizacion;
-        public $fecha;
-        public $monto;
+        public $nitEmisor;
+        public $numeroFactura;
+        public $cuf;
+        public $cufd;
+        public $codigoSucursal;
+        public $direccion;
+        public $codigoPuntoVenta;
+        public $fechaEmision;
+        public $nombreRazonSocial;
+        public $codigoTipoDocumentoIdentidad;
+        public $numeroDocumento;
+        public $complemento;
+        public $codigoCliente;
+        public $codigoMetodoPago;
+        public $numeroTarjeta;
+        public $montoTotal;
+        public $codigoMoneda;
+        public $tipoCambio;
+        public $montoTotalMoneda;
+        public $leyenda;
+        public $usuario;
+        public $codigoDocumentoSector;
         public $anulada;
-        public $sucursal;
-        public $modalidad;
-        public $tipo_emision;
-        public $cod_fiscal;
-        public $tipo_sector;
-        public $cod_autoverificador;
+        
+        public $factura_detalles;
     }
     
 }

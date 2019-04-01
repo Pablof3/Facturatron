@@ -166,4 +166,70 @@ class Venta extends Controller
         $this->vista('Venta/vDetalle', $data);
     }
 
+
+    public function Prueba() {
+
+        // $facturacion = new Facturacion();
+
+        // echo $facturacion->calculaDigitoMod11("000012345678920190113163721239000021104000000040000", 1, 9, false);
+
+        
+        $xml = new SimpleXMLElement("<?xml version=\"1.0\" encoding=\"utf-8\"?>
+        <facturaComputarizadaEstandar 
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" 
+        xsi:noNamespaceSchemaLocation=\"facturaComputarizadaEstandar.xsd\">
+        </facturaComputarizadaEstandar>");
+
+    
+        $cabecera = $xml->addChild('cabecera');
+        $cabecera->addChild('nitEmisor', 456489012);
+        $cabecera->addChild('numeroFactura', 66);
+        $cabecera->addChild('cuf', 'a812312f1223892b');
+        $cabecera->addChild('cufd', 'dae91da3e083d42a3da456665b8cad2e');
+        $cabecera->addChild('codigoSucursal', 2);
+        $cabecera->addChild('direccion', 'Calle Juan Pablo II #54');
+        $cabecera->addChild('codigoPuntoVenta')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
+        $cabecera->addChild('fechaEmision', '2019-02-13T08:32:12');
+        $cabecera->addChild('nombreRazonSocial', 'Pablo Mamani');
+        $cabecera->addChild('codigoTipoDocumentoIdentidad', 1);
+        $cabecera->addChild('numeroDocumento',1548971);
+        $cabecera->addChild('complemento')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
+        $cabecera->addChild('codigoCliente', 'PMamani');
+        $cabecera->addChild('codigoMetodoPago',2);
+        $cabecera->addChild('numeroTarjeta', 4651608789011556);
+        $cabecera->addChild('montoTotal', 25);
+        $cabecera->addChild('montoDescuento')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
+        $cabecera->addChild('codigoMoneda', 689);
+        $cabecera->addChild('tipoCambio',1);
+        $cabecera->addChild('montoTotalMoneda', 25);
+        $cabecera->addChild('leyenda', 'Ley N° 453: Tienes derecho a recibir información sobre las características y contenidos de los servicios que utilices.');
+        $cabecera->addChild('usuario', 'pperez');
+        $cabecera->addChild('codigoDocumentoSector', 1);
+
+        $detalle = $xml->addChild('detalle');
+        $detalle->addChild('actividadEconomica', 103020);
+        $detalle->addChild('codigoProductoSin', 21431);
+        $detalle->addChild('codigoProducto', 'JN-131231');
+        $detalle->addChild('descripcion', 'JUGO DE NARANJA EN VASO');
+        $detalle->addChild('cantidad', 10);
+        $detalle->addChild('unidadMedida', 'VASO');
+        $detalle->addChild('precioUnitario', 2.5);
+        $detalle->addChild('montoDescuento')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
+        $detalle->addChild('subTotal', 25);
+        $detalle->addChild('numeroSerie')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
+
+        $dom = new DOMDocument('1.0');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($xml->asXML());
+        $dom->save('xml/venta.xml');
+
+        //echo hash_file("md5", "xml/venta.xml");
+
+        $facturacion = new Facturacion;
+        echo $facturacion->bcdechex("0000123456789201901131637212580000222040000005000002");
+        //159ffe6fb1986a24bb32dbe5a2a34214b245a6a3  dado
+        //159FFE6FB1986A24BB32DBE5A2A34214B245A6A3 Esperado
+    }
+
 }
