@@ -7,7 +7,6 @@ $controlador=trim(explode('/',$_GET['url'])[0]);
     <meta charset="UTF-8">
     <title><?= NOMBRE_SITIO;?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="<?= RUTA_URL;?>/font/iconsmind/style.css" />
     <link rel="stylesheet" href="<?= RUTA_URL;?>/font/simple-line-icons/css/simple-line-icons.css" />
     <link rel="stylesheet" href="<?= RUTA_URL;?>/css/vendor/bootstrap.min.css" />
@@ -56,7 +55,7 @@ $controlador=trim(explode('/',$_GET['url'])[0]);
         </div>
 
 
-        <a class="navbar-logo" href="Dashboard.Default.html">
+        <a class="navbar-logo" href="">
             <span class="logo d-none d-xs-block"></span>
             <span class="logo-mobile d-block d-xs-none"></span>
         </a>

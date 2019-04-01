@@ -14,12 +14,6 @@
                     <a class="btn btn-primary m-1" href="<?= RUTA_URL?>/Venta/vDetalle/<?= $venta->id_venta ?>" >
                         <div class="glyph-icon simple-icon-eyeglass"></div>
                     </a>
-                    <a class="btn btn-primary m-1" href="<?= RUTA_URL;?>/Venta/vActualizar/<?= $venta->id_venta; ?>">
-                        <div class="glyph-icon simple-icon-note"></div>
-                    </a>
-                    <a class="btn btn-primary m-1" href="<?= RUTA_URL;?>/Venta/vEliminar/<?= $venta->id_venta; ?>">
-                        <div class=" glyph-icon simple-icon-trash"></div>
-                    </a>
                 </div>
             </div>
         </div>
