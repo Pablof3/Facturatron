@@ -207,6 +207,14 @@ class Producto extends Controller
         $precio=$producto->precio_unitario;
         echo json_encode($precio);
     }
+    public function getPrecioCompraProducto()
+    {
+        $id_producto=$_POST['id_producto'];
+        $mProducto=new mProducto;
+        $producto=$mProducto->GetProducto($id_producto);
+        $precio=$producto->precio_compra;
+        echo json_encode($precio);
+    }
 
 }
 

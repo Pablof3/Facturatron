@@ -51,7 +51,10 @@ class Compra extends Controller
     //Vista registrar
     public function vRegistrar()
     {
-        $this->vista('Compra/vRegistrar');
+        $mProvedor=new mProveedor;
+        $proveedores=$mProvedor->GetList();
+        $data=['Proveedores'=>$proveedores];
+        $this->vista('Compra/vRegistrar', $data);
     }
 
     public function vLista()
@@ -98,4 +101,14 @@ class Compra extends Controller
         $this->vista('Compra/vDetalle', $data);
     }
 
+    public function vDetalleRegistro()
+    {
+        $id=$_GET['id'];
+        $mProducto=new mProducto;
+        $productos=$mProducto->GetList();
+        $data=['Productos'=>$productos,
+                'id'=>$id];
+        $this->vista('Compra/Component/DetalleRegistro',$data);
+    }
+    
 }
