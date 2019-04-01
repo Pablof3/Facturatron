@@ -5,28 +5,6 @@ class Venta extends Controller
     public function __construct() {
         $this->GuardSession();
     }
-    // public function Registrar()
-    // {
-    //     $venta=new Core\Venta;
-    //     $venta->id_venta=1;
-    //     $venta->nro=1;
-    //     $venta->fecha=date_create();
-    //     $venta->usuario=$_SESSION["usuario"]["id_usuario"];
-    //     $venta->cliente=$_POST['Venta']['cliente'];
-    //     $venta->factura='';
-    //     $venta->total=$_POST['Venta']['total'];
-    //     foreach ($_POST['Venta']['VentaDetalle'] as $key => $ventaDetalle) {
-    //         $VeDe=new Core\VentaDetalle;
-    //         $VeDe->id_ventadetalle=1;
-    //         $VeDe->venta=1;
-    //         $VeDe->producto=$ventaDetalle['producto'];
-    //         $VeDe->precio=$ventaDetalle['precio'];
-    //         $VeDe->cantidad=$ventaDetalle['cantidad'];
-    //         $VeDe->subtotal=$ventaDetalle['subtotal'];
-    //         $venta->venta_detalles[]=$VeDe;
-    //     }
-    //     var_dump($venta);
-    // }
     //Registrar
     public function Registrar()
     {
@@ -165,18 +143,24 @@ class Venta extends Controller
     public function vTabla()
     {
         $mVenta=new mVenta;
-        $pagActual=$_POST['Tabla']['pagActual']; 
-        $limit=$_POST['Tabla']['limit'];
-        $busqueda=$_POST['Tabla']['busqueda'];
+        $pagActual=1; 
+        $limit=5;
+        $busqueda='';
         if (empty($busqueda)) 
         {
             $numReg=$mVenta->CountVentas();
             $numPag=ceil($numReg/$limit);
             $offset=($pagActual-1)*$limit;
             $ventas=$mVenta->GetList($offset, $limit);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
             $data=['Ventas'=>$ventas,
                     'numPaginas'=>$numPag,
-                    'pagActual'=>$pagActual];
+                    'pagActual'=>$pagActual,
+                    'cantRegistros'=>$cantRegistros];
             $this->vista('Venta/Component/Tabla', $data);
         }
         else
@@ -185,9 +169,15 @@ class Venta extends Controller
             $numPag=ceil($numReg/$limit);
             $offset=($pagActual-1)*$limit;
             $ventas=$mVenta->GetListSearch($offset,$limit,$busqueda);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
             $data=['Venta'=>$ventas,
                     'numPaginas'=>$numPag,
-                    'pagActual'=>$pagActual];
+                    'pagActual'=>$pagActual,
+                    'cantRegistros'=>$cantRegistros];
             $this->vista('Venta/Component/Tabla', $data);
         }
     }

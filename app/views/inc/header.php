@@ -81,8 +81,6 @@ $controlador=trim(explode('/',$_GET['url'])[0]);
                 </button>
 
                 <div class="dropdown-menu dropdown-menu-right mt-3">
-                    <a class="dropdown-item" href="#">Cuenta</a>
-                    <a class="dropdown-item" href="#">Configuracion</a>
                     <a class="dropdown-item" href="<?= RUTA_URL;?>/Login/Logout">Cerrar Sesion</a>
                 </div>
             </div>

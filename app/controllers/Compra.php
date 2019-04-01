@@ -65,29 +65,41 @@ class Compra extends Controller
     public function vTabla()
     {
         $mCompra=new mCompra;
-        $pagActual=$_POST['Tabla']['pagActual']; 
+        $pagActual=$_POST['Tabla']['pagActual'];
         $limit=$_POST['Tabla']['limit'];
-        $busqueda=$_POST['Tabla']['busqueda'];
+        $busqueda=_POST['Tabla']['busqueda'];
         if (empty($busqueda)) 
         {
-            $numReg=$mVenta->CountVentas();
+            $numReg=$mCompra->CountCompras();
             $numPag=ceil($numReg/$limit);
             $offset=($pagActual-1)*$limit;
-            $compras=$mVenta->GetList($offset, $limit);
+            $compras=$mCompra->GetList($offset, $limit);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
             $data=['Compras'=>$compras,
                     'numPaginas'=>$numPag,
-                    'pagActual'=>$pagActual];
+                    'pagActual'=>$pagActual,
+                    'cantRegistros'=>$cantRegistros];
             $this->vista('Compra/Component/Tabla', $data);
         }
         else
         {
-            $numReg=$mVenta->CountComprasSearch($busqueda);
+            $numReg=$mCompra->CountComprasSearch($busqueda);
             $numPag=ceil($numReg/$limit);
             $offset=($pagActual-1)*$limit;
-            $ventas=$mVenta->GetListSearch($offset,$limit,$busqueda);
-            $data=['Compra'=>$compras,
+            $ventas=$mCompra->GetListSearch($offset,$limit,$busqueda);
+
+            $fromPag = $offset + 1;
+            $toPag = ($offset + $limit) < $numReg ? $offset + $limit : $numReg;
+            $cantRegistros = "Mostrando del $fromPag al $toPag de $numReg";
+
+            $data=['Compras'=>$compras,
                     'numPaginas'=>$numPag,
-                    'pagActual'=>$pagActual];
+                    'pagActual'=>$pagActual,
+                    'cantRegistros'=>$cantRegistros];
             $this->vista('Compra/Component/Tabla', $data);
         }
     }
