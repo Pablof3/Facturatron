@@ -1,5 +1,8 @@
 var url = "http://" + window.location.host + "/Facturatron/";
-
+$(document).ready(function () {
+  agregarDetalle();
+  getListaCompra();
+});
 //Venta registrar
 if (document.getElementById("form_CompraRegistro")) {
   var form = document.getElementById("form_CompraRegistro");
@@ -89,9 +92,6 @@ function getListaCompra(pag=1)
 
 }
 // Detalles Producto
-$(document).ready(function () {
-  agregarDetalle();
-});
 var id_detalleCompra=0;//Auto incrementar
 function agregarDetalle () 
 {  

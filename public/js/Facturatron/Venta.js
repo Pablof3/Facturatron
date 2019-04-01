@@ -1,6 +1,7 @@
 var url = "http://" + window.location.host + "/Facturatron/";
 $(document).ready(function () {
   agregarDetalle();
+  getListaVenta();
 });
 
 //Venta registrar
