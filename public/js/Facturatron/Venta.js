@@ -26,7 +26,8 @@ if (document.getElementById("form_VentaRegistro")) {
                   type: "success",
                   confirmButtonText: "Correcto"
                 });
-                setTimeout(function (){document.location.href=url+'Venta/vLista'},2000);
+
+                setTimeout(function (){document.location.href=url+'Factura/vRegistrar'},2000);
               } else {
                 if (response.validate.status == false) {
                   var msgError = "";

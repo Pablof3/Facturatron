@@ -1,6 +1,17 @@
 <?php
 class mProducto
 {
+
+    public function ObtenerNombre($id) {
+        $db = new Database;
+        $query = "SELECT descripcion FROM Producto
+                  WHERE id_producto = :id_producto";
+        $db->prepare($query);
+        $db->bindParam(":id_producto", $id, PDO::PARAM_INT);
+        
+        return $db->fetchColumn();
+    }
+
     /**
      * Lista todos los productos
      *

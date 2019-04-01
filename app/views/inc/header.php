@@ -120,7 +120,7 @@ $controlador=trim(explode('/',$_GET['url'])[0]);
                             <i class=" iconsmind-Shopping-Cart"></i> Compra
                         </a>
                     </li>
-                    <li class="<?=($controlador=='Venta')?'active':''?>">
+                    <li class="<?=($controlador=='Venta' or $controlador=="Factura")?'active':''?>">
                         <a href="<?=RUTA_URL?>/Venta/vLista">
                             <i class=" iconsmind-Full-Cart"></i> Venta
                         </a>

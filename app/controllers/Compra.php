@@ -67,7 +67,7 @@ class Compra extends Controller
         $mCompra=new mCompra;
         $pagActual=$_POST['Tabla']['pagActual'];
         $limit=$_POST['Tabla']['limit'];
-        $busqueda=_POST['Tabla']['busqueda'];
+        $busqueda=$_POST['Tabla']['busqueda'];
         if (empty($busqueda)) 
         {
             $numReg=$mCompra->CountCompras();

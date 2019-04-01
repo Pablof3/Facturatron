@@ -49,6 +49,12 @@ class Venta extends Controller
             $resp['db']=Validador::ValidarDB($mresp);
             $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
         }
+
+        unset($_SESSION["Venta"]);
+        if($resp["status"]) {
+            $_SESSION["Venta"] = serialize($venta);
+        }
+
         echo json_encode($resp);
     }
 
@@ -215,7 +221,7 @@ class Venta extends Controller
         $cabecera->addChild('complemento')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
         $cabecera->addChild('codigoCliente', 'PMamani');
         $cabecera->addChild('codigoMetodoPago',2);
-        $cabecera->addChild('numeroTarjeta', 4651608789011556);
+        $cabecera->addChild('numeroTarjeta', "4651608789011556");
         $cabecera->addChild('montoTotal', 25);
         $cabecera->addChild('montoDescuento')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
         $cabecera->addChild('codigoMoneda', 689);
