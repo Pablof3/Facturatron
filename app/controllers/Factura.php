@@ -1,5 +1,5 @@
 <?php
-class Venta extends Controller 
+class Factura extends Controller 
 {
 
     public function __construct() {
@@ -7,13 +7,17 @@ class Venta extends Controller
 	}
 
 	public function vRegistrar() {
-
 		$data = [];
 		if(isset($_SESSION["Venta"])) {
-			$data = ["Venta" => $_SESSION["Venta"]];
+			$data = ["Venta" => unserialize($_SESSION["Venta"])];
 		}
-		
+
 		return $this->vista("Factura/vRegistrar", $data);
+	}
+
+	public function NombreProducto($id) {
+		$producto = new mProducto();
+		return $producto->ObtenerNombre($id);
 	}
 
 }
