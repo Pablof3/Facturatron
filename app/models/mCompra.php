@@ -117,7 +117,7 @@ class mCompra
         $db=new Database;
         $query="SELECT Compra.id_compra, Compra.nro, Compra.fecha, Compra.total, 
                 Proveedor.nombre AS proveedor, CONCAT(Usuario.nombre, ' ', Usuario.apellidos) AS usuario
-                FROM Compra
+                FROM Compra, Proveedor, Usuario
                 ORDER BY id_compra DESC
                 LIMIT :offset, :limit";
         $db->prepare($query);
