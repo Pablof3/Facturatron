@@ -15,9 +15,6 @@
                     <a class="btn btn-primary m-1" href="<?= RUTA_URL?>/Compra/vDetalle/<?= $compra->id_compra ?>" >
                         <div class="glyph-icon simple-icon-eyeglass"></div>
                     </a>
-                    <a class="btn btn-primary m-1" href="<?= RUTA_URL;?>/Compra/vEliminar/<?= $compra->id_compra; ?>">
-                        <div class=" glyph-icon simple-icon-trash"></div>
-                    </a>
                 </div>
             </div>
         </div>
