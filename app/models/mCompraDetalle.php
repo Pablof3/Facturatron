@@ -18,9 +18,9 @@ class mCompraDetalle
     
     public function Listar($id)
     {
-        $query = "SELECT *.CompraDetalle, Producto.nombre AS nombre_producto
+        $query = "SELECT CompraDetalle.*, Producto.descripcion AS nombre_producto 
                   FROM CompraDetalle 
-                  INNER JOIN Producto ON Producto.id_producto = CompraDetalle.producto
+                  INNER JOIN Producto ON Producto.id_producto = CompraDetalle.producto 
                   WHERE CompraDetalle.compra = :id";
         $this->db->prepare($query);
         $this->db->bindParam(":id", $id);

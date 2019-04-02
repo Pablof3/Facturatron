@@ -69,12 +69,13 @@ class mCompra
 
             $id_compra = $db->lastInsertId();
             
-            $query = "INSERT INTO CompraDetalle(compra, producto, cantidad, subtotal) 
-                      VALUES(:compra, :producto, :cantidad, :subtotal)";
+            $query = "INSERT INTO CompraDetalle(compra, producto, precio, cantidad, subtotal) 
+                      VALUES(:compra, :producto, :precio, :cantidad, :subtotal)";
             $db->prepare($query);
             foreach ($compra->compra_detalles as $key => $compra_detalle) {
 				$db->bindParam(":compra", $id_compra);
-				$db->bindParam(":producto", $compra_detalle->producto);
+                $db->bindParam(":producto", $compra_detalle->producto);
+                $db->bindParam(":precio", $compra_detalle->precio);                
 				$db->bindParam(":cantidad", $compra_detalle->cantidad);
 				$db->bindParam(":subtotal", $compra_detalle->subtotal);				
                 $db->execute();
@@ -117,8 +118,9 @@ class mCompra
         $db=new Database;
         $query="SELECT Compra.id_compra, Compra.nro, Compra.fecha, Compra.total, 
                 Proveedor.nombre AS proveedor, CONCAT(Usuario.nombre, ' ', Usuario.apellidos) AS usuario
-                FROM Compra, Proveedor, Usuario
-                ORDER BY id_compra DESC
+                FROM Compra INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor 
+                INNER JOIN Usuario ON Compra.usuario = Usuario.id_usuario 
+                ORDER BY Compra.id_compra DESC
                 LIMIT :offset, :limit";
         $db->prepare($query);
         $db->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -133,11 +135,12 @@ class mCompra
         $busqueda="%{$busqueda}%";
         $query="SELECT Compra.id_compra, Compra.nro, Compra.fecha, Compra.total, 
                 Proveedor.nombre AS proveedor, CONCAT(Usuario.nombre, ' ', Usuario.apellidos) AS usuario
-                FROM Compra
-                WHERE nro LIKE :busqueda
-                OR usuario LIKE :busqueda 
-                OR proveedor LIKE :busqueda
-                ORDER BY id_compra DESC
+                FROM Compra INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor 
+                INNER JOIN Usuario ON Compra.usuario = Usuario.id_usuario 
+                WHERE Compra.nro LIKE :busqueda
+                OR CONCAT(Usuario.nombre, ' ', Usuario.apellidos)  LIKE :busqueda 
+                OR Proveedor.nombre LIKE :busqueda
+                ORDER BY Compra.id_compra DESC
                 LIMIT :offset, :limit";
         $db->prepare($query);
         $db->bindParam(':busqueda',$busqueda);
@@ -151,12 +154,16 @@ class mCompra
     public function GetCompra($id)
     {
         $db=new Database;
-        $query="SELECT * FROM Compra
-                WHERE  id_compra=:id_compra";
+        $query="SELECT Compra.id_compra, Compra.nro, Compra.fecha, Compra.total, 
+                Proveedor.nombre AS proveedor, CONCAT(Usuario.nombre, ' ', Usuario.apellidos) AS usuario
+                FROM Compra INNER JOIN Proveedor ON Proveedor.id_proveedor = Compra.proveedor 
+                INNER JOIN Usuario ON Compra.usuario = Usuario.id_usuario 
+                WHERE  Compra.id_compra=:id_compra";
         $db->prepare($query);
         $db->bindParam(':id_compra', $id);
         return $db->getRegistro();
     }
+
      //Numero de regidtros de compras
      public function CountCompras()
      {

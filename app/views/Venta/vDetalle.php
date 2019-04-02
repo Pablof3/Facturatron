@@ -21,62 +21,57 @@
                 <div class="card-body">
                     <h6 class="mb-3">Detalle de Venta</h6>
                     <form class="needs-validation" novalidate>
-                        <input type="hidden" name="Cliente[id_cliente]" value="<?= $data['Venta']->id_venta; ?>"
-                            hidden>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="">Numrero</label>
-                                <input type="number" class="form-control"  placeholder="Numero"
-                                    value="<?= $data['Venta']->nro ?>" maxlength="11" disabled required>
-                                <div class="invalid-feedback">
-                                    Campo Requerido
-                                </div>
+                                <label for="compra_descripcion">Numero</label>
+                                <input id="compra_descripcion" type="text" class="form-control"
+                                    value="<?=$data["Venta"]->nro?>" disabled>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Fecha</label>
-                                <input type="text" class="form-control" placeholder="Fecha"
-                                    value="<?= $data['Venta']->fecha; ?>" maxlength="10" pattern="[0-9]*" disabled required>
-                                <div class="invalid-feedback">
-                                    Campo requerido
-                                </div>
+                                <label for="compra_fecha">Fecha</label>
+                                <input id="compra_fecha" type="text" class="form-control"
+                                        value="<?=$data["Venta"]->fecha?>" 
+                                         disabled>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="compra_fecha">Usuario</label>
+                                <input id="compra_fecha" type="text" class="form-control"
+                                        value="<?=$data["Venta"]->usuario?>" 
+                                         disabled>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Usuario</label>
-                                <input type="text" class="form-control" placeholder="Usuario"
-                                    value="<?= $data['Venta']->usuario; ?>" maxlength="11" disabled required>
-                                <div class="invalid-feedback">
-                                    Campo Requerido
-                                </div>
+                                <label for="compra_fecha">Cliente</label>
+                                <input id="compra_fecha" type="text" class="form-control"
+                                        value="<?=$data["Venta"]->cliente?>" 
+                                         disabled>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Cliente</label>
-                                <input type="text" class="form-control"
-                                    placeholder="Cliente" value="<?= $data['Venta']->cliente; ?>" maxlength="11"
-                                    disabled required>
-                                <div class="invalid-feedback">
-                                    Campo Requerido
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Factura</label>
-                                <input type="text" class="form-control" placeholder="Factura"
-                                    value="<?= $data['Venta']->factura; ?>" maxlength="11" disabled required>
-                                <div class="invalid-feedback">
-                                    Campo Requerido
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Total</label>
-                                <input type="text" class="form-control"
-                                    placeholder="Venta" value="<?= $data['Venta']->total; ?>" maxlength="11"
-                                    disabled required>
-                                <div class="invalid-feedback">
-                                    Campo Requerido
-                                </div>
+                            <div class="col-md-8 mb-3">
+                                <table class="table table-condensed table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Precio Compra</th>
+                                            <th>Cantidad</th>
+                                            <th>SubTotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($data["Venta"]->venta_detalles as $venta_detalle): ?>
+                                        <tr>
+                                            <td><?=$venta_detalle->nombre_producto?></td>
+                                            <td><?=$venta_detalle->precio?></td>
+                                            <td><?=$venta_detalle->cantidad?></td>
+                                            <td><?=$venta_detalle->subtotal?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                        <tr style="font-weight: bold">
+                                            <td colspan="3">TOTAL</td>
+                                            <td colspan="1"><?=$data["Venta"]->total?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <a class="btn btn-primary" href="<?= RUTA_URL;?>\Venta\vLista" >Cancelar</a>

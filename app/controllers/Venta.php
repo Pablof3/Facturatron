@@ -186,8 +186,12 @@ class Venta extends Controller
     public function vDetalle($id_venta)
     {
         $mVenta=new mVenta;
-        $cliente = $mVenta->GetVenta($id_venta);
-        $data=['Venta'=>$cliente];
+        $mVentaDetalle=new mVentaDetalle;
+        $venta = $mVenta->GetVenta($id_venta);
+
+        $venta->venta_detalles = $mVentaDetalle->Listar($venta->id_venta);
+
+        $data=['Venta'=>$venta];
         $this->vista('Venta/vDetalle', $data);
     }
 

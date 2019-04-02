@@ -8,8 +8,10 @@
                         <?= $indice; ?>
                     </span>
                     <a class="list-item-heading mb-1 truncate w-40 w-xs-100">
-                        Nro: <?= $venta->nro; ?>
+                        Nro: #<?= $venta->nro; ?>
                     </a>
+                    <p class="mb-1 text-muted text-small w-15 w-xs-100">Cliente: <?= $venta->cliente; ?></p>
+                    <p class="mb-1 text-muted text-small w-15 w-xs-100">Usuario: <?= $venta->usuario; ?></p>
                     <p class="mb-1 text-muted text-small w-15 w-xs-100">Fecha: <?= $venta->fecha; ?></p>
                     <a class="btn btn-primary m-1" href="<?= RUTA_URL?>/Venta/vDetalle/<?= $venta->id_venta ?>" >
                         <div class="glyph-icon simple-icon-eyeglass"></div>

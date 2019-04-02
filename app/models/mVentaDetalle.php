@@ -6,9 +6,9 @@ class mVentaDetalle
     {
         $db = new Database;
 
-        $query = "SELECT *.VentaDetalle, Producto.nombre AS nombre_producto
+        $query = "SELECT VentaDetalle.*, Producto.descripcion AS nombre_producto 
                   FROM VentaDetalle 
-                  INNER JOIN Producto ON Producto.id_producto = VentaDetalle.producto
+                  INNER JOIN Producto ON Producto.id_producto = VentaDetalle.producto 
                   WHERE VentaDetalle.venta = :id";
         $db->prepare($query);
         $db->bindParam(":id", $id);

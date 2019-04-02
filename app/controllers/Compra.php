@@ -108,8 +108,12 @@ class Compra extends Controller
     public function vDetalle($id_compra)
     {
         $mCompra=new mCompra;
-        $cliente = $mCompra->GetCompra($id_compra);
-        $data=['Compra'=>$proveedor];
+        $mCompraDetalle=new mCompraDetalle;
+        $compra = $mCompra->GetCompra($id_compra);
+
+        $compra->compra_detalles = $mCompraDetalle->Listar($compra->id_compra);
+
+        $data=['Compra'=>$compra];
         $this->vista('Compra/vDetalle', $data);
     }
 

@@ -82,8 +82,11 @@ class mVenta
     public function GetList($offset, $limit)
     {
         $db=new Database;
-        $query="SELECT * FROM Venta
-                ORDER BY id_venta DESC
+        $query="SELECT Venta.id_venta, Venta.nro, Venta.fecha, Venta.total, 
+                Cliente.nombre AS cliente, CONCAT(Usuario.nombre, ' ', Usuario.apellidos) AS usuario
+                FROM Venta INNER JOIN Cliente ON Cliente.id_cliente = Venta.cliente 
+                INNER JOIN Usuario ON Venta.usuario = Usuario.id_usuario 
+                ORDER BY Venta.id_venta DESC
                 LIMIT :offset, :limit";
         $db->prepare($query);
         $db->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -96,13 +99,14 @@ class mVenta
     {
         $db=new Database;
         $busqueda="%{$busqueda}%";
-        $query="SELECT *
-                FROM Venta
-                WHERE nro LIKE :busqueda 
-                OR usuario LIKE :busqueda 
-                OR cliente LIKE :busqueda
-                OR total LIKE :busqueda
-                ORDER BY id_venta DESC
+        $query="SELECT Venta.id_venta, Venta.nro, Venta.fecha, Venta.total, 
+                Cliente.nombre AS cliente, CONCAT(Usuario.nombre, ' ', Usuario.apellidos) AS usuario
+                FROM Venta INNER JOIN Cliente ON Cliente.id_cliente = Venta.cliente 
+                INNER JOIN Usuario ON Venta.usuario = Usuario.id_usuario 
+                WHERE Venta.nro LIKE :busqueda 
+                OR Venta.usuario LIKE :busqueda 
+                OR Venta.cliente LIKE :busqueda 
+                ORDER BY Venta.id_venta DESC
                 LIMIT :offset, :limit";
         $db->prepare($query);
         $db->bindParam(':busqueda',$busqueda);
@@ -116,8 +120,11 @@ class mVenta
     public function GetVenta($id)
     {
         $db=new Database;
-        $query="SELECT * FROM Venta
-                WHERE  id_venta=:id_venta";
+        $query="SELECT Venta.id_venta, Venta.nro, Venta.fecha, Venta.total, 
+                Cliente.nombre AS cliente, CONCAT(Usuario.nombre, ' ', Usuario.apellidos) AS usuario
+                FROM Venta INNER JOIN Cliente ON Cliente.id_cliente = Venta.cliente 
+                INNER JOIN Usuario ON Venta.usuario = Usuario.id_usuario    
+                WHERE Venta.id_venta=:id_venta";
         $db->prepare($query);
         $db->bindParam(':id_venta', $id);
         return $db->getRegistro();

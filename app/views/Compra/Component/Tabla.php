@@ -9,9 +9,11 @@
                         <?= $indice; ?>
                     </span>
                     <a class="list-item-heading mb-1 truncate w-40 w-xs-100">
-                        <?= $compra->nro; ?>
+                       NRO: #<?= $compra->nro; ?>
                     </a>
-                    <p class="mb-1 text-muted text-small w-15 w-xs-100">: <?= $compra->total; ?></p>
+                    <p class="mb-1 text-muted text-small w-15 w-xs-100">Proveedor: <?= $compra->proveedor; ?></p>
+                    <p class="mb-1 text-muted text-small w-15 w-xs-100">Usuario: <?= $compra->usuario; ?></p>                    
+                    <p class="mb-1 text-muted text-small w-15 w-xs-100">TOTAL: <?= $compra->total; ?></p>
                     <a class="btn btn-primary m-1" href="<?= RUTA_URL?>/Compra/vDetalle/<?= $compra->id_compra ?>" >
                         <div class="glyph-icon simple-icon-eyeglass"></div>
                     </a>
