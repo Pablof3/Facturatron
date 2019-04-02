@@ -24,23 +24,25 @@ class Factura extends Controller
 		$resp['status']=true;
         $validador=new Validador();
         
+        $venta = unserialize($_SESSION["Venta"]);
+
         $productos = [];
-        if(!isset($_SESSION["Venta"]->venta_detalles) or empty($_SESSION["Venta"]->venta_detalles)) {
+        if(!isset($venta->venta_detalles) or empty($venta->venta_detalles)) {
             $resp['status']=false;
             $resp['validador']['status']=false;
             $resp['validador']['error']["Productos"][]="Lista de Productos de la Venta Vacia";
         }
 
-        foreach(unserialize($_SESSION["Venta"]->venta_detalles) as $key => $producto) {
+        foreach($venta->venta_detalles as $producto) {
             $factura_detalle=new Core\FacturaDetalle;
 			$factura_detalle->codigoProducto = "JN-131231";
 			$factura_detalle->codigoProductoSin = 21431;
 			$factura_detalle->actividadEconomica = 103020;
-			$factura_detalle->descripcion = $this->NombreProducto($producto["producto"]);
-            $factura_detalle->cantidad = $producto["cantidad"];
-			$factura_detalle->precioUnitario = $producto["precio"];
+			$factura_detalle->descripcion = $this->NombreProducto($producto->producto);
+            $factura_detalle->cantidad = $producto->cantidad;
+			$factura_detalle->precioUnitario = $producto->precio;
 			$factura_detalle->unidadMedida = "Unidad";
-            $factura_detalle->subTotal = $producto["precio"] * $producto["cantidad"];
+            $factura_detalle->subTotal = $producto->precio * $producto->cantidad;
 			
             $productos[]  = $factura_detalle;
         }
@@ -53,17 +55,20 @@ class Factura extends Controller
         $factura->fechaEmision = $fecha_actual->format('Y-m-d');
         $factura->usuario=$_SESSION["usuario"]["id_usuario"];
         // $factura->factura= Respuesta de la Factura Generada;
-        $factura->montoTotal=$_POST["Factura[montoTotal]"];
+        $factura->codigoCliente=$_POST["Factura"]["codigoCliente"];
+        $factura->nombreRazonSocial=$_POST["Factura"]["nombreRazonSocial"];
+        $factura->numeroDocumento=$_POST["Factura"]["numeroDocumento"];
+        $factura->montoTotal=$_POST["Factura"]["montoTotal"];
         $factura->factura_detalles = $productos;
 
         $resp['validate']=$validador->error;
         $resp['status']=($resp['status']&&$resp['validate']['status']);
-        if ($validador->error['status']==true) {
-            $mFactura=new mFactura;
-            $mresp=$mFactura->Insertar($factura);
-            $resp['db']=Validador::ValidarDB($mresp);
-            $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
-        }
+        // if ($validador->error['status']==true) {
+        //     $mFactura=new mFactura;
+        //     $mresp=$mFactura->Insertar($factura);
+        //     $resp['db']=Validador::ValidarDB($mresp);
+        //     $resp['status']=($resp['validate']['status'] && $resp['db']['status']);
+        // }
 
         if($resp["status"]) {
             unset($_SESSION["Venta"]);
@@ -90,23 +95,23 @@ class Factura extends Controller
         $cabecera->addChild('direccion', 'Calle Juan Pablo II #54');
         $cabecera->addChild('codigoPuntoVenta')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
         $cabecera->addChild('fechaEmision', '2019-02-13T08:32:12');
-        $cabecera->addChild('nombreRazonSocial', $_POST["nombreRazonSocial"]);
+        $cabecera->addChild('nombreRazonSocial', $factura->nombreRazonSocial);
         $cabecera->addChild('codigoTipoDocumentoIdentidad', 1);
-        $cabecera->addChild('numeroDocumento',$_POST["numeroDocumento"]);
+        $cabecera->addChild('numeroDocumento',$factura->numeroDocumento);
         $cabecera->addChild('complemento')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
-        $cabecera->addChild('codigoCliente', $_POST["codigoCliente"]);
+        $cabecera->addChild('codigoCliente', $factura->codigoCliente);
         $cabecera->addChild('codigoMetodoPago',1);
         $cabecera->addChild('numeroTarjeta')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
-        $cabecera->addChild('montoTotal', 25);
+        $cabecera->addChild('montoTotal', $factura->montoTotal);
         $cabecera->addChild('montoDescuento')->addAttribute("xsi:nil", "true", "http://www.w3.org/2001/XMLSchema-instance");
         $cabecera->addChild('codigoMoneda', 689);
         $cabecera->addChild('tipoCambio',1);
-        $cabecera->addChild('montoTotalMoneda', 25);
+        $cabecera->addChild('montoTotalMoneda', $factura->montoTotal);
         $cabecera->addChild('leyenda', 'Ley N° 453: Tienes derecho a recibir información sobre las características y contenidos de los servicios que utilices.');
         $cabecera->addChild('usuario', 'pperez');
         $cabecera->addChild('codigoDocumentoSector', 1);
 
-        foreach ($productos as $key => $producto) {
+        foreach ($productos as $producto) {
             $detalle = $xml->addChild('detalle');
             $detalle->addChild('actividadEconomica', $producto->actividadEconomica);
             $detalle->addChild('codigoProductoSin', $producto->codigoProductoSin);
@@ -124,7 +129,7 @@ class Factura extends Controller
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = true;
         $dom->loadXML($xml->asXML());
-        $dom->save('xml/venta'.$factura->fechaEmision.'.xml');
+        $dom->save('xml/venta'.$factura->fechaEmision.time().'.xml');
 
         echo json_encode($resp);
         

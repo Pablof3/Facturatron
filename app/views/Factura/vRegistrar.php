@@ -57,9 +57,9 @@ $venta=$data["Venta"];
                                     value="<?=$venta->total?>" 
                                     class="form-control" 
                                     placeholder="Total" 
-                                    name="Factura[montoTotal]"
                                     id="montoTotal" disabled>
                         </div>
+                        <input type="hidden" value="<?=$venta->total?>" name="Factura[montoTotal]">
                     </div>
 					<div class="form-row">
 						<table class="table table-striped table-inverse table-responsive">
