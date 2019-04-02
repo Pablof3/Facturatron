@@ -1,9 +1,17 @@
 <?php
 class mCliente
 {
-    private  $db;
-    public function __construct() {
-        $this->db=new Database;
+
+    public function GetRazonSocial($nit) {
+        $db=new Database;
+
+        $query="SELECT razon 
+                FROM Cliente 
+                WHERE Cliente.nit = :nit";
+        $db->prepare($query);
+        $db->bindParam(":nit", $nit);
+        
+        return $db->fetchColumn();
     }
 
     /**
@@ -14,17 +22,18 @@ class mCliente
      **/
     public function Insertar($cliente)
     {
+        $db=new Database;
         $resp;
         $query="INSERT INTO Cliente(razon, nombre, apellidos, nit) 
                 VALUES(:razon, :nombre, :apellidos, :nit)";
-        $this->db->prepare($query);
-        $this->db->bindParam(':razon', $cliente->razon);
-        $this->db->bindParam(':nombre', $cliente->nombre);
-        $this->db->bindParam(':apellidos', $cliente->apellidos);
-        $this->db->bindParam(':nit', $cliente->nit);
+        $db->prepare($query);
+        $db->bindParam(':razon', $cliente->razon);
+        $db->bindParam(':nombre', $cliente->nombre);
+        $db->bindParam(':apellidos', $cliente->apellidos);
+        $db->bindParam(':nit', $cliente->nit);
 
-        $resp['status']=$this->db->execute();
-        $resp['error']=$this->db->error;
+        $resp['status']=$db->execute();
+        $resp['error']=$db->error;
 
         return $resp;
     }
@@ -37,18 +46,19 @@ class mCliente
      **/
     public function Actualizar($cliente)
     {
+        $db=new Database;
         $resp;
         $query="UPDATE Cliente 
                 SET razon=:razon, nombre=:nombre, apellidos=:apellidos, nit=:nit
                 WHERE id_cliente=:id_cliente";
-        $this->db->prepare($query);
-        $this->db->bindParam(':razon', $cliente->razon);
-        $this->db->bindParam(':nombre', $cliente->nombre);
-        $this->db->bindParam(':apellidos', $cliente->apellidos);
-        $this->db->bindParam(':nit', $cliente->nit);
-        $this->db->bindParam(':id_cliente', $cliente->id_cliente);
-        $resp['status']= $this->db->execute();
-        $resp['error']=$this->db->error;
+        $db->prepare($query);
+        $db->bindParam(':razon', $cliente->razon);
+        $db->bindParam(':nombre', $cliente->nombre);
+        $db->bindParam(':apellidos', $cliente->apellidos);
+        $db->bindParam(':nit', $cliente->nit);
+        $db->bindParam(':id_cliente', $cliente->id_cliente);
+        $resp['status']= $db->execute();
+        $resp['error']=$db->error;
         return $resp;
     }
 
@@ -61,13 +71,14 @@ class mCliente
      **/
     public function Eliminar($id)
     {
+        $db=new Database;
         $resp;
         $query="DELETE FROM Cliente 
                 WHERE id_cliente=:id_cliente";
-        $this->db->prepare($query);
-        $this->db->bindParam(':id_cliente', $id);
-        $resp['status']=$this->db->execute();
-        $resp['error']=$this->db->error;
+        $db->prepare($query);
+        $db->bindParam(':id_cliente', $id);
+        $resp['status']=$db->execute();
+        $resp['error']=$db->error;
         return $resp;
     }
 
@@ -80,18 +91,19 @@ class mCliente
      **/
     public function GetList($offset=null, $limit=null)
     {
+        $db=new Database;
         $query="SELECT * FROM Cliente
                 ORDER BY id_cliente DESC ";
         if (!is_null($offset) and !is_null($limit)) {
             $query.="LIMIT :offset, :limit";
-            $this->db->prepare($query);
-            $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
-            $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $db->prepare($query);
+            $db->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $db->bindParam(':limit', $limit, PDO::PARAM_INT);
         }
         else{
-            $this->db->prepare($query);
+            $db->prepare($query);
         }
-        return $this->db->getRegistros();
+        return $db->getRegistros();
     }
 
     /**
@@ -106,6 +118,7 @@ class mCliente
      **/
     public function GetListSearch($offset, $limit, $busqueda)
     {
+        $db=new Database;
         $busqueda="%{$busqueda}%";
         $query="SELECT *
                 FROM Cliente
@@ -114,11 +127,11 @@ class mCliente
                 OR apellidos LIKE :busqueda
                 ORDER BY id_cliente DESC
                 LIMIT :offset, :limit";
-        $this->db->prepare($query);
-        $this->db->bindParam(':busqueda',$busqueda);
-        $this->db->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $this->db->bindParam(':limit', $limit, PDO::PARAM_INT);
-        return $this->db->getRegistros();
+        $db->prepare($query);
+        $db->bindParam(':busqueda',$busqueda);
+        $db->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $db->bindParam(':limit', $limit, PDO::PARAM_INT);
+        return $db->getRegistros();
         
     }
 
@@ -129,11 +142,12 @@ class mCliente
      **/
     public function GetCliente($id)
     {
+        $db=new Database;
         $query="SELECT * FROM Cliente
                 WHERE  id_cliente=:id_cliente";
-        $this->db->prepare($query);
-        $this->db->bindParam(':id_cliente', $id);
-        return $this->db->getRegistro();
+        $db->prepare($query);
+        $db->bindParam(':id_cliente', $id);
+        return $db->getRegistro();
     }
 
     /**
@@ -143,9 +157,10 @@ class mCliente
      **/
     public function CountClientes()
     {
+        $db=new Database;
         $sql="SELECT COUNT(*) FROM Cliente";
-        $this->db->prepare($sql);
-        return $this->db->fetchColumn();
+        $db->prepare($sql);
+        return $db->fetchColumn();
     }
 
     /**
@@ -155,15 +170,16 @@ class mCliente
      **/
     public function CountClientesSearch($busqueda)
     {
+        $db=new Database;
         $busqueda="%{$busqueda}%";
         $query="SELECT COUNT(*)
                 FROM Cliente
                 WHERE razon LIKE :busqueda 
                 OR nombre LIKE :busqueda 
                 OR apellidos LIKE :busqueda";
-        $this->db->prepare($query);
-        $this->db->bindParam(':busqueda',$busqueda);
-        return $this->db->fetchColumn();
+        $db->prepare($query);
+        $db->bindParam(':busqueda',$busqueda);
+        return $db->fetchColumn();
     }
 }
 ?>

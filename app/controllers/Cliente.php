@@ -130,6 +130,23 @@ class Cliente extends Controller
         }
     }
 
+
+    public function GetRazonSocial() {
+        $nit = $_GET["nit"];
+        $resp['status'] = true;
+        $mCliente = new mCliente;
+
+        $resp['razonSocial'] = $mCliente->GetRazonSocial($nit);
+
+        if($resp['razonSocial']) {
+            $resp['status'] = true;
+        } else {
+            $resp['status']= false;
+            $reso['razonSocial'] = "";
+        }
+
+        echo json_encode($resp); 
+    }
 }
 
 ?>

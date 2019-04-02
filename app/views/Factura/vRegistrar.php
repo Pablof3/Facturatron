@@ -43,16 +43,22 @@ $venta=$data["Venta"];
                                     id="nombreRazonSocial" required>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="">Total</label>
-                            <input type="number" step="0.01" 
+                            <label>Codigo Cliente</label>
+                            <input type="text"
+									value="" 
                                     class="form-control" 
                                     placeholder="Total" 
-                                    maxlength="11"
-                                    name="Venta[montoTotal]"
+                                    name="Factura[codigoCliente]"
+                                    id="codigoCliente" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="">Total</label>
+                            <input type="text"
+                                    value="<?=$venta->total?>" 
+                                    class="form-control" 
+                                    placeholder="Total" 
+                                    name="Factura[montoTotal]"
                                     id="montoTotal" disabled>
-                            <div class="invalid-feedback">
-                                Campo Requerido
-                            </div>
                         </div>
                     </div>
 					<div class="form-row">
@@ -78,15 +84,7 @@ $venta=$data["Venta"];
 						</table>
 					</div>
                     <button class="btn btn-primary" type="submit">Registrar</button>
-
                 </div>
-            </div>
-            <div id='VentaDetalle_RegistroLista'>
-
-            </div>
-            <div class="form-row">
-                <button type="button" class="btn btn-secondary mb-1 mx-auto">Agragar
-                    Detalle</button>
             </div>
         </form>
     </div>
